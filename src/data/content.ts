@@ -50,28 +50,28 @@ export const featuredWorks = [
     github: "https://github.com/Drv4ever/SlideOS"
   },
   {
-    title: "Atlas UI",
+    title: "TCRAS - Transfer Chain Risk Amplification System",
     description:
-      "Design system and component library focused on editorial interfaces and readability.",
+      "A secure file transfer platform with a React frontend, Node.js transfer APIs, a Python FastAPI risk engine, and ML-based anomaly scoring to evaluate transfer-chain risk in real time.",
     techStack: [
       { name: "React", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
-      { name: "Storybook", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/storybook/storybook-original.svg" },
-      { name: "Tailwind", logo: "https://www.vectorlogo.zone/logos/tailwindcss/tailwindcss-icon.svg" }
+      { name: "Node.js", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+      { name: "Express", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+      { name: "Multer", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+      { name: "Axios", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/axios/axios-plain.svg" },
+      { name: "TCP Socket (net)", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+      { name: "Python", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "FastAPI", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
+      { name: "Isolation Forest", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" },
+      { name: "pandas", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/pandas/pandas-original.svg" },
+      { name: "NumPy", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/numpy/numpy-original.svg" },
+      { name: "MongoDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" },
+      { name: "SQLite", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/sqlite-original.svg" },
+      { name: "Docker", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" },
+      { name: "Docker Compose", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" }
     ],
-    live: "https://example.com/live/atlas-ui",
-    github: "https://github.com/averybennett/atlas-ui"
-  },
-  {
-    title: "Signal Notes",
-    description:
-      "Minimal writing app with markdown support, autosave, and offline-first behavior.",
-    techStack: [
-      { name: "PWA", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/chrome/chrome-original.svg" },
-      { name: "Framer", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/framermotion/framermotion-original.svg" },
-      { name: "IndexedDB", logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" }
-    ],
-    live: "https://example.com/live/signal-notes",
-    github: "https://github.com/averybennett/signal-notes"
+    live: "https://tcras.vercel.app/",
+    github: "https://github.com/Drv4ever/TCRAS"
   }
 ];
 

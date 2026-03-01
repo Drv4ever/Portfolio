@@ -21,7 +21,7 @@ export default function Header() {
         <div className="mx-auto mb-3 h-28 w-28 overflow-hidden rounded-full border border-border-light bg-paper-light p-1 dark:border-border-dark dark:bg-paper-dark md:h-32 md:w-32">
           <img src={profile.image} alt={`${profile.name} profile`} className="h-full w-full rounded-full object-cover" />
         </div>
-        <h1 className="font-serif text-5xl font-medium tracking-wide md:text-7xl">{profile.name}</h1>
+        <h1 className="font-serif text-4xl font-medium tracking-wide md:text-6xl">{profile.name}</h1>
         <p className="mt-2 text-sm uppercase tracking-editorial text-neutral-600 dark:text-neutral-400">{profile.role}</p>
       </div>
     </header>
