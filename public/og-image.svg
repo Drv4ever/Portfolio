@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#f8f5f0"/>
+  <rect x="36" y="36" width="1128" height="558" fill="none" stroke="#1a1a1a" stroke-width="2"/>
+  <text x="80" y="170" font-family="Georgia, serif" font-size="92" fill="#111111">Dhruv Jain</text>
+  <text x="80" y="238" font-family="Inter, Arial, sans-serif" font-size="34" fill="#2a2a2a" letter-spacing="2">ASPIRING DEVELOPER</text>
+  <line x1="80" y1="280" x2="1120" y2="280" stroke="#1a1a1a" stroke-width="1"/>
+  <text x="80" y="360" font-family="Inter, Arial, sans-serif" font-size="30" fill="#1f1f1f">React • Node.js • MongoDB • TypeScript</text>
+  <text x="80" y="520" font-family="Inter, Arial, sans-serif" font-size="24" fill="#3a3a3a">github.com/Drv4ever</text>
+  <text x="1080" y="560" text-anchor="end" font-family="Georgia, serif" font-size="42" fill="#111111">DRV4EVER</text>
+</svg>

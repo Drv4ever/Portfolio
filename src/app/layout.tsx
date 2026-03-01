@@ -16,7 +16,35 @@ const playfair = Playfair_Display({
 
 export const metadata: Metadata = {
   title: "Dhruv Jain | Aspiring Developer",
-  description: "Editorial-style personal portfolio built with Next.js, Tailwind, and Framer Motion."
+  description: "A developer building intelligent web products with React, Node.js, and MongoDB.",
+  metadataBase: new URL("https://your-portfolio-domain.vercel.app"),
+  icons: {
+    icon: "/icon.svg",
+    shortcut: "/icon.svg",
+    apple: "/icon.svg"
+  },
+  openGraph: {
+    title: "Dhruv Jain | Aspiring Developer",
+    description: "A developer building intelligent web products with React, Node.js, and MongoDB.",
+    url: "https://your-portfolio-domain.vercel.app",
+    siteName: "Dhruv Jain Portfolio",
+    images: [
+      {
+        url: "/og-image.svg",
+        width: 1200,
+        height: 630,
+        alt: "Dhruv Jain Portfolio Preview"
+      }
+    ],
+    locale: "en_US",
+    type: "website"
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Dhruv Jain | Aspiring Developer",
+    description: "A developer building intelligent web products with React, Node.js, and MongoDB.",
+    images: ["/og-image.svg"]
+  }
 };
 
 export default function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
