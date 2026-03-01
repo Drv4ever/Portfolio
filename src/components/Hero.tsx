@@ -1,8 +1,8 @@
 "use client";
 
 import { FadeIn } from "@/components/Motion";
+import HeroActions from "@/components/HeroActions";
 import { profile } from "@/data/content";
-import { motion } from "framer-motion";
 
 export default function Hero() {
   const socialIcon: Record<string, string> = {
@@ -28,22 +28,7 @@ export default function Hero() {
           ))}
         </div>
 
-        <div className="mt-7 flex flex-wrap gap-3">
-          <motion.a
-            whileHover={{ scale: 1.02 }}
-            href="/resume"
-            className="rounded-md border border-ink-light bg-ink-light px-4 py-2 text-sm uppercase tracking-editorial text-paper-light transition-colors duration-300 hover:bg-paper-light hover:text-ink-light dark:border-ink-dark dark:bg-ink-dark dark:text-paper-dark dark:hover:bg-paper-dark dark:hover:text-ink-dark"
-          >
-            Read Resume
-          </motion.a>
-          <motion.a
-            whileHover={{ scale: 1.02 }}
-            href="#footer"
-            className="rounded-md border border-border-light px-4 py-2 text-sm uppercase tracking-editorial transition-colors duration-300 hover:bg-ink-light hover:text-paper-light dark:border-border-dark dark:hover:bg-ink-dark dark:hover:text-paper-dark"
-          >
-            Contact
-          </motion.a>
-        </div>
+        <HeroActions />
 
         <ul className="mt-8 space-y-2.5 text-base">
           {profile.socials.map((item) => (
