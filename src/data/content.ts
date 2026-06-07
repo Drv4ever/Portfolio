@@ -161,6 +161,38 @@ export const featuredWorks = [
   },
 ];
 
+export const learningProjects = [
+  {
+    title: "Vaultify — Password Manager (learning)",
+    description:
+      "Personal learning project: a password manager built to learn backend principles. Implements encrypted vault storage, JWT authentication, and read/write routes with Node.js + Express and MongoDB. Deployed for demo and available on GitHub.",
+    techStack: [
+      {
+        name: "TypeScript",
+        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+      },
+      {
+        name: "Node.js",
+        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
+      },
+      {
+        name: "Express",
+        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
+      },
+      {
+        name: "MongoDB",
+        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
+      },
+      {
+        name: "Docker",
+        logo: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+      },
+    ],
+    live: "https://vaultify-gilt.vercel.app",
+    github: "https://github.com/Drv4ever/Vaultify",
+  },
+];
+
 export const experiences = [
   {
     company: "Northline Studio",
