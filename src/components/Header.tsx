@@ -1,12 +1,29 @@
 import { profile } from "@/data/content";
+import { useEffect, useState } from "react";
 
 export default function Header() {
-  const date = new Intl.DateTimeFormat("en-US", {
-    weekday: "short",
-    month: "short",
-    day: "numeric",
-    year: "numeric"
-  }).format(new Date());
+  const [date, setDate] = useState(() =>
+    new Intl.DateTimeFormat("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    }).format(new Date()),
+  );
+
+  useEffect(() => {
+    const formatter = new Intl.DateTimeFormat("en-US", {
+      weekday: "short",
+      month: "short",
+      day: "numeric",
+      year: "numeric",
+    });
+
+    const update = () => setDate(formatter.format(new Date()));
+
+    const interval = setInterval(update, 60_000);
+    return () => clearInterval(interval);
+  }, []);
 
   return (
     <header className="border-b border-border-light pb-5 dark:border-border-dark">
@@ -19,10 +36,18 @@ export default function Header() {
           {profile.nickname}
         </span>
         <div className="mx-auto mb-3 h-28 w-28 overflow-hidden rounded-full border border-border-light bg-paper-light p-1 dark:border-border-dark dark:bg-paper-dark md:h-32 md:w-32">
-          <img src={profile.image} alt={`${profile.name} profile`} className="h-full w-full rounded-full object-cover" />
+          <img
+            src={profile.image}
+            alt={`${profile.name} profile`}
+            className="h-full w-full rounded-full object-cover"
+          />
         </div>
-        <h1 className="font-serif text-4xl font-medium tracking-wide md:text-6xl">{profile.name}</h1>
-        <p className="mt-2 text-sm uppercase tracking-editorial text-neutral-600 dark:text-neutral-400">{profile.role}</p>
+        <h1 className="font-serif text-4xl font-medium tracking-wide md:text-6xl">
+          {profile.name}
+        </h1>
+        <p className="mt-2 text-sm uppercase tracking-editorial text-neutral-600 dark:text-neutral-400">
+          {profile.role}
+        </p>
       </div>
     </header>
   );
