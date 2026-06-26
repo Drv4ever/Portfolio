@@ -17,7 +17,6 @@ export default function Header() {
   useEffect(() => {
     const formatter = new Intl.DateTimeFormat("en-US", {
       weekday: "short",
-      month: "short",
       day: "numeric",
       year: "numeric",
     });
@@ -28,28 +27,12 @@ export default function Header() {
     return () => clearInterval(interval);
   }, []);
 
-  const [visits, setVisits] = useState<number | null>(null);
-  useEffect(() => {
-    let mounted = true;
-    const hit = async () => {
-      const value = await incrementVisit();
-      if (mounted && typeof value === "number") setVisits(value);
-    };
-    hit();
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  // Visits moved to Footer component
 
   return (
     <header className="border-b border-border-light pb-5 dark:border-border-dark">
       <div className="border-b border-border-light py-2 text-center text-xs uppercase tracking-editorial text-neutral-600 dark:border-border-dark dark:text-neutral-400">
         <span className="mr-2">{date}</span>
-        {visits !== null && (
-          <span className="text-xs text-neutral-500 dark:text-neutral-400">
-            • {new Intl.NumberFormat().format(visits)} visits
-          </span>
-        )}
       </div>
 
       <div className="relative py-5 text-center md:py-6">
