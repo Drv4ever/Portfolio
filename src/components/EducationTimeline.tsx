@@ -2,43 +2,42 @@
 
 import * as React from "react";
 import { education } from "@/content";
-import { MapPin } from "lucide-react";
 
 export function EducationTimeline() {
   return (
     <section id="education" aria-label="Academic Education" className="space-y-4">
       <div className="space-y-1">
-        <h2 className="font-serif text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
           Education
         </h2>
-        <p className="text-xs text-muted-foreground">
-          Academic foundation in Information Technology and computational principles.
+        <p className="font-mono text-xs text-muted-foreground">
+          Academic foundation in Information Technology and computational systems.
         </p>
       </div>
 
-      <div className="space-y-4 pt-2">
+      <div className="grid grid-cols-1 gap-4">
         {education.map((item) => (
-          <div
+          <article
             key={item.institution}
-            className="flex flex-col sm:flex-row sm:items-baseline sm:justify-between gap-1 border-b border-border/40 pb-4 last:border-b-0"
+            className="rounded-lg border border-border bg-card p-6 space-y-2 transition-colors hover:border-emerald-500/40"
           >
-            <div className="space-y-0.5">
-              <h3 className="font-serif text-lg font-medium text-foreground">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-lg font-medium text-foreground">
                 {item.institution}
               </h3>
-              <p className="text-sm text-muted-foreground">{item.degree}</p>
-              <div className="flex items-center gap-1 text-xs text-muted-foreground/80">
-                <MapPin className="h-3 w-3" />
-                <span>{item.location}</span>
-              </div>
-            </div>
-
-            <div className="pt-1 sm:pt-0">
               <span className="font-mono text-xs text-muted-foreground">
                 {item.period}
               </span>
             </div>
-          </div>
+
+            <p className="text-sm text-foreground/90 font-medium">
+              {item.degree}
+            </p>
+
+            <p className="font-mono text-xs text-muted-foreground">
+              {item.location}
+            </p>
+          </article>
         ))}
       </div>
     </section>

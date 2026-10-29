@@ -1,10 +1,8 @@
 "use client";
 
 import * as React from "react";
-import Link from "next/link";
 import { toast } from "sonner";
 import { content } from "@/content";
-import { Button } from "@/components/ui/button";
 import {
   Mail,
   Copy,
@@ -13,7 +11,6 @@ import {
   Github,
   Linkedin,
   Twitter,
-  Heart,
 } from "lucide-react";
 
 export function Footer() {
@@ -36,52 +33,52 @@ export function Footer() {
     <footer
       id="contact"
       aria-label="Footer and Contact Information"
-      className="mt-20 border-t border-border/60 bg-card/30 pt-16 pb-12 backdrop-blur-sm"
+      className="mt-16 border-t border-border bg-background pt-12 pb-12"
     >
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 space-y-12">
-        {/* Top Contact CTA Banner */}
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 rounded-3xl border border-border/60 bg-card/80 p-8 shadow-sm">
-          <div className="space-y-2">
-            <span className="font-mono text-xs uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 space-y-8">
+        {/* Contact Card (Maanas Tyagi card style) */}
+        <article className="rounded-lg border border-border bg-card p-6 space-y-4">
+          <div className="space-y-1">
+            <span className="font-mono text-xs uppercase tracking-wider text-emerald-500">
               Get In Touch
             </span>
-            <h2 className="font-serif text-2xl sm:text-3xl font-medium text-foreground">
+            <h2 className="text-xl sm:text-2xl font-semibold text-foreground">
               Let&apos;s build intelligent systems together.
             </h2>
-            <p className="text-sm text-muted-foreground max-w-lg">
+            <p className="text-xs sm:text-sm text-muted-foreground">
               Open to Software Engineering and Full-Stack Internships for Summer 2026.
             </p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-3">
-            <Button asChild size="lg" className="rounded-full shadow-sm bg-emerald-700 hover:bg-emerald-600 text-white">
-              <a href={`mailto:${content.profile.email}`} className="gap-2">
-                <Mail className="h-4 w-4" />
-                <span>Send Email</span>
-              </a>
-            </Button>
+          <div className="flex flex-wrap items-center gap-3 pt-1">
+            <a
+              href={`mailto:${content.profile.email}`}
+              className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-1.5 font-mono text-xs text-emerald-500 hover:bg-emerald-500/20 transition-colors"
+            >
+              <Mail className="h-3.5 w-3.5" />
+              <span>Send Email</span>
+            </a>
 
-            <Button
-              variant="outline"
-              size="lg"
+            <button
+              type="button"
               onClick={handleCopyEmail}
-              className="rounded-full gap-2"
               aria-label="Copy Address to clipboard"
+              className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-1.5 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors"
             >
               {copied ? (
-                <Check className="h-4 w-4 text-emerald-500" />
+                <Check className="h-3.5 w-3.5 text-emerald-500" />
               ) : (
-                <Copy className="h-4 w-4" />
+                <Copy className="h-3.5 w-3.5" />
               )}
               <span>{copied ? "Copied" : "Copy Address"}</span>
-            </Button>
+            </button>
           </div>
-        </div>
+        </article>
 
-        {/* Bottom Metadata & Social Bar */}
-        <div className="flex flex-col sm:flex-row items-center justify-between gap-6 border-t border-border/40 pt-8 text-xs text-muted-foreground">
+        {/* Bottom Bar */}
+        <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-border/40 pt-6 text-xs font-mono text-muted-foreground">
           <div className="flex items-center gap-2">
-            <span className="font-serif font-medium text-foreground">
+            <span className="font-semibold text-foreground">
               {content.profile.name}
             </span>
             <span>•</span>
@@ -90,53 +87,43 @@ export function Footer() {
             <span>Vellore, India</span>
           </div>
 
-          {/* Social Links & Back to Top */}
-          <div className="flex items-center gap-3">
-            <Button asChild variant="ghost" size="icon" className="h-8 w-8 rounded-full">
-              <a
-                href="https://github.com/Drv4ever"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub Profile"
-              >
-                <Github className="h-4 w-4" />
-              </a>
-            </Button>
-
-            <Button asChild variant="ghost" size="icon" className="h-8 w-8 rounded-full">
-              <a
-                href="https://linkedin.com/in/dhruv-jain-4284a8263/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn Profile"
-              >
-                <Linkedin className="h-4 w-4" />
-              </a>
-            </Button>
-
-            <Button asChild variant="ghost" size="icon" className="h-8 w-8 rounded-full">
-              <a
-                href="https://x.com/Drv4ever632"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Twitter Profile"
-              >
-                <Twitter className="h-4 w-4" />
-              </a>
-            </Button>
-
-            <div className="h-4 w-px bg-border/60 mx-1" />
-
-            <Button
-              variant="outline"
-              size="sm"
+          <div className="flex items-center gap-4">
+            <a
+              href="https://github.com/Drv4ever"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub Profile"
+              className="hover:text-foreground transition-colors"
+            >
+              <Github className="h-4 w-4" />
+            </a>
+            <a
+              href="https://linkedin.com/in/dhruv-jain-4284a8263/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn Profile"
+              className="hover:text-foreground transition-colors"
+            >
+              <Linkedin className="h-4 w-4" />
+            </a>
+            <a
+              href="https://x.com/Drv4ever632"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Twitter Profile"
+              className="hover:text-foreground transition-colors"
+            >
+              <Twitter className="h-4 w-4" />
+            </a>
+            <button
+              type="button"
               onClick={scrollToTop}
-              className="h-8 gap-1.5 rounded-full px-3 text-xs"
-              aria-label="Back to top"
+              aria-label="Back to top of page"
+              className="hover:text-foreground transition-colors flex items-center gap-1"
             >
               <ArrowUp className="h-3.5 w-3.5" />
-              <span>Top</span>
-            </Button>
+              <span>top</span>
+            </button>
           </div>
         </div>
       </div>

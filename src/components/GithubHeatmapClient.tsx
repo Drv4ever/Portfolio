@@ -3,7 +3,6 @@
 import * as React from "react";
 import { useInView } from "motion/react";
 import { Github, Flame } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
 
 interface ContributionDay {
   date: string;
@@ -38,12 +37,12 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
       aria-label="GitHub Activity Heatmap"
       className="space-y-4"
     >
-      <div className="rounded-2xl border border-border/60 bg-card/60 p-6 backdrop-blur-sm shadow-sm md:p-8">
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-border/40">
+      <article className="rounded-lg border border-border bg-card p-6 space-y-5 transition-colors hover:border-emerald-500/40">
+        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-border/40">
           <div className="flex items-center gap-2.5">
             <Github className="h-5 w-5 text-foreground" />
             <div>
-              <h3 className="font-serif text-xl font-medium text-foreground">
+              <h3 className="text-lg font-medium text-foreground">
                 GitHub Activity Stream
               </h3>
               <p className="text-xs text-muted-foreground font-mono">
@@ -53,22 +52,22 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
           </div>
 
           <div className="flex items-center gap-3">
-            <Badge variant="outline" className="font-mono text-xs gap-1">
-              <Flame className="h-3.5 w-3.5 text-emerald-500" />
+            <span className="font-mono text-xs text-emerald-500 border border-emerald-500/30 bg-emerald-500/10 rounded px-2.5 py-1 flex items-center gap-1.5">
+              <Flame className="h-3.5 w-3.5" />
               <span>{calendar.totalContributions} Contributions This Year</span>
-            </Badge>
+            </span>
           </div>
         </div>
 
         {/* Heatmap Grid */}
-        <div className="overflow-x-auto pt-6 pb-2">
-          <div className="inline-flex gap-1">
+        <div className="overflow-x-auto pb-2">
+          <div className="flex gap-1.5 min-w-[500px]">
             {recentWeeks.map((week, wIdx) => (
-              <div key={wIdx} className="flex flex-col gap-1">
+              <div key={wIdx} className="flex flex-col gap-1.5 flex-1">
                 {week.contributionDays.map((day, dIdx) => {
                   const level =
                     day.contributionCount === 0
-                      ? "bg-secondary/40"
+                      ? "bg-border/40"
                       : day.contributionCount < 3
                       ? "bg-emerald-500/30"
                       : day.contributionCount < 6
@@ -79,13 +78,9 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
                     <div
                       key={day.date || dIdx}
                       title={`${day.date}: ${day.contributionCount} contributions`}
-                      className={`h-2.5 w-2.5 rounded-[2px] transition-all duration-500 ${level} ${
-                        isVisible
-                          ? "opacity-100 scale-100"
-                          : "opacity-0 scale-50"
-                      }`}
+                      className={`h-3 w-full rounded-sm transition-all duration-300 ${level}`}
                       style={{
-                        transitionDelay: `${(wIdx * 7 + dIdx) * 2}ms`,
+                        opacity: isVisible ? 1 : 0.4,
                       }}
                     />
                   );
@@ -95,17 +90,17 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
           </div>
         </div>
 
-        <div className="flex items-center justify-between pt-4 text-[11px] font-mono text-muted-foreground">
+        <div className="flex items-center justify-between text-xs font-mono text-muted-foreground pt-1">
           <span>Less</span>
           <div className="flex items-center gap-1">
-            <span className="h-2 w-2 rounded-[2px] bg-secondary/40" />
-            <span className="h-2 w-2 rounded-[2px] bg-emerald-500/30" />
-            <span className="h-2 w-2 rounded-[2px] bg-emerald-500/60" />
-            <span className="h-2 w-2 rounded-[2px] bg-emerald-500" />
+            <div className="h-2.5 w-2.5 rounded-sm bg-border/40" />
+            <div className="h-2.5 w-2.5 rounded-sm bg-emerald-500/30" />
+            <div className="h-2.5 w-2.5 rounded-sm bg-emerald-500/60" />
+            <div className="h-2.5 w-2.5 rounded-sm bg-emerald-500" />
           </div>
           <span>More</span>
         </div>
-      </div>
+      </article>
     </section>
   );
 }

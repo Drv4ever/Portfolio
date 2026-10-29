@@ -3,23 +3,14 @@
 import * as React from "react";
 import dynamic from "next/dynamic";
 import { spotlightProject } from "@/content";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import {
-  ExternalLink,
-  Github,
-  ShieldCheck,
-  CheckCircle2,
-  Cpu,
-  ArrowRight,
-} from "lucide-react";
+import { ExternalLink, Github, ShieldCheck, ArrowRight } from "lucide-react";
 
 const TestSplitDonut = dynamic(
   () => import("./TestSplitDonut").then((m) => m.TestSplitDonut),
   {
     ssr: false,
     loading: () => (
-      <div className="h-44 w-full flex items-center justify-center font-mono text-xs text-muted-foreground">
+      <div className="h-32 w-full flex items-center justify-center font-mono text-xs text-muted-foreground">
         Loading test breakdown...
       </div>
     ),
@@ -43,192 +34,143 @@ export function SlideOSSpotlight({
     <article
       id="slideos-spotlight"
       aria-label="SlideOS Spotlight Project"
-      className="relative overflow-hidden rounded-3xl border border-emerald-500/30 bg-gradient-to-b from-card to-card/60 p-6 shadow-lg backdrop-blur-sm sm:p-8 md:p-10"
+      className="rounded-lg border border-border bg-card p-6 space-y-5"
     >
-      {/* Decorative accent glow */}
-      <div className="absolute -top-32 -right-32 h-64 w-64 rounded-full bg-emerald-500/10 blur-3xl pointer-events-none" />
-
-      {/* Header Bar: Status & Links */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b border-border/50 pb-6">
-        <div className="flex items-center gap-3">
-          <Badge className="bg-emerald-500/15 text-emerald-600 hover:bg-emerald-500/20 border-emerald-500/30 gap-1.5 px-3 py-1 font-mono text-xs dark:text-emerald-400">
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+      {/* Header Row: Title, Badges, Links */}
+      <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border/50 pb-4">
+        <div className="flex flex-wrap items-center gap-2.5">
+          <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-foreground">
+            <a
+              href="https://slide-os.vercel.app/"
+              target="_blank"
+              rel="noreferrer"
+              className="hover:text-emerald-500 transition-colors"
+            >
+              {project.title}
+            </a>
+          </h2>
+          <span className="inline-flex items-center gap-1.5 font-mono text-xs text-emerald-500 border border-emerald-500/30 bg-emerald-500/10 rounded px-2 py-0.5">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
             Active Project
-          </Badge>
+          </span>
           <span className="font-mono text-xs text-muted-foreground">
             12 Themes Engineered
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-3 font-mono text-xs">
           {project.github && (
-            <Button asChild variant="outline" size="sm" className="rounded-full gap-1.5 text-xs">
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="SlideOS GitHub Repository"
-              >
-                <Github className="h-3.5 w-3.5" />
-                <span>GitHub</span>
-              </a>
-            </Button>
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="SlideOS GitHub Repository"
+              className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+            >
+              <Github className="h-3.5 w-3.5" />
+              <span>GitHub ↗</span>
+            </a>
           )}
-
           {project.live && (
-            <Button asChild size="sm" className="rounded-full gap-1.5 text-xs bg-emerald-700 hover:bg-emerald-600 text-white shadow-sm">
-              <a
-                href={project.live}
-                target="_blank"
-                rel="noreferrer"
-                aria-label="SlideOS Live Demo Application"
-              >
-                <ExternalLink className="h-3.5 w-3.5" />
-                <span>Live Demo</span>
-              </a>
-            </Button>
+            <a
+              href={project.live}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="SlideOS Live Demo Application"
+              className="text-emerald-500 hover:underline flex items-center gap-1 font-medium"
+            >
+              <ExternalLink className="h-3.5 w-3.5" />
+              <span>Live Demo ↗</span>
+            </a>
           )}
         </div>
       </div>
 
-      {/* Title & Tagline */}
-      <div className="pt-6 space-y-3">
-        <h2 className="font-serif text-3xl font-medium tracking-tight sm:text-4xl">
-          {project.title}
-        </h2>
-        <p className="text-base text-muted-foreground leading-relaxed max-w-3xl">
-          {project.tagline}
-        </p>
+      {/* Tagline */}
+      <p className="text-sm leading-relaxed text-muted-foreground">
+        {project.tagline}
+      </p>
+
+      {/* Tech Stack Chips (Maanas Tyagi monospace pill style) */}
+      <div className="flex flex-wrap gap-1.5">
+        {project.techStack.map((tech) => (
+          <span
+            key={tech}
+            className="font-mono rounded-full border border-border bg-background px-2.5 py-0.5 text-[11px] text-muted-foreground"
+          >
+            {tech}
+          </span>
+        ))}
       </div>
 
-      {/* Pipeline Diagram */}
-      <div className="mt-8 rounded-2xl border border-border/60 bg-background/50 p-5 backdrop-blur-sm sm:p-6">
-        <div className="flex items-center justify-between pb-4">
-          <div className="flex items-center gap-2">
-            <Cpu className="h-4 w-4 text-emerald-500" />
-            <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-foreground">
-              Deterministic Generation & Layout Pipeline
-            </h3>
-          </div>
-          <span className="text-[11px] font-mono text-muted-foreground">
-            End-to-End Flow
-          </span>
-        </div>
+      {/* Crisp En-Dash Bullets */}
+      <ul className="flex flex-col gap-2 pt-1">
+        {project.bullets.map((bullet, idx) => (
+          <li key={idx} className="flex gap-2 text-sm leading-relaxed text-muted-foreground">
+            <span className="text-emerald-500 shrink-0">–</span>
+            <span>{bullet}</span>
+          </li>
+        ))}
+      </ul>
 
-        <div className="grid grid-cols-1 gap-3 sm:grid-cols-5">
+      {/* Deterministic Pipeline Flow (Minimal Monospace Flow) */}
+      <div className="rounded border border-border/60 bg-background/50 p-4 space-y-2.5">
+        <div className="flex items-center justify-between text-xs font-mono text-muted-foreground">
+          <span className="text-foreground font-medium uppercase tracking-wider text-[11px]">
+            Deterministic Generation & Layout Pipeline
+          </span>
+          <span>End-to-End Flow</span>
+        </div>
+        <div className="grid grid-cols-1 sm:grid-cols-5 gap-2 text-xs font-mono">
           {project.architectureSteps?.map((step, idx) => (
             <div
               key={step.step}
-              className="relative flex flex-col justify-between rounded-xl border border-border/50 bg-card/80 p-3.5 text-left transition-all hover:border-emerald-500/40 hover:bg-accent/30"
+              className="rounded border border-border/40 bg-card p-2.5 space-y-1"
             >
-              <div>
-                <div className="flex items-center justify-between pb-2">
-                  <span className="font-mono text-[10px] font-bold text-emerald-500">
-                    0{step.step}
-                  </span>
-                  {idx < 4 && (
-                    <ArrowRight className="hidden sm:block h-3.5 w-3.5 text-muted-foreground/60" />
-                  )}
-                </div>
-                <h4 className="text-xs font-semibold text-foreground">
-                  {step.title}
-                </h4>
-                <p className="mt-1 text-[11px] leading-snug text-muted-foreground">
-                  {step.detail}
-                </p>
+              <div className="flex items-center justify-between text-[10px] text-emerald-500">
+                <span>0{step.step}</span>
+                {idx < 4 && <ArrowRight className="hidden sm:inline h-3 w-3 text-muted-foreground/50" />}
               </div>
+              <p className="font-semibold text-foreground text-[11px]">{step.title}</p>
+              <p className="text-[10px] text-muted-foreground leading-snug">{step.detail}</p>
             </div>
           ))}
         </div>
       </div>
 
-      {/* Middle Section: Security & Test Donut Split */}
-      <div className="mt-6 grid grid-cols-1 gap-6 lg:grid-cols-12">
-        {/* Left 7 cols: Technical Details & Security Highlights */}
-        <div className="space-y-4 lg:col-span-7">
-          <div className="rounded-2xl border border-border/50 bg-background/40 p-5 space-y-3">
-            <div className="flex items-center gap-2 text-foreground font-medium text-sm">
-              <ShieldCheck className="h-4 w-4 text-emerald-500" />
-              <span>Authentication & Access Security</span>
-            </div>
-            <p className="text-xs leading-relaxed text-muted-foreground">
-              Engineered with <strong>JWT</strong> and <strong>bcrypt</strong> password hashing alongside <strong>Google OAuth 2.0</strong>. Decks enforce owner-only write permissions while generating tamper-resistant, public read-only share links that completely shield user database IDs.
-            </p>
+      {/* Security & Test Breakdown Strip */}
+      <div className="grid grid-cols-1 sm:grid-cols-12 gap-4 pt-1">
+        {/* Security Details */}
+        <div className="sm:col-span-7 rounded border border-border/50 bg-background/30 p-3.5 space-y-1.5 text-xs">
+          <div className="flex items-center gap-1.5 font-medium text-foreground">
+            <ShieldCheck className="h-4 w-4 text-emerald-500 shrink-0" />
+            <span>Authentication & Access Security</span>
           </div>
-
-          <div className="space-y-2 pt-2">
-            <h4 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
-              Resume Key Contributions
-            </h4>
-            <ul className="space-y-2 text-xs leading-relaxed text-muted-foreground">
-              {project.bullets.map((bullet, idx) => (
-                <li key={idx} className="flex items-start gap-2">
-                  <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 mt-0.5 shrink-0" />
-                  <span>{bullet}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+          <p className="text-muted-foreground leading-relaxed text-[11px]">
+            Engineered with <strong>JWT</strong> and <strong>bcrypt</strong> password hashing alongside <strong>Google OAuth 2.0</strong>. Decks enforce owner-only write permissions while generating tamper-resistant, public read-only share links that completely shield user database IDs.
+          </p>
         </div>
 
-        {/* Right 5 cols: Test Split Donut Chart */}
-        <div className="flex flex-col justify-between rounded-2xl border border-border/50 bg-background/40 p-5 lg:col-span-5">
-          <div className="flex items-center justify-between border-b border-border/40 pb-3">
-            <div>
-              <h4 className="text-xs font-semibold text-foreground">
-                Automated Test Split
-              </h4>
-              <p className="text-[11px] text-muted-foreground">
-                209 Total Verified Tests
-              </p>
-            </div>
-            <Badge variant="outline" className="font-mono text-[10px]">
-              100% Pass Rate
-            </Badge>
+        {/* Test Verification Split */}
+        <div className="sm:col-span-5 rounded border border-border/50 bg-background/30 p-3.5 space-y-2">
+          <div className="flex items-center justify-between text-xs font-mono">
+            <span className="font-medium text-foreground">Automated Test Split</span>
+            <span className="text-emerald-500 text-[11px]">209 Total Verified Tests</span>
           </div>
-
-          {mounted ? (
-            <TestSplitDonut />
-          ) : (
-            <div className="h-44 w-full flex items-center justify-center font-mono text-xs text-muted-foreground">
-              Loading test breakdown...
+          <div className="grid grid-cols-2 gap-2 text-center text-xs font-mono">
+            <div className="rounded border border-border/40 bg-card p-1.5">
+              <span className="text-[10px] text-muted-foreground block">Vitest (Frontend)</span>
+              <span className="font-semibold text-foreground text-xs">131 tests</span>
             </div>
-          )}
-
-          <div className="grid grid-cols-2 gap-2 pt-2 text-center text-xs">
-            <div className="rounded-lg border border-border/40 bg-card/60 p-2">
-              <span className="flex items-center justify-center gap-1.5 font-medium text-emerald-600 dark:text-emerald-400">
-                <span className="h-2 w-2 rounded-full bg-emerald-500" />
-                Vitest (Frontend)
-              </span>
-              <span className="font-mono text-sm font-bold text-foreground">
-                131 tests
-              </span>
+            <div className="rounded border border-border/40 bg-card p-1.5">
+              <span className="text-[10px] text-muted-foreground block">Jest (Backend)</span>
+              <span className="font-semibold text-foreground text-xs">78 tests</span>
             </div>
-            <div className="rounded-lg border border-border/40 bg-card/60 p-2">
-              <span className="flex items-center justify-center gap-1.5 font-medium text-indigo-500">
-                <span className="h-2 w-2 rounded-full bg-indigo-500" />
-                Jest (Backend)
-              </span>
-              <span className="font-mono text-sm font-bold text-foreground">
-                78 tests
-              </span>
-            </div>
+          </div>
+          <div className="opacity-0 h-0 overflow-hidden" aria-hidden="true">
+            {mounted && <TestSplitDonut />}
           </div>
         </div>
-      </div>
-
-      {/* Tech Stack Footer Badges */}
-      <div className="mt-6 flex flex-wrap items-center gap-1.5 border-t border-border/40 pt-4">
-        {project.techStack.map((tech) => (
-          <Badge
-            key={tech}
-            variant="secondary"
-            className="font-mono text-[11px] px-2.5 py-0.5 border border-border/40"
-          >
-            {tech}
-          </Badge>
-        ))}
       </div>
     </article>
   );

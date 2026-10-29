@@ -2,79 +2,75 @@
 
 import * as React from "react";
 import { achievements, certifications } from "@/content";
-import { Badge } from "@/components/ui/badge";
 
 export function AchievementsSection() {
   return (
     <section id="achievements" aria-label="Achievements and Certifications" className="space-y-4">
       <div className="space-y-1">
-        <h2 className="font-serif text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
           Achievements & Certifications
         </h2>
-        <p className="text-xs text-muted-foreground">
+        <p className="font-mono text-xs text-muted-foreground">
           Competitive problem solving, published intellectual property, and verified credentials.
         </p>
       </div>
 
-      <div className="space-y-4 pt-2">
+      <div className="grid grid-cols-1 gap-4">
         {/* Achievements */}
         {achievements.map((ach) => (
-          <div
+          <article
             key={ach.id}
-            className="border-b border-border/40 pb-4 space-y-1.5 last:border-b-0"
+            className="rounded-lg border border-border bg-card p-6 space-y-2 transition-colors hover:border-emerald-500/40"
           >
-            <div className="flex items-center justify-between gap-2">
-              <h3 className="font-serif text-lg font-medium text-foreground">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-lg font-medium text-foreground">
                 {ach.title}
               </h3>
               {ach.tag && (
-                <Badge variant="outline" className="font-mono text-[10px]">
+                <span className="font-mono text-xs text-emerald-500 border border-emerald-500/30 bg-emerald-500/10 rounded px-2 py-0.5">
                   {ach.tag}
-                </Badge>
+                </span>
               )}
             </div>
 
-            <p className="text-xs text-muted-foreground leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
               {ach.description}
             </p>
 
             {ach.metric && (
-              <div className="font-mono text-sm font-semibold text-emerald-600 dark:text-emerald-400">
+              <div className="font-mono text-sm font-semibold text-emerald-500 dark:text-emerald-400 pt-1">
                 {ach.metric}
               </div>
             )}
-          </div>
+          </article>
         ))}
 
         {/* Certifications */}
         {certifications.map((cert) => (
-          <div
+          <article
             key={cert.id}
-            className="border-b border-border/40 pb-4 space-y-1.5 last:border-b-0"
+            className="rounded-lg border border-border bg-card p-6 space-y-2 transition-colors hover:border-emerald-500/40"
           >
-            <div className="flex items-center justify-between gap-2">
-              <h3 className="font-serif text-lg font-medium text-foreground">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-lg font-medium text-foreground">
                 {cert.title}
               </h3>
-              <Badge
-                variant="outline"
-                className="font-mono text-[10px] text-indigo-700 dark:text-indigo-300 border-indigo-500/40 font-medium"
-              >
+              <span className="font-mono text-xs text-muted-foreground border border-border rounded px-2 py-0.5">
                 Verified Credential
-              </Badge>
+              </span>
             </div>
 
-            <p className="text-xs text-muted-foreground leading-relaxed">
+            <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
               {cert.description}
             </p>
 
             <div className="flex items-center justify-between text-xs font-mono text-muted-foreground pt-1">
               <span>Issuer: {cert.issuer}</span>
-              <span className="text-indigo-700 dark:text-indigo-300 font-medium">
+              <span className="text-foreground/80 font-medium">
                 CI/CD & Containers
               </span>
             </div>
-          </div>
+          </article>
         ))}
       </div>
     </section>

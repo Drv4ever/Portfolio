@@ -2,9 +2,6 @@
 
 import * as React from "react";
 import { skills } from "@/content";
-import { SkillCategoryName } from "@/content/schema";
-import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
 
 export function SkillsSection() {
   const [selectedCategory, setSelectedCategory] = React.useState<string>("All");
@@ -21,10 +18,10 @@ export function SkillsSection() {
   return (
     <section id="skills" aria-label="Technical Skills Matrix" className="space-y-4">
       <div className="space-y-1">
-        <h2 className="font-serif text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
+        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
           Technical Skills & Tooling
         </h2>
-        <p className="text-xs text-muted-foreground">
+        <p className="font-mono text-xs text-muted-foreground">
           Grouped as verified on resume. Honest categorization with zero arbitrary proficiency bars.
         </p>
       </div>
@@ -34,54 +31,51 @@ export function SkillsSection() {
         {categories.map((category) => {
           const isSelected = selectedCategory === category;
           return (
-            <Button
+            <button
               key={category}
-              variant={isSelected ? "default" : "outline"}
-              size="sm"
+              type="button"
               onClick={() => setSelectedCategory(category)}
-              className={`rounded-full text-xs font-mono transition-all ${
+              className={`rounded-full px-3 py-1 text-xs font-mono transition-all border ${
                 isSelected
-                  ? "bg-foreground text-background font-semibold"
-                  : "text-muted-foreground hover:text-foreground"
+                  ? "bg-foreground text-background border-foreground font-medium"
+                  : "border-border bg-card text-muted-foreground hover:text-foreground"
               }`}
               role="tab"
               aria-selected={isSelected}
             >
               {category}
-            </Button>
+            </button>
           );
         })}
       </div>
 
-      {/* Grouped Skills Display */}
+      {/* Grouped Skills Display in Maanas Tyagi Card Grid */}
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {displayedSkills.map((cat) => (
-          <div
+          <article
             key={cat.category}
-            className="flex flex-col justify-between rounded-2xl border border-border/60 bg-card/60 p-5 backdrop-blur-sm shadow-sm transition-colors hover:border-emerald-500/30"
+            className="rounded-lg border border-border bg-card p-5 space-y-3 transition-colors hover:border-emerald-500/40"
           >
-            <div>
-              <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 pb-3">
+            <div className="flex items-center justify-between border-b border-border/40 pb-2">
+              <h3 className="font-mono text-xs font-medium uppercase tracking-wider text-emerald-500 dark:text-emerald-400">
                 {cat.category}
               </h3>
-              <div className="flex flex-wrap gap-2">
-                {cat.skills.map((skill) => (
-                  <Badge
-                    key={skill}
-                    variant="secondary"
-                    className="font-mono text-xs px-2.5 py-1 border border-border/50 bg-secondary/60 hover:bg-secondary"
-                  >
-                    {skill}
-                  </Badge>
-                ))}
-              </div>
-            </div>
-            <div className="pt-4 text-right">
               <span className="font-mono text-[10px] text-muted-foreground">
                 {cat.skills.length} competencies
               </span>
             </div>
-          </div>
+
+            <div className="flex flex-wrap gap-1.5">
+              {cat.skills.map((skill) => (
+                <span
+                  key={skill}
+                  className="font-mono rounded-full border border-border bg-background px-2.5 py-0.5 text-[11px] text-muted-foreground"
+                >
+                  {skill}
+                </span>
+              ))}
+            </div>
+          </article>
         ))}
       </div>
     </section>

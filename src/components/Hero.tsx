@@ -3,31 +3,11 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "motion/react";
 import { toast } from "sonner";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import { content } from "@/content";
-import {
-  FileText,
-  Mail,
-  Copy,
-  Check,
-  Github,
-  Linkedin,
-  Twitter,
-  MapPin,
-  Sparkles,
-} from "lucide-react";
 
 export function Hero() {
   const [copied, setCopied] = React.useState(false);
-
-  const [mounted, setMounted] = React.useState(false);
-
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(content.profile.email);
@@ -53,145 +33,124 @@ export function Hero() {
     <section
       id="hero"
       aria-label="Introduction"
-      className="relative pt-24 pb-8 md:pt-28 md:pb-12"
+      className="pt-20 pb-8 sm:pt-24 sm:pb-12 space-y-6"
     >
-      <div className="flex flex-col-reverse gap-8 md:flex-row md:items-center md:justify-between">
-        {/* Left Column: Narrative & CTA */}
-        <div className="flex-1 space-y-6">
-          {/* Status pill */}
-          <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur-sm">
-            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="font-mono">{content.profile.nickname}</span>
-            <span className="text-border">•</span>
-            <span className="flex items-center gap-1">
-              <MapPin className="h-3 w-3" />
-              {content.profile.location}
-            </span>
-          </div>
+      {/* Top Availability / Location Tag */}
+      <div className="inline-flex w-fit items-center gap-2.5 rounded-full border border-border bg-card px-4 py-1.5 font-mono text-xs text-foreground">
+        <span className="relative flex h-2 w-2 shrink-0">
+          <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+          <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+        </span>
+        <span className="font-semibold">{content.profile.nickname}</span>
+        <span className="text-muted-foreground">•</span>
+        <span>{content.profile.location}</span>
+        <span className="hidden sm:inline text-muted-foreground">•</span>
+        <span className="hidden sm:inline text-muted-foreground">
+          Open to Summer · Software & AI Engineering
+        </span>
+      </div>
 
-          {/* Masked staggered name reveal */}
-          <div className="overflow-hidden">
-            <motion.h1
-              initial={{ y: 24 }}
-              animate={{ y: 0 }}
-              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
-              className="font-serif text-4xl font-medium tracking-tight sm:text-6xl md:text-7xl"
-            >
+      <div className="flex flex-col-reverse sm:flex-row sm:items-start sm:justify-between gap-6">
+        <div className="space-y-4 flex-1">
+          {/* Monospace Greeting */}
+          <p className="font-mono text-sm text-emerald-500 dark:text-emerald-400">
+            Hi, I&apos;m Dhruv
+          </p>
+
+          {/* Clean Name & Tagline */}
+          <div className="space-y-1">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl font-semibold tracking-tight text-foreground">
               {content.profile.name}
-            </motion.h1>
+            </h1>
+            <p className="font-mono text-sm text-muted-foreground">
+              {content.profile.role}
+            </p>
           </div>
 
-          {/* Subtitle / Role */}
-          <p className="text-lg font-medium text-emerald-600 dark:text-emerald-400 sm:text-xl">
-            {content.profile.role}
-          </p>
+          {/* Narrative bio paragraphs (Maanas Tyagi style) */}
+          <div className="space-y-2.5 text-sm sm:text-base leading-relaxed text-muted-foreground max-w-2xl">
+            <p>
+              Information Technology undergraduate at Vellore Institute of Technology. I engineer full-stack platforms, autonomous AI agent protocols (MCP, LangGraph), and event-driven AWS cloud architectures.
+            </p>
+            <p>
+              Built SlideOS—an AI presentation engineering workspace with a deterministic slide layout compiler, 209 automated unit and integration tests, and real-time SVG rendering.
+            </p>
+          </div>
 
-          {/* Bio statement */}
-          <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
-            {content.profile.bio}
-          </p>
-
-          {/* Hero tech chips */}
+          {/* Tech Stack Chips */}
           <div
-            className="flex flex-wrap items-center gap-1.5"
+            className="flex flex-wrap items-center gap-1.5 pt-1"
             aria-label="Core Technologies"
           >
             {heroTechStack.map((tech) => (
-              <Badge
+              <span
                 key={tech}
-                variant="secondary"
-                className="font-mono text-xs px-2.5 py-0.5 border border-border/50 bg-secondary/50"
+                className="font-mono rounded-full border border-border bg-card px-2.5 py-0.5 text-[11px] text-muted-foreground"
               >
                 {tech}
-              </Badge>
+              </span>
             ))}
           </div>
 
-          {/* Magnetic CTA Action Buttons */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.45 }}
-            className="flex flex-wrap items-center gap-3 pt-2"
-          >
-            <Button asChild size="lg" className="rounded-full shadow-sm hover:scale-[1.02] transition-transform">
-              <Link href="/resume" className="gap-2">
-                <FileText className="h-4 w-4" />
-                <span>View Resume</span>
-              </Link>
-            </Button>
-
-            <Button
-              variant="outline"
-              size="lg"
-              onClick={handleCopyEmail}
-              className="rounded-full gap-2 hover:scale-[1.02] transition-transform"
-              aria-label="Copy email address"
+          {/* Monospace Action Links */}
+          <div className="flex flex-wrap items-center gap-4 pt-3 font-mono text-sm">
+            <a
+              href="https://github.com/Drv4ever"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub Profile"
+              className="text-muted-foreground hover:text-foreground transition-colors"
             >
-              {copied ? (
-                <Check className="h-4 w-4 text-emerald-500" />
-              ) : (
-                <Copy className="h-4 w-4" />
-              )}
-              <span>{copied ? "Copied!" : "Copy Email"}</span>
-            </Button>
-
-            <Button asChild variant="ghost" size="icon" className="rounded-full">
-              <a
-                href="https://github.com/Drv4ever"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="GitHub Profile"
-              >
-                <Github className="h-4 w-4" />
-              </a>
-            </Button>
-
-            <Button asChild variant="ghost" size="icon" className="rounded-full">
-              <a
-                href="https://linkedin.com/in/dhruv-jain-4284a8263/"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="LinkedIn Profile"
-              >
-                <Linkedin className="h-4 w-4" />
-              </a>
-            </Button>
-
-            <Button asChild variant="ghost" size="icon" className="rounded-full">
-              <a
-                href="https://x.com/Drv4ever632"
-                target="_blank"
-                rel="noreferrer"
-                aria-label="Twitter Profile"
-              >
-                <Twitter className="h-4 w-4" />
-              </a>
-            </Button>
-          </motion.div>
+              GitHub ↗
+            </a>
+            <a
+              href="https://linkedin.com/in/dhruv-jain-4284a8263/"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="LinkedIn Profile"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              LinkedIn ↗
+            </a>
+            <a
+              href="https://x.com/Drv4ever632"
+              target="_blank"
+              rel="noreferrer"
+              aria-label="Twitter Profile"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              X ↗
+            </a>
+            <button
+              onClick={handleCopyEmail}
+              aria-label="Copy email address"
+              className="text-muted-foreground hover:text-foreground transition-colors"
+            >
+              {copied ? "Copied!" : "Email"}
+            </button>
+            <Link
+              href="/resume"
+              aria-label="View Resume"
+              className="text-emerald-500 hover:underline dark:text-emerald-400"
+            >
+              resume ↗
+            </Link>
+          </div>
         </div>
 
-        {/* Right Column: Self-Hosted Avatar */}
-        <motion.div
-          initial={{ opacity: 0, scale: 0.95 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative mx-auto md:mx-0"
-        >
-          <div className="relative h-40 w-40 sm:h-48 sm:w-48 overflow-hidden rounded-full border-2 border-emerald-500/30 p-1.5 shadow-xl backdrop-blur-sm dark:border-emerald-500/20">
+        {/* Avatar */}
+        <div className="relative shrink-0 self-start">
+          <div className="h-24 w-24 sm:h-28 sm:w-28 overflow-hidden rounded-full border border-border bg-card p-1">
             <Image
               src="/avatar.png"
               alt={`${content.profile.name} portrait`}
-              width={192}
-              height={192}
+              width={112}
+              height={112}
               priority
-              className="h-full w-full rounded-full object-cover transition-transform duration-500 hover:scale-105"
+              className="h-full w-full rounded-full object-cover"
             />
           </div>
-          <div className="absolute -bottom-2 right-2 rounded-full border border-border/80 bg-background/90 px-2.5 py-0.5 text-[11px] font-mono font-medium text-emerald-600 shadow-sm dark:text-emerald-400">
-            VIT &apos;28
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );
