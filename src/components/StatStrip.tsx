@@ -34,12 +34,7 @@ export function StatStrip() {
               const eased = 1 - Math.pow(1 - progress, 4);
 
               setDisplayValues(
-                stats.map((s) => {
-                  const val = s.value * eased;
-                  return s.decimals > 0
-                    ? Number(val.toFixed(s.decimals))
-                    : Math.round(val);
-                })
+                stats.map((s) => Math.round(s.value * eased))
               );
 
               if (progress < 1) {
@@ -71,10 +66,7 @@ export function StatStrip() {
     >
       <div className="grid grid-cols-2 gap-6 md:grid-cols-4 md:gap-8 divide-y divide-border/30 md:divide-y-0 md:divide-x md:divide-border/40">
         {stats.map((item, index) => {
-          const formatted =
-            item.decimals > 0
-              ? displayValues[index].toFixed(item.decimals)
-              : Math.round(displayValues[index]).toString();
+          const formatted = Math.round(displayValues[index]).toString();
 
           return (
             <div

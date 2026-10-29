@@ -30,7 +30,7 @@ describe("Content Module & Schema Validation", () => {
     expect(parsed.projects).toHaveLength(5);
     expect(parsed.achievements).toHaveLength(2);
     expect(parsed.certifications).toHaveLength(1);
-    expect(parsed.stats).toHaveLength(4);
+    expect(parsed.stats).toHaveLength(3);
   });
 
   it("STRICT PRIVACY: phone number must never appear in any content output", () => {
@@ -49,16 +49,17 @@ describe("Content Module & Schema Validation", () => {
     expect(profile.socials.some((s) => s.label === "GitHub")).toBe(true);
   });
 
-  it("verifies education matches resume exactly", () => {
+  it("verifies education matches resume exactly and does not expose grades or CGPA", () => {
     const vit = education.find((e) => e.institution.includes("Vellore"));
     expect(vit).toBeDefined();
     expect(vit?.degree).toBe("B.Tech in Information Technology");
-    expect(vit?.score).toBe("CGPA: 9.08");
     expect(vit?.period).toBe("2024 – 2028");
 
     const dps = education.find((e) => e.institution.includes("Delhi Public School"));
     expect(dps).toBeDefined();
-    expect(dps?.score).toBe("Percentage: 89.2%");
+
+    expect(JSON.stringify(education)).not.toContain("CGPA");
+    expect(JSON.stringify(education)).not.toContain("9.08");
   });
 
   it("verifies skill categories match resume exactly", () => {
@@ -105,13 +106,13 @@ describe("Content Module & Schema Validation", () => {
     );
   });
 
-  it("verifies real stat strip numbers", () => {
+  it("verifies real stat numbers without academic grades or CGPA", () => {
     const statIds = stats.map((s) => s.id);
-    expect(statIds).toEqual(["tests", "themes", "leetcode", "cgpa"]);
+    expect(statIds).toEqual(["tests", "themes", "leetcode"]);
     expect(stats.find((s) => s.id === "tests")?.value).toBe(209);
     expect(stats.find((s) => s.id === "themes")?.value).toBe(12);
     expect(stats.find((s) => s.id === "leetcode")?.value).toBe(220);
-    expect(stats.find((s) => s.id === "cgpa")?.value).toBe(9.08);
+    expect(stats.find((s) => s.id === "cgpa")).toBeUndefined();
   });
 
   it("schema validation errors on invalid inputs", () => {

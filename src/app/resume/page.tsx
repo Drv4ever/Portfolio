@@ -21,7 +21,7 @@ export default function ResumePage() {
     <div className="min-h-screen flex flex-col bg-background text-foreground">
       <Navbar />
 
-      <main className="flex-1 mx-auto max-w-5xl w-full px-4 pt-28 pb-16 sm:px-6">
+      <main className="flex-1 mx-auto max-w-3xl w-full px-4 pt-28 pb-16 sm:px-6">
         {/* Navigation & Action Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-border/60">
           <div className="space-y-1">
@@ -36,7 +36,7 @@ export default function ResumePage() {
               Curriculum Vitae
             </h1>
             <p className="text-xs sm:text-sm text-muted-foreground font-mono">
-              {content.profile.name} • VIT Vellore (CGPA 9.08)
+              {content.profile.name} • Vellore Institute of Technology
             </p>
           </div>
 

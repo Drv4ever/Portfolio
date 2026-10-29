@@ -95,7 +95,7 @@ export function Navbar() {
           aria-hidden="true"
         />
 
-        <div className="mx-auto max-w-5xl px-4 pt-3 pb-2 sm:px-6">
+        <div className="mx-auto max-w-3xl px-4 pt-3 pb-2 sm:px-6">
           <nav
             aria-label="Main Navigation"
             className="flex items-center justify-between rounded-full border border-border/60 bg-background/80 px-4 py-2 backdrop-blur-md shadow-sm"

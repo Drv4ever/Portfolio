@@ -3,17 +3,11 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import dynamic from "next/dynamic";
 import { motion } from "motion/react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { content } from "@/content";
-
-const HeroCanvas = dynamic(
-  () => import("./HeroCanvas").then((m) => m.HeroCanvas),
-  { ssr: false }
-);
 import {
   FileText,
   Mail,
@@ -59,10 +53,8 @@ export function Hero() {
     <section
       id="hero"
       aria-label="Introduction"
-      className="relative pt-24 pb-12 md:pt-32 md:pb-16"
+      className="relative pt-24 pb-8 md:pt-28 md:pb-12"
     >
-      {mounted && <HeroCanvas />}
-
       <div className="flex flex-col-reverse gap-8 md:flex-row md:items-center md:justify-between">
         {/* Left Column: Narrative & CTA */}
         <div className="flex-1 space-y-6">

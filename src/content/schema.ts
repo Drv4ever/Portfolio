@@ -23,7 +23,7 @@ export const EducationSchema = z.object({
   degree: z.string().min(1),
   period: z.string().min(1),
   location: z.string().min(1),
-  score: z.string().min(1),
+  score: z.string().optional(),
 });
 
 export const SkillCategoryNameSchema = z.enum([

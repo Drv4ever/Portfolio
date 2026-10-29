@@ -1,6 +1,5 @@
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/components/Hero";
-import { StatStrip } from "@/components/StatStrip";
 import { ProjectsSection } from "@/components/ProjectsSection";
 import { SkillsSection } from "@/components/SkillsSection";
 import { GithubHeatmap } from "@/components/GithubHeatmap";
@@ -13,12 +12,11 @@ export default async function HomePage() {
     <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-emerald-500/20 selection:text-emerald-500">
       <Navbar />
 
-      <main className="flex-1 mx-auto max-w-5xl w-full px-4 sm:px-6">
+      <main className="flex-1 mx-auto max-w-3xl w-full px-4 sm:px-6 space-y-16 pb-16">
         <Hero />
-        <StatStrip />
         <ProjectsSection />
-        <SkillsSection />
         <GithubHeatmap />
+        <SkillsSection />
         <EducationTimeline />
         <AchievementsSection />
       </main>

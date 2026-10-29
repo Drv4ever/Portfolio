@@ -38,7 +38,7 @@ export function Footer() {
       aria-label="Footer and Contact Information"
       className="mt-20 border-t border-border/60 bg-card/30 pt-16 pb-12 backdrop-blur-sm"
     >
-      <div className="mx-auto max-w-5xl px-4 sm:px-6 space-y-12">
+      <div className="mx-auto max-w-3xl px-4 sm:px-6 space-y-12">
         {/* Top Contact CTA Banner */}
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 rounded-3xl border border-border/60 bg-card/80 p-8 shadow-sm">
           <div className="space-y-2">

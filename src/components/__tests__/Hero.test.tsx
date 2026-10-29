@@ -70,7 +70,6 @@ describe("StatStrip Component", () => {
     expect(screen.getByText("Automated Tests")).toBeInTheDocument();
     expect(screen.getByText("SlideOS Themes")).toBeInTheDocument();
     expect(screen.getByText("LeetCode Solved")).toBeInTheDocument();
-    expect(screen.getByText("Academic CGPA")).toBeInTheDocument();
   });
 
   it("respects reduced-motion preference by immediately displaying full numbers", () => {
@@ -90,7 +89,6 @@ describe("StatStrip Component", () => {
     expect(screen.getByText("209")).toBeInTheDocument();
     expect(screen.getByText("12")).toBeInTheDocument();
     expect(screen.getByText("220")).toBeInTheDocument();
-    expect(screen.getByText("9.08")).toBeInTheDocument();
 
     window.matchMedia = originalMatchMedia;
   });
@@ -128,6 +126,6 @@ describe("StatStrip Component", () => {
     });
 
     expect(screen.getByText("209")).toBeInTheDocument();
-    expect(screen.getByText("9.08")).toBeInTheDocument();
+    expect(screen.getByText("220")).toBeInTheDocument();
   });
 });

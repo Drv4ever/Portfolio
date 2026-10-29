@@ -19,21 +19,18 @@ export function SkillsSection() {
   }, [selectedCategory]);
 
   return (
-    <section id="skills" aria-label="Technical Skills Matrix" className="py-12 md:py-16">
-      <div className="space-y-3 pb-8">
-        <span className="font-mono text-xs uppercase tracking-widest text-emerald-600 dark:text-emerald-400">
-          Core Competencies
-        </span>
-        <h2 className="font-serif text-3xl font-medium tracking-tight sm:text-4xl">
+    <section id="skills" aria-label="Technical Skills Matrix" className="space-y-4">
+      <div className="space-y-1">
+        <h2 className="font-serif text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
           Technical Skills & Tooling
         </h2>
-        <p className="text-sm text-muted-foreground max-w-2xl">
+        <p className="text-xs text-muted-foreground">
           Grouped as verified on resume. Honest categorization with zero arbitrary proficiency bars.
         </p>
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex flex-wrap gap-2 pb-8" role="tablist" aria-label="Skill Categories">
+      <div className="flex flex-wrap gap-1.5 pb-2" role="tablist" aria-label="Skill Categories">
         {categories.map((category) => {
           const isSelected = selectedCategory === category;
           return (
@@ -57,7 +54,7 @@ export function SkillsSection() {
       </div>
 
       {/* Grouped Skills Display */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
         {displayedSkills.map((cat) => (
           <div
             key={cat.category}

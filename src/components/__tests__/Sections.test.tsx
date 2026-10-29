@@ -36,13 +36,13 @@ describe("SkillsSection Component", () => {
 });
 
 describe("EducationTimeline Component", () => {
-  it("renders educational background accurately", () => {
+  it("renders educational background accurately without displaying grades or CGPA", () => {
     render(<EducationTimeline />);
     expect(screen.getByText("Vellore Institute of Technology")).toBeInTheDocument();
     expect(screen.getByText("B.Tech in Information Technology")).toBeInTheDocument();
-    expect(screen.getByText("CGPA: 9.08")).toBeInTheDocument();
     expect(screen.getByText("Delhi Public School")).toBeInTheDocument();
-    expect(screen.getByText("Percentage: 89.2%")).toBeInTheDocument();
+    expect(screen.queryByText(/CGPA/)).toBeNull();
+    expect(screen.queryByText(/89\.2%/)).toBeNull();
   });
 });
 

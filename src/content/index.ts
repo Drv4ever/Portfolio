@@ -40,14 +40,12 @@ export const rawContent = {
       degree: "B.Tech in Information Technology",
       period: "2024 – 2028",
       location: "Vellore, India",
-      score: "CGPA: 9.08",
     },
     {
       institution: "Delhi Public School",
       degree: "Higher Secondary Education (Class XII)",
       period: "2023 – 2024",
       location: "Gwalior, India",
-      score: "Percentage: 89.2%",
     },
   ],
 
@@ -393,14 +391,6 @@ export const rawContent = {
       suffix: "+",
       description: "Data structure and algorithm challenges completed.",
       decimals: 0,
-    },
-    {
-      id: "cgpa",
-      label: "Academic CGPA",
-      value: 9.08,
-      suffix: "",
-      description: "Cumulative GPA at Vellore Institute of Technology.",
-      decimals: 2,
     },
   ],
 };

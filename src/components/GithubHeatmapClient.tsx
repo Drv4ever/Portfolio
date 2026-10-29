@@ -36,7 +36,7 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
       ref={containerRef}
       id="github-activity"
       aria-label="GitHub Activity Heatmap"
-      className="py-12 md:py-16"
+      className="space-y-4"
     >
       <div className="rounded-2xl border border-border/60 bg-card/60 p-6 backdrop-blur-sm shadow-sm md:p-8">
         <div className="flex flex-wrap items-center justify-between gap-4 pb-6 border-b border-border/40">
