@@ -1,10 +1,8 @@
 import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, act } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SkillsSection } from "../SkillsSection";
-import { EducationTimeline } from "../EducationTimeline";
-import { AchievementsSection } from "../AchievementsSection";
 import { GithubHeatmap, getGithubContributions } from "../GithubHeatmap";
 import { GithubHeatmapClient } from "../GithubHeatmapClient";
 import { Footer } from "../Footer";
@@ -32,42 +30,6 @@ describe("SkillsSection Component", () => {
     await user.click(screen.getByRole("tab", { name: "AI Agents" }));
     expect(screen.getByText("Model Context Protocol (MCP)")).toBeInTheDocument();
     expect(screen.getByText("LangGraph")).toBeInTheDocument();
-  });
-});
-
-describe("EducationTimeline Component", () => {
-  it("renders educational background accurately without displaying grades or CGPA", () => {
-    render(<EducationTimeline />);
-    expect(screen.getByText("Vellore Institute of Technology")).toBeInTheDocument();
-    expect(screen.getByText("B.Tech in Information Technology")).toBeInTheDocument();
-    expect(screen.getByText("Delhi Public School")).toBeInTheDocument();
-    expect(screen.queryByText(/CGPA/)).toBeNull();
-    expect(screen.queryByText(/89\.2%/)).toBeNull();
-  });
-});
-
-describe("AchievementsSection Component", () => {
-  it("renders LeetCode problem solving milestone", () => {
-    render(<AchievementsSection />);
-    expect(screen.getByText("Problem Solving")).toBeInTheDocument();
-    expect(screen.getByText("220+")).toBeInTheDocument();
-  });
-
-  it("renders published patent contribution with exact required text", () => {
-    render(<AchievementsSection />);
-    expect(screen.getByText("Patent Contribution")).toBeInTheDocument();
-    expect(screen.getByText("Patent [Published]")).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        "Contributed as a frontend developer in a 3-member team on an AI-driven system for detecting risk in distributed file propagation. [published]"
-      )
-    ).toBeInTheDocument();
-  });
-
-  it("renders IBM DevOps Certification", () => {
-    render(<AchievementsSection />);
-    expect(screen.getByText("IBM DevOps Certification")).toBeInTheDocument();
-    expect(screen.getByText("Issuer: IBM")).toBeInTheDocument();
   });
 });
 

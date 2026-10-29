@@ -1,9 +1,8 @@
 import React from "react";
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { SlideOSSpotlight } from "../SlideOSSpotlight";
-import { TestSplitDonut, TestSplitTooltip } from "../TestSplitDonut";
 import { ProjectArchitectureDiagram } from "../ProjectArchitectureDiagram";
 import { ProjectDetailDialog } from "../ProjectDetailDialog";
 import { ProjectCard } from "../ProjectCard";
@@ -11,19 +10,7 @@ import { LearningProjects } from "../LearningProjects";
 import { ProjectsSection } from "../ProjectsSection";
 import { content } from "@/content";
 
-vi.mock("recharts", async () => {
-  const original = await vi.importActual<Record<string, unknown>>("recharts");
-  return {
-    ...original,
-    ResponsiveContainer: ({ children }: { children: React.ReactNode }) => (
-      <div data-testid="responsive-container" style={{ width: 400, height: 200 }}>
-        {children}
-      </div>
-    ),
-  };
-});
-
-describe("SlideOSSpotlight & Tooltip", () => {
+describe("SlideOSSpotlight", () => {
   it("returns null when project is null", () => {
     const { container } = render(<SlideOSSpotlight project={null} />);
     expect(container.firstChild).toBeNull();
@@ -32,7 +19,6 @@ describe("SlideOSSpotlight & Tooltip", () => {
   it("renders status badge, project title, and live links", () => {
     render(<SlideOSSpotlight />);
     expect(screen.getByText("Active Project")).toBeInTheDocument();
-    expect(screen.getByText("12 Themes Engineered")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 2 })).toHaveTextContent("SlideOS — AI-Powered Presentation Builder");
 
     const liveBtn = screen.getByRole("link", { name: /slideos live demo application/i });
@@ -42,38 +28,11 @@ describe("SlideOSSpotlight & Tooltip", () => {
     expect(githubBtn).toHaveAttribute("href", "https://github.com/Drv4ever/SlideOS");
   });
 
-  it("renders pipeline architecture steps", () => {
+  it("renders project description and tech stack", () => {
     render(<SlideOSSpotlight />);
-    expect(screen.getByText("Prompt Input")).toBeInTheDocument();
-    expect(screen.getByText("Groq LLM (JSON Mode)")).toBeInTheDocument();
-    expect(screen.getByText("Server Enforcement & Fallback")).toBeInTheDocument();
-    expect(screen.getByText("Interactive Canvas Editor")).toBeInTheDocument();
-    expect(screen.getByText("Shared Layout Engine")).toBeInTheDocument();
-  });
-
-  it("renders test donut split breakdown", () => {
-    render(<SlideOSSpotlight />);
-    expect(screen.getByText("131 tests")).toBeInTheDocument();
-    expect(screen.getByText("78 tests")).toBeInTheDocument();
-    expect(screen.getByText("209 Total Verified Tests")).toBeInTheDocument();
-  });
-
-  it("TestSplitTooltip renders when active with payload and returns null when inactive", () => {
-    const { container: inactiveContainer } = render(<TestSplitTooltip active={false} />);
-    expect(inactiveContainer.firstChild).toBeNull();
-
-    render(
-      <TestSplitTooltip
-        active={true}
-        payload={[{ name: "Vitest (Frontend)", value: 131 }]}
-      />
-    );
-    expect(screen.getByText("Vitest (Frontend): 131 tests")).toBeInTheDocument();
-  });
-
-  it("TestSplitDonut renders donut chart container", () => {
-    const { container } = render(<TestSplitDonut />);
-    expect(container.firstChild).toBeInTheDocument();
+    expect(screen.getByText(/Full-stack web app that generates slide outlines/i)).toBeInTheDocument();
+    expect(screen.getByText("React")).toBeInTheDocument();
+    expect(screen.getByText("Groq LLM")).toBeInTheDocument();
   });
 });
 

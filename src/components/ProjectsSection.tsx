@@ -24,23 +24,20 @@ export function ProjectsSection() {
 
   return (
     <section id="projects" aria-label="Featured Engineering Projects" className="space-y-6">
-      <div className="space-y-1">
-        <h2 className="font-serif text-2xl font-medium tracking-tight text-foreground sm:text-3xl">
+      <div className="space-y-0.5">
+        <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-foreground">
           Engineered Products & Architectures
         </h2>
-        <p className="text-xs text-muted-foreground">
-          Full-stack web applications, Model Context Protocol servers, and cloud-native event-driven pipelines.
+        <p className="text-xs text-muted-foreground font-mono">
+          selected platforms, tools, and event-driven cloud systems
         </p>
       </div>
 
-      {/* Spotlight: SlideOS */}
+      {/* Flagship: SlideOS */}
       <SlideOSSpotlight />
 
       {/* Featured Works Grid */}
-      <div className="mt-12 space-y-4">
-        <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-          Distributed Systems & Protocols
-        </h3>
+      <div className="space-y-4 pt-2">
         <div className="grid grid-cols-1 gap-4">
           {featuredProjects.map((project) => (
             <ProjectCard

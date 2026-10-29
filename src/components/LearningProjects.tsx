@@ -13,22 +13,22 @@ export function LearningProjects({ projects = defaultProjects }: LearningProject
   if (projects.length === 0) return null;
 
   return (
-    <div className="space-y-4 pt-4">
+    <div className="space-y-3 pt-2">
       <div className="flex items-center gap-2">
-        <BookOpen className="h-4 w-4 text-muted-foreground" />
-        <h3 className="font-mono text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+        <BookOpen className="h-3.5 w-3.5 text-muted-foreground" />
+        <h3 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
           Foundational & Learning Projects
         </h3>
       </div>
 
-      <div className="grid grid-cols-1 gap-4">
+      <div className="grid grid-cols-1 gap-3">
         {projects.map((project) => (
           <article
             key={project.id}
-            className="rounded-lg border border-border bg-card p-6 space-y-3 transition-colors hover:border-emerald-500/40"
+            className="rounded-lg border border-border bg-card p-5 space-y-2.5 transition-colors hover:border-border/80"
           >
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-              <h4 className="text-lg font-medium text-foreground">
+            <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/40 pb-2.5">
+              <h4 className="text-base font-medium text-foreground">
                 {project.title}
               </h4>
               <div className="flex items-center gap-2 font-mono text-xs">
@@ -71,7 +71,7 @@ export function LearningProjects({ projects = defaultProjects }: LearningProject
               {project.techStack.map((tech) => (
                 <span
                   key={tech}
-                  className="font-mono rounded-full border border-border bg-background px-2.5 py-0.5 text-[11px] text-muted-foreground"
+                  className="font-mono rounded border border-border bg-background px-2 py-0.5 text-[11px] text-muted-foreground"
                 >
                   {tech}
                 </span>

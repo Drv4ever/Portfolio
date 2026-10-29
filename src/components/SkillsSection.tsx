@@ -17,12 +17,12 @@ export function SkillsSection() {
 
   return (
     <section id="skills" aria-label="Technical Skills Matrix" className="space-y-4">
-      <div className="space-y-1">
-        <h2 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+      <div className="space-y-0.5">
+        <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-foreground">
           Technical Skills & Tooling
         </h2>
-        <p className="font-mono text-xs text-muted-foreground">
-          Grouped as verified on resume. Honest categorization with zero arbitrary proficiency bars.
+        <p className="text-xs text-muted-foreground font-mono">
+          verified technologies, frameworks, and core competencies
         </p>
       </div>
 
@@ -49,19 +49,19 @@ export function SkillsSection() {
         })}
       </div>
 
-      {/* Grouped Skills Display in Maanas Tyagi Card Grid */}
-      <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {/* Grouped Skills Display in Amaan Card Grid */}
+      <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {displayedSkills.map((cat) => (
           <article
             key={cat.category}
-            className="rounded-lg border border-border bg-card p-5 space-y-3 transition-colors hover:border-emerald-500/40"
+            className="rounded-lg border border-border bg-card p-4 space-y-2.5 transition-colors hover:border-border/80"
           >
             <div className="flex items-center justify-between border-b border-border/40 pb-2">
-              <h3 className="font-mono text-xs font-medium uppercase tracking-wider text-emerald-500 dark:text-emerald-400">
+              <h3 className="font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground">
                 {cat.category}
               </h3>
               <span className="font-mono text-[10px] text-muted-foreground">
-                {cat.skills.length} competencies
+                {cat.skills.length} skills
               </span>
             </div>
 
@@ -69,7 +69,7 @@ export function SkillsSection() {
               {cat.skills.map((skill) => (
                 <span
                   key={skill}
-                  className="font-mono rounded-full border border-border bg-background px-2.5 py-0.5 text-[11px] text-muted-foreground"
+                  className="font-mono rounded border border-border bg-background px-2 py-0.5 text-[11px] text-muted-foreground"
                 >
                   {skill}
                 </span>

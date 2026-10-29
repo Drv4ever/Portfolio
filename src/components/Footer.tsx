@@ -35,27 +35,27 @@ export function Footer() {
       aria-label="Footer and Contact Information"
       className="mt-16 border-t border-border bg-background pt-12 pb-12"
     >
-      <div className="mx-auto max-w-3xl px-4 sm:px-6 space-y-8">
-        {/* Contact Card (Maanas Tyagi card style) */}
-        <article className="rounded-lg border border-border bg-card p-6 space-y-4">
+      <div className="mx-auto max-w-2xl px-4 sm:px-6 space-y-6">
+        {/* Contact Card (Amaan style) */}
+        <article className="rounded-lg border border-border bg-card p-6 space-y-3.5">
           <div className="space-y-1">
-            <span className="font-mono text-xs uppercase tracking-wider text-emerald-500">
-              Get In Touch
+            <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+              Contact
             </span>
-            <h2 className="text-xl sm:text-2xl font-semibold text-foreground">
+            <h2 className="text-lg sm:text-xl font-medium text-foreground">
               Let&apos;s build intelligent systems together.
             </h2>
             <p className="text-xs sm:text-sm text-muted-foreground">
-              Open to Software Engineering and Full-Stack Internships for Summer 2026.
+              Open to Software Engineering and Full-Stack Internships.
             </p>
           </div>
 
           <div className="flex flex-wrap items-center gap-3 pt-1">
             <a
               href={`mailto:${content.profile.email}`}
-              className="inline-flex items-center gap-2 rounded-full border border-emerald-500/40 bg-emerald-500/10 px-4 py-1.5 font-mono text-xs text-emerald-500 hover:bg-emerald-500/20 transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3.5 py-1 font-mono text-xs text-foreground hover:bg-secondary transition-colors"
             >
-              <Mail className="h-3.5 w-3.5" />
+              <Mail className="h-3 w-3" />
               <span>Send Email</span>
             </a>
 
@@ -63,12 +63,12 @@ export function Footer() {
               type="button"
               onClick={handleCopyEmail}
               aria-label="Copy Address to clipboard"
-              className="inline-flex items-center gap-2 rounded-full border border-border bg-background px-4 py-1.5 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3.5 py-1 font-mono text-xs text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
             >
               {copied ? (
-                <Check className="h-3.5 w-3.5 text-emerald-500" />
+                <Check className="h-3 w-3 text-emerald-500" />
               ) : (
-                <Copy className="h-3.5 w-3.5" />
+                <Copy className="h-3 w-3" />
               )}
               <span>{copied ? "Copied" : "Copy Address"}</span>
             </button>
@@ -78,13 +78,11 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-border/40 pt-6 text-xs font-mono text-muted-foreground">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-foreground">
+            <span className="font-medium text-foreground">
               {content.profile.name}
             </span>
             <span>•</span>
-            <span>VIT Vellore (2024–2028)</span>
-            <span>•</span>
-            <span>Vellore, India</span>
+            <span>{content.profile.location}</span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -110,7 +108,7 @@ export function Footer() {
               href="https://x.com/Drv4ever632"
               target="_blank"
               rel="noreferrer"
-              aria-label="Twitter Profile"
+              aria-label="X (Twitter) Profile"
               className="hover:text-foreground transition-colors"
             >
               <Twitter className="h-4 w-4" />

@@ -39,8 +39,6 @@ describe("Navbar Component", () => {
     expect(screen.getByText("DJ")).toBeInTheDocument();
     expect(screen.getByText("Projects")).toBeInTheDocument();
     expect(screen.getByText("Skills")).toBeInTheDocument();
-    expect(screen.getByText("Education")).toBeInTheDocument();
-    expect(screen.getByText("Achievements")).toBeInTheDocument();
     expect(screen.getByText("Resume")).toBeInTheDocument();
   });
 

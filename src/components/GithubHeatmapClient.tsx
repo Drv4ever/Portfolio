@@ -37,7 +37,7 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
       aria-label="GitHub Activity Heatmap"
       className="space-y-4"
     >
-      <article className="rounded-lg border border-border bg-card p-6 space-y-5 transition-colors hover:border-emerald-500/40">
+      <article className="rounded-lg border border-border bg-card p-6 space-y-5 transition-colors hover:border-border/80">
         <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-border/40">
           <div className="flex items-center gap-2.5">
             <Github className="h-5 w-5 text-foreground" />

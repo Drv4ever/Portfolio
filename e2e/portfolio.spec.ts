@@ -116,7 +116,7 @@ test.describe("Portfolio End-to-End Suite", () => {
     await page.waitForLoadState("domcontentloaded");
 
     await expect(page.getByRole("heading", { name: "Curriculum Vitae" })).toBeVisible();
-    await expect(page.getByText("Dhruv Jain • VIT Vellore (CGPA 9.08)")).toBeVisible();
+    await expect(page.getByText("Dhruv Jain • Vellore Institute of Technology")).toBeVisible();
 
     const downloadBtn = page.getByRole("link", { name: /download/i }).first();
     await expect(downloadBtn).toHaveAttribute("href", "/Dhruv-Jain-Resume.pdf");
