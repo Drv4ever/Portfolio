@@ -1,100 +1,208 @@
 "use client";
 
-import HeroActions from "@/components/HeroActions";
-import { FadeIn } from "@/components/Motion";
-import { profile } from "@/data/content";
-import type { ReactElement } from "react";
+import * as React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { motion } from "motion/react";
+import { toast } from "sonner";
+import { HeroCanvas } from "./HeroCanvas";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { content } from "@/content";
+import {
+  FileText,
+  Mail,
+  Copy,
+  Check,
+  Github,
+  Linkedin,
+  Twitter,
+  MapPin,
+  Sparkles,
+} from "lucide-react";
 
-export default function Hero() {
-  const socialIcon: Record<string, ReactElement> = {
-    Email: (
-      <svg
-        viewBox="0 0 24 24"
-        className="h-4 w-4"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.9"
-        aria-hidden="true"
-      >
-        <rect x="3" y="5" width="18" height="14" rx="2" />
-        <path d="m4 7 8 6 8-6" />
-      </svg>
-    ),
-    LinkedIn: (
-      <svg
-        viewBox="0 0 24 24"
-        className="h-4 w-4"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path d="M6.94 8.5a1.56 1.56 0 1 1 0-3.12 1.56 1.56 0 0 1 0 3.12ZM5.6 9.75h2.68V18H5.6V9.75Zm4.35 0h2.57v1.13h.04c.36-.68 1.23-1.4 2.54-1.4 2.72 0 3.22 1.78 3.22 4.09V18h-2.67v-3.88c0-.92-.02-2.1-1.28-2.1-1.28 0-1.48 1-1.48 2.03V18H9.95V9.75Z" />
-      </svg>
-    ),
-    Twitter: (
-      <svg
-        viewBox="0 0 24 24"
-        className="h-4 w-4"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path d="M18.9 2H22l-6.77 7.73L23.2 22h-6.26l-4.9-6.42L6.42 22H3.3l7.24-8.27L.8 2h6.42l4.43 5.86L18.9 2Zm-1.1 18h1.73L6.3 3.9H4.44L17.8 20Z" />
-      </svg>
-    ),
-    GitHub: (
-      <svg
-        viewBox="0 0 24 24"
-        className="h-4 w-4"
-        fill="currentColor"
-        aria-hidden="true"
-      >
-        <path d="M12 .7a11.3 11.3 0 0 0-3.57 22.02c.57.1.78-.25.78-.55v-2.14c-3.17.69-3.84-1.34-3.84-1.34-.52-1.31-1.27-1.66-1.27-1.66-1.03-.7.08-.7.08-.7 1.14.08 1.74 1.16 1.74 1.16 1 .72 2.6.52 3.24.4.1-.73.4-1.23.72-1.52-2.53-.29-5.19-1.25-5.19-5.55 0-1.23.44-2.24 1.16-3.03-.12-.28-.5-1.43.12-2.97 0 0 .95-.3 3.1 1.16a10.8 10.8 0 0 1 5.66 0c2.14-1.46 3.08-1.16 3.08-1.16.63 1.54.24 2.69.12 2.97.72.79 1.16 1.8 1.16 3.03 0 4.31-2.67 5.26-5.2 5.54.4.35.78 1.03.78 2.08v3.1c0 .3.2.66.79.55A11.3 11.3 0 0 0 12 .7Z" />
-      </svg>
-    ),
+export function Hero() {
+  const [copied, setCopied] = React.useState(false);
+
+  const handleCopyEmail = () => {
+    navigator.clipboard.writeText(content.profile.email);
+    setCopied(true);
+    toast.success("Email address copied to clipboard!", {
+      description: content.profile.email,
+    });
+    setTimeout(() => setCopied(false), 2000);
   };
 
+  const heroTechStack = [
+    "TypeScript",
+    "React.js",
+    "Node.js",
+    "Express.js",
+    "MongoDB",
+    "AWS",
+    "MCP",
+    "Groq LLM",
+  ];
+
   return (
-    <section className="border-b border-border-light py-10 dark:border-border-dark">
-      <FadeIn>
-        <p className="max-w-[52ch] text-sm leading-7 text-neutral-700 dark:text-neutral-300">
-          {profile.intro}
-        </p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {profile.techStack.map((tech) => (
-            <span
-              key={tech.name}
-              className="inline-flex items-center gap-1.5 rounded-md border border-border-light px-2 py-1 text-[10px] uppercase tracking-editorial dark:border-border-dark"
-            >
-              <img
-                src={tech.logo}
-                alt={`${tech.name} logo`}
-                className="h-3.5 w-3.5"
-                loading="lazy"
-              />
-              {tech.name}
+    <section
+      id="hero"
+      aria-label="Introduction"
+      className="relative pt-24 pb-12 md:pt-32 md:pb-16"
+    >
+      <HeroCanvas />
+
+      <div className="flex flex-col-reverse gap-8 md:flex-row md:items-center md:justify-between">
+        {/* Left Column: Narrative & CTA */}
+        <div className="flex-1 space-y-6">
+          {/* Status pill */}
+          <div className="inline-flex items-center gap-2 rounded-full border border-border/60 bg-background/60 px-3 py-1 text-xs text-muted-foreground backdrop-blur-sm">
+            <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+            <span className="font-mono">{content.profile.nickname}</span>
+            <span className="text-border">•</span>
+            <span className="flex items-center gap-1">
+              <MapPin className="h-3 w-3" />
+              {content.profile.location}
             </span>
-          ))}
+          </div>
+
+          {/* Masked staggered name reveal */}
+          <div className="overflow-hidden">
+            <motion.h1
+              initial={{ y: "100%", opacity: 0 }}
+              animate={{ y: 0, opacity: 1 }}
+              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              className="font-serif text-4xl font-medium tracking-tight sm:text-6xl md:text-7xl"
+            >
+              {content.profile.name}
+            </motion.h1>
+          </div>
+
+          {/* Subtitle / Role */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="text-lg font-medium text-emerald-600 dark:text-emerald-400 sm:text-xl"
+          >
+            {content.profile.role}
+          </motion.p>
+
+          {/* Bio statement */}
+          <motion.p
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.25 }}
+            className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
+          >
+            {content.profile.bio}
+          </motion.p>
+
+          {/* Hero tech chips */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.35 }}
+            className="flex flex-wrap items-center gap-1.5"
+            aria-label="Core Technologies"
+          >
+            {heroTechStack.map((tech) => (
+              <Badge
+                key={tech}
+                variant="secondary"
+                className="font-mono text-xs px-2.5 py-0.5 border border-border/50 bg-secondary/50"
+              >
+                {tech}
+              </Badge>
+            ))}
+          </motion.div>
+
+          {/* Magnetic CTA Action Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.45 }}
+            className="flex flex-wrap items-center gap-3 pt-2"
+          >
+            <Button asChild size="lg" className="rounded-full shadow-sm hover:scale-[1.02] transition-transform">
+              <Link href="/resume" className="gap-2">
+                <FileText className="h-4 w-4" />
+                <span>View Resume</span>
+              </Link>
+            </Button>
+
+            <Button
+              variant="outline"
+              size="lg"
+              onClick={handleCopyEmail}
+              className="rounded-full gap-2 hover:scale-[1.02] transition-transform"
+              aria-label="Copy email address"
+            >
+              {copied ? (
+                <Check className="h-4 w-4 text-emerald-500" />
+              ) : (
+                <Copy className="h-4 w-4" />
+              )}
+              <span>{copied ? "Copied!" : "Copy Email"}</span>
+            </Button>
+
+            <Button asChild variant="ghost" size="icon" className="rounded-full">
+              <a
+                href="https://github.com/Drv4ever"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="GitHub Profile"
+              >
+                <Github className="h-4 w-4" />
+              </a>
+            </Button>
+
+            <Button asChild variant="ghost" size="icon" className="rounded-full">
+              <a
+                href="https://linkedin.com/in/dhruv-jain-4284a8263/"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="LinkedIn Profile"
+              >
+                <Linkedin className="h-4 w-4" />
+              </a>
+            </Button>
+
+            <Button asChild variant="ghost" size="icon" className="rounded-full">
+              <a
+                href="https://x.com/Drv4ever632"
+                target="_blank"
+                rel="noreferrer"
+                aria-label="Twitter Profile"
+              >
+                <Twitter className="h-4 w-4" />
+              </a>
+            </Button>
+          </motion.div>
         </div>
 
-        <HeroActions />
-
-        <ul className="mt-8 space-y-2.5 text-base">
-          {profile.socials.map((item) => (
-            <li key={item.label}>
-              <a
-                className="inline-flex items-center gap-2 border-b border-transparent pb-0.5 transition hover:border-ink-light dark:hover:border-ink-dark"
-                href={item.href}
-                target={item.href.startsWith("http") ? "_blank" : undefined}
-                rel={item.href.startsWith("http") ? "noreferrer" : undefined}
-              >
-                <span className="inline-flex h-5 w-5 items-center justify-center text-neutral-500 dark:text-neutral-400">
-                  {socialIcon[item.label] ?? <span className="text-xs">•</span>}
-                </span>
-                {item.label}
-              </a>
-            </li>
-          ))}
-        </ul>
-      </FadeIn>
+        {/* Right Column: Self-Hosted Avatar */}
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="relative mx-auto md:mx-0"
+        >
+          <div className="relative h-40 w-40 sm:h-48 sm:w-48 overflow-hidden rounded-full border-2 border-emerald-500/30 p-1.5 shadow-xl backdrop-blur-sm dark:border-emerald-500/20">
+            <Image
+              src="/avatar.png"
+              alt={`${content.profile.name} portrait`}
+              width={192}
+              height={192}
+              priority
+              className="h-full w-full rounded-full object-cover transition-transform duration-500 hover:scale-105"
+            />
+          </div>
+          <div className="absolute -bottom-2 right-2 rounded-full border border-border/80 bg-background/90 px-2.5 py-0.5 text-[11px] font-mono font-medium text-emerald-600 shadow-sm dark:text-emerald-400">
+            VIT &apos;28
+          </div>
+        </motion.div>
+      </div>
     </section>
   );
 }

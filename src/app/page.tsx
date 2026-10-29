@@ -1,44 +1,27 @@
-import Footer from "@/components/Footer";
-import Header from "@/components/Header";
-import Hero from "@/components/Hero";
-import Section from "@/components/Section";
-import Projects from "@/components/Projects";
-import Sidebar from "@/components/Sidebar";
-import ThemeToggle from "@/components/ThemeToggle";
-import { FadeIn } from "@/components/Motion";
-import { education } from "@/data/content";
+import { Navbar } from "@/components/Navbar";
+import { Hero } from "@/components/Hero";
+import { StatStrip } from "@/components/StatStrip";
+import { ProjectsSection } from "@/components/ProjectsSection";
+import { SkillsSection } from "@/components/SkillsSection";
+import { GithubHeatmap } from "@/components/GithubHeatmap";
+import { EducationTimeline } from "@/components/EducationTimeline";
+import { AchievementsSection } from "@/components/AchievementsSection";
+import { Footer } from "@/components/Footer";
 
-export default function HomePage() {
+export default async function HomePage() {
   return (
-    <div className="mx-auto max-w-3xl px-4 pb-8 pt-16 md:px-8">
-      <ThemeToggle />
-      <Header />
+    <div className="min-h-screen flex flex-col bg-background text-foreground selection:bg-emerald-500/20 selection:text-emerald-500">
+      <Navbar />
 
-      <div className="grid gap-8 lg:grid-cols-[1.7fr_0.9fr]">
-        <div>
-          <Hero />
-        </div>
-        <div className="pt-10 lg:pt-10">
-          <Sidebar />
-        </div>
-      </div>
-
-      <div>
-        <Projects />
-      </div>
-
-      <FadeIn>
-        <Section title="Education">
-          <div className="grid gap-4 md:grid-cols-2">
-            {education.map((item) => (
-              <article key={item.school} className="rounded-md border border-border-light p-4 dark:border-border-dark">
-                <h3 className="font-serif text-2xl">{item.school}</h3>
-                <p className="mt-2 text-sm text-neutral-700 dark:text-neutral-300">{item.detail}</p>
-              </article>
-            ))}
-          </div>
-        </Section>
-      </FadeIn>
+      <main className="flex-1 mx-auto max-w-5xl w-full px-4 sm:px-6">
+        <Hero />
+        <StatStrip />
+        <ProjectsSection />
+        <SkillsSection />
+        <GithubHeatmap />
+        <EducationTimeline />
+        <AchievementsSection />
+      </main>
 
       <Footer />
     </div>
