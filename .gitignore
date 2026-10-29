@@ -4,3 +4,7 @@ node_modules
 .env.local
 dist
 build
+coverage
+playwright-report
+test-results
+*.tsbuildinfo
