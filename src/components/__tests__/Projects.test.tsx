@@ -2,7 +2,8 @@ import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { SlideOSSpotlight, TestSplitTooltip } from "../SlideOSSpotlight";
+import { SlideOSSpotlight } from "../SlideOSSpotlight";
+import { TestSplitDonut, TestSplitTooltip } from "../TestSplitDonut";
 import { ProjectArchitectureDiagram } from "../ProjectArchitectureDiagram";
 import { ProjectDetailDialog } from "../ProjectDetailDialog";
 import { ProjectCard } from "../ProjectCard";
@@ -68,6 +69,11 @@ describe("SlideOSSpotlight & Tooltip", () => {
       />
     );
     expect(screen.getByText("Vitest (Frontend): 131 tests")).toBeInTheDocument();
+  });
+
+  it("TestSplitDonut renders donut chart container", () => {
+    const { container } = render(<TestSplitDonut />);
+    expect(container.firstChild).toBeInTheDocument();
   });
 });
 

@@ -1,12 +1,17 @@
 "use client";
 
 import * as React from "react";
+import dynamic from "next/dynamic";
 import { featuredProjects } from "@/content";
 import { Project } from "@/content/schema";
 import { SlideOSSpotlight } from "./SlideOSSpotlight";
 import { ProjectCard } from "./ProjectCard";
-import { ProjectDetailDialog } from "./ProjectDetailDialog";
 import { LearningProjects } from "./LearningProjects";
+
+const ProjectDetailDialog = dynamic(
+  () => import("./ProjectDetailDialog").then((m) => m.ProjectDetailDialog),
+  { ssr: false }
+);
 
 export function ProjectsSection() {
   const [selectedProject, setSelectedProject] = React.useState<Project | null>(null);
@@ -54,11 +59,13 @@ export function ProjectsSection() {
       <LearningProjects />
 
       {/* Detail Modal */}
-      <ProjectDetailDialog
-        project={selectedProject}
-        open={dialogOpen}
-        onOpenChange={setDialogOpen}
-      />
+      {dialogOpen && (
+        <ProjectDetailDialog
+          project={selectedProject}
+          open={dialogOpen}
+          onOpenChange={setDialogOpen}
+        />
+      )}
     </section>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import dynamic from "next/dynamic";
 import { spotlightProject } from "@/content";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -12,44 +13,31 @@ import {
   Cpu,
   ArrowRight,
 } from "lucide-react";
-import { PieChart, Pie, Cell, ResponsiveContainer, Tooltip } from "recharts";
 
-interface TooltipPayloadItem {
-  name: string;
-  value: number;
-}
-
-export function TestSplitTooltip({
-  active,
-  payload,
-}: {
-  active?: boolean;
-  payload?: TooltipPayloadItem[];
-}) {
-  if (active && payload && payload.length) {
-    const data = payload[0];
-    return (
-      <div className="rounded-lg border border-border bg-popover px-3 py-1.5 shadow-md">
-        <p className="text-xs font-medium text-popover-foreground">
-          {data.name}: {data.value} tests
-        </p>
+const TestSplitDonut = dynamic(
+  () => import("./TestSplitDonut").then((m) => m.TestSplitDonut),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="h-44 w-full flex items-center justify-center font-mono text-xs text-muted-foreground">
+        Loading test breakdown...
       </div>
-    );
+    ),
   }
-  return null;
-}
+);
 
 export function SlideOSSpotlight({
   project = spotlightProject,
 }: {
   project?: typeof spotlightProject | null;
 } = {}) {
-  if (!project) return null;
+  const [mounted, setMounted] = React.useState(false);
 
-  const testData = [
-    { name: "Vitest (Frontend)", value: 131, color: "#10b981" },
-    { name: "Jest (Backend)", value: 78, color: "#6366f1" },
-  ];
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!project) return null;
 
   return (
     <article
@@ -88,7 +76,7 @@ export function SlideOSSpotlight({
           )}
 
           {project.live && (
-            <Button asChild size="sm" className="rounded-full gap-1.5 text-xs bg-emerald-600 hover:bg-emerald-500 text-white shadow-sm">
+            <Button asChild size="sm" className="rounded-full gap-1.5 text-xs bg-emerald-700 hover:bg-emerald-600 text-white shadow-sm">
               <a
                 href={project.live}
                 target="_blank"
@@ -199,26 +187,13 @@ export function SlideOSSpotlight({
             </Badge>
           </div>
 
-          <div className="h-44 w-full py-2">
-            <ResponsiveContainer width="100%" height="100%">
-              <PieChart>
-                <Pie
-                  data={testData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={45}
-                  outerRadius={68}
-                  paddingAngle={4}
-                  dataKey="value"
-                >
-                  {testData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip content={<TestSplitTooltip />} />
-              </PieChart>
-            </ResponsiveContainer>
-          </div>
+          {mounted ? (
+            <TestSplitDonut />
+          ) : (
+            <div className="h-44 w-full flex items-center justify-center font-mono text-xs text-muted-foreground">
+              Loading test breakdown...
+            </div>
+          )}
 
           <div className="grid grid-cols-2 gap-2 pt-2 text-center text-xs">
             <div className="rounded-lg border border-border/40 bg-card/60 p-2">

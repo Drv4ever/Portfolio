@@ -3,12 +3,17 @@
 import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { motion } from "motion/react";
 import { toast } from "sonner";
-import { HeroCanvas } from "./HeroCanvas";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { content } from "@/content";
+
+const HeroCanvas = dynamic(
+  () => import("./HeroCanvas").then((m) => m.HeroCanvas),
+  { ssr: false }
+);
 import {
   FileText,
   Mail,
@@ -23,6 +28,12 @@ import {
 
 export function Hero() {
   const [copied, setCopied] = React.useState(false);
+
+  const [mounted, setMounted] = React.useState(false);
+
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const handleCopyEmail = () => {
     navigator.clipboard.writeText(content.profile.email);
@@ -50,7 +61,7 @@ export function Hero() {
       aria-label="Introduction"
       className="relative pt-24 pb-12 md:pt-32 md:pb-16"
     >
-      <HeroCanvas />
+      {mounted && <HeroCanvas />}
 
       <div className="flex flex-col-reverse gap-8 md:flex-row md:items-center md:justify-between">
         {/* Left Column: Narrative & CTA */}
@@ -69,9 +80,9 @@ export function Hero() {
           {/* Masked staggered name reveal */}
           <div className="overflow-hidden">
             <motion.h1
-              initial={{ y: "100%", opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
+              initial={{ y: 24 }}
+              animate={{ y: 0 }}
+              transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
               className="font-serif text-4xl font-medium tracking-tight sm:text-6xl md:text-7xl"
             >
               {content.profile.name}
@@ -79,30 +90,17 @@ export function Hero() {
           </div>
 
           {/* Subtitle / Role */}
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.15 }}
-            className="text-lg font-medium text-emerald-600 dark:text-emerald-400 sm:text-xl"
-          >
+          <p className="text-lg font-medium text-emerald-600 dark:text-emerald-400 sm:text-xl">
             {content.profile.role}
-          </motion.p>
+          </p>
 
           {/* Bio statement */}
-          <motion.p
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.25 }}
-            className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg"
-          >
+          <p className="max-w-xl text-base leading-relaxed text-muted-foreground sm:text-lg">
             {content.profile.bio}
-          </motion.p>
+          </p>
 
           {/* Hero tech chips */}
-          <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.35 }}
+          <div
             className="flex flex-wrap items-center gap-1.5"
             aria-label="Core Technologies"
           >
@@ -115,7 +113,7 @@ export function Hero() {
                 {tech}
               </Badge>
             ))}
-          </motion.div>
+          </div>
 
           {/* Magnetic CTA Action Buttons */}
           <motion.div

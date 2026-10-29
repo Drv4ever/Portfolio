@@ -80,7 +80,7 @@ export function SkillsSection() {
               </div>
             </div>
             <div className="pt-4 text-right">
-              <span className="font-mono text-[10px] text-muted-foreground/60">
+              <span className="font-mono text-[10px] text-muted-foreground">
                 {cat.skills.length} competencies
               </span>
             </div>

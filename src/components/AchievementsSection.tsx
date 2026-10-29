@@ -71,7 +71,7 @@ export function AchievementsSection() {
                 <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-indigo-500/10 text-indigo-500">
                   <Award className="h-4 w-4" />
                 </span>
-                <Badge variant="outline" className="font-mono text-[10px] text-indigo-500 border-indigo-500/30">
+                <Badge variant="outline" className="font-mono text-[10px] text-indigo-700 dark:text-indigo-300 border-indigo-500/40 font-medium">
                   Verified Credential
                 </Badge>
               </div>
@@ -89,7 +89,7 @@ export function AchievementsSection() {
               <span className="font-mono text-xs text-muted-foreground">
                 Issuer: {cert.issuer}
               </span>
-              <span className="font-mono text-[11px] text-indigo-400 font-semibold">
+              <span className="font-mono text-[11px] text-indigo-700 dark:text-indigo-300 font-semibold">
                 CI/CD & Containers
               </span>
             </div>

@@ -54,7 +54,7 @@ export function Footer() {
           </div>
 
           <div className="flex flex-wrap items-center gap-3">
-            <Button asChild size="lg" className="rounded-full shadow-sm bg-emerald-600 hover:bg-emerald-500 text-white">
+            <Button asChild size="lg" className="rounded-full shadow-sm bg-emerald-700 hover:bg-emerald-600 text-white">
               <a href={`mailto:${content.profile.email}`} className="gap-2">
                 <Mail className="h-4 w-4" />
                 <span>Send Email</span>
