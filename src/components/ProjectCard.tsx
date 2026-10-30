@@ -2,45 +2,25 @@
 
 import * as React from "react";
 import { Project } from "@/content/schema";
-import { ExternalLink, Github, Workflow, Eye } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
-import { ProjectLandingPreview } from "./ProjectLandingPreview";
+import { ExternalLink, Github, Workflow } from "lucide-react";
 
 interface ProjectCardProps {
   project: Project;
   onSelect: (project: Project) => void;
+  onHover?: (project: Project | null) => void;
 }
 
-export function ProjectCard({ project, onSelect }: ProjectCardProps) {
-  const cardRef = React.useRef<HTMLDivElement>(null);
-  const [isHovered, setIsHovered] = React.useState(false);
-  const [showPreview, setShowPreview] = React.useState(false);
-  const [, setCanTilt] = React.useState(false);
-
-  React.useEffect(() => {
-    const hasFinePointer = window.matchMedia("(pointer: fine)").matches;
-    const isReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    setCanTilt(hasFinePointer && !isReduced);
-  }, []);
-
-  const handleMouseMove = () => {
-    // Interactive pointer feedback
-  };
-
+export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
   const handleMouseEnter = () => {
-    setIsHovered(true);
+    onHover?.(project);
   };
 
   const handleMouseLeave = () => {
-    setIsHovered(false);
+    onHover?.(null);
   };
-
-  const isPreviewActive = isHovered || showPreview;
 
   return (
     <article
-      ref={cardRef}
-      onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
       className="group rounded-lg border border-border bg-card p-6 space-y-3 transition-all hover:border-emerald-500/40"
@@ -108,38 +88,6 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
           </span>
         ))}
       </div>
-
-      {/* Hover preview trigger bar */}
-      <div className="flex items-center justify-between pt-1 text-[11px] font-mono text-muted-foreground/75">
-        <button
-          type="button"
-          onClick={() => setShowPreview((prev) => !prev)}
-          className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer"
-        >
-          <Eye className="h-3 w-3 text-emerald-500" />
-          <span>{isPreviewActive ? "Hide Landing Page" : "Hover or click to preview landing page"}</span>
-        </button>
-        {project.live && (
-          <span className="text-emerald-500 font-bold truncate max-w-[150px]">
-            {project.live.replace(/^https?:\/\//, "").replace(/\/$/, "")}
-          </span>
-        )}
-      </div>
-
-      {/* Animated Landing Page Preview on Hover */}
-      <AnimatePresence>
-        {isPreviewActive && (
-          <motion.div
-            initial={{ opacity: 0, height: 0, scale: 0.98 }}
-            animate={{ opacity: 1, height: "auto", scale: 1 }}
-            exit={{ opacity: 0, height: 0, scale: 0.98 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden"
-          >
-            <ProjectLandingPreview project={project} />
-          </motion.div>
-        )}
-      </AnimatePresence>
 
       {/* Architecture Spec Trigger */}
       <div className="pt-2 border-t border-border/40 flex items-center justify-end">

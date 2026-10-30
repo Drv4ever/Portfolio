@@ -3,23 +3,24 @@
 import * as React from "react";
 import { learningProjects as defaultProjects } from "@/content";
 import { Project } from "@/content/schema";
-import { ExternalLink, Github, BookOpen, Eye } from "lucide-react";
-import { motion, AnimatePresence } from "motion/react";
-import { ProjectLandingPreview } from "./ProjectLandingPreview";
+import { ExternalLink, Github, BookOpen } from "lucide-react";
 
 interface LearningProjectsProps {
   projects?: Project[];
+  onHover?: (project: Project | null) => void;
 }
 
-function LearningProjectItem({ project }: { project: Project }) {
-  const [isHovered, setIsHovered] = React.useState(false);
-  const [showPreview, setShowPreview] = React.useState(false);
-  const isPreviewActive = isHovered || showPreview;
-
+function LearningProjectItem({
+  project,
+  onHover,
+}: {
+  project: Project;
+  onHover?: (project: Project | null) => void;
+}) {
   return (
     <article
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onMouseEnter={() => onHover?.(project)}
+      onMouseLeave={() => onHover?.(null)}
       className="group rounded-lg border border-border bg-card p-5 space-y-2.5 transition-all hover:border-emerald-500/40"
     >
       <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/40 pb-2.5">
@@ -73,43 +74,14 @@ function LearningProjectItem({ project }: { project: Project }) {
           </span>
         ))}
       </div>
-
-      {/* Hover preview trigger bar */}
-      <div className="flex items-center justify-between pt-1 text-[11px] font-mono text-muted-foreground/75">
-        <button
-          type="button"
-          onClick={() => setShowPreview((prev) => !prev)}
-          className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer"
-        >
-          <Eye className="h-3 w-3 text-emerald-500" />
-          <span>{isPreviewActive ? "Hide Landing Page" : "Hover or click to preview landing page"}</span>
-        </button>
-        {project.live && (
-          <span className="text-emerald-500 font-bold truncate max-w-[150px]">
-            {project.live.replace(/^https?:\/\//, "").replace(/\/$/, "")}
-          </span>
-        )}
-      </div>
-
-      {/* Animated Landing Page Preview on Hover */}
-      <AnimatePresence>
-        {isPreviewActive && (
-          <motion.div
-            initial={{ opacity: 0, height: 0, scale: 0.98 }}
-            animate={{ opacity: 1, height: "auto", scale: 1 }}
-            exit={{ opacity: 0, height: 0, scale: 0.98 }}
-            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
-            className="overflow-hidden"
-          >
-            <ProjectLandingPreview project={project} />
-          </motion.div>
-        )}
-      </AnimatePresence>
     </article>
   );
 }
 
-export function LearningProjects({ projects = defaultProjects }: LearningProjectsProps) {
+export function LearningProjects({
+  projects = defaultProjects,
+  onHover,
+}: LearningProjectsProps) {
   if (projects.length === 0) return null;
 
   return (
@@ -123,7 +95,7 @@ export function LearningProjects({ projects = defaultProjects }: LearningProject
 
       <div className="grid grid-cols-1 gap-3">
         {projects.map((project) => (
-          <LearningProjectItem key={project.id} project={project} />
+          <LearningProjectItem key={project.id} project={project} onHover={onHover} />
         ))}
       </div>
     </div>
