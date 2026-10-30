@@ -2,7 +2,9 @@
 
 import * as React from "react";
 import { Project } from "@/content/schema";
-import { ExternalLink, Github, Workflow } from "lucide-react";
+import { ExternalLink, Github, Workflow, Eye } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { ProjectLandingPreview } from "./ProjectLandingPreview";
 
 interface ProjectCardProps {
   project: Project;
@@ -11,7 +13,8 @@ interface ProjectCardProps {
 
 export function ProjectCard({ project, onSelect }: ProjectCardProps) {
   const cardRef = React.useRef<HTMLDivElement>(null);
-  const [, setIsHovered] = React.useState(false);
+  const [isHovered, setIsHovered] = React.useState(false);
+  const [showPreview, setShowPreview] = React.useState(false);
   const [, setCanTilt] = React.useState(false);
 
   React.useEffect(() => {
@@ -32,20 +35,22 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
     setIsHovered(false);
   };
 
+  const isPreviewActive = isHovered || showPreview;
+
   return (
     <article
       ref={cardRef}
       onMouseMove={handleMouseMove}
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="rounded-lg border border-border bg-card p-6 space-y-3 transition-colors hover:border-border/80"
+      className="group rounded-lg border border-border bg-card p-6 space-y-3 transition-all hover:border-emerald-500/40"
     >
       {/* Header Row: Title, Links, and Category */}
       <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/40 pb-3">
         <div className="flex flex-wrap items-center gap-2.5">
           <h3 className="text-base sm:text-lg font-bold text-foreground">
             <a
-              href={project.github}
+              href={project.live || project.github}
               target="_blank"
               rel="noreferrer"
               className="hover:text-foreground transition-colors underline decoration-1 decoration-border underline-offset-4 hover:decoration-foreground"
@@ -87,13 +92,13 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
         </span>
       </div>
 
-      {/* Description */}
+      {/* Concise 3-4 Liner Description */}
       <p className="text-xs sm:text-sm text-muted-foreground leading-relaxed">
         {project.description}
       </p>
 
       {/* Tech Stack Chips */}
-      <div className="flex flex-wrap gap-1.5 pt-1">
+      <div className="flex flex-wrap gap-1.5 pt-0.5">
         {project.techStack.map((tech) => (
           <span
             key={tech}
@@ -104,15 +109,37 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
         ))}
       </div>
 
-      {/* En-Dash Bullets */}
-      <ul className="flex flex-col gap-1.5 pt-1 text-xs sm:text-sm leading-relaxed text-muted-foreground">
-        {project.bullets.map((bullet, idx) => (
-          <li key={idx} className="flex gap-2">
-            <span className="text-muted-foreground shrink-0 font-bold">–</span>
-            <span>{bullet}</span>
-          </li>
-        ))}
-      </ul>
+      {/* Hover preview trigger bar */}
+      <div className="flex items-center justify-between pt-1 text-[11px] font-mono text-muted-foreground/75">
+        <button
+          type="button"
+          onClick={() => setShowPreview((prev) => !prev)}
+          className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer"
+        >
+          <Eye className="h-3 w-3 text-emerald-500" />
+          <span>{isPreviewActive ? "Hide Landing Page" : "Hover or click to preview landing page"}</span>
+        </button>
+        {project.live && (
+          <span className="text-emerald-500 font-bold truncate max-w-[150px]">
+            {project.live.replace(/^https?:\/\//, "").replace(/\/$/, "")}
+          </span>
+        )}
+      </div>
+
+      {/* Animated Landing Page Preview on Hover */}
+      <AnimatePresence>
+        {isPreviewActive && (
+          <motion.div
+            initial={{ opacity: 0, height: 0, scale: 0.98 }}
+            animate={{ opacity: 1, height: "auto", scale: 1 }}
+            exit={{ opacity: 0, height: 0, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <ProjectLandingPreview project={project} />
+          </motion.div>
+        )}
+      </AnimatePresence>
 
       {/* Architecture Spec Trigger */}
       <div className="pt-2 border-t border-border/40 flex items-center justify-end">

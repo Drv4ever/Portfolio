@@ -104,7 +104,7 @@ export const rawContent = {
       shortTitle: "SlideOS",
       tagline: "Natural-language presentation generator with exact-count server enforcement, rich editor, and PPTX/PDF export.",
       description:
-        "Full-stack web app that generates slide outlines from prompts using AI (Groq JSON mode), supports visual drag-and-drop editing, JWT authentication, MongoDB persistence, and dual PPTX/PDF export.",
+        "Full-stack web app that generates slide outlines from prompts using AI (Groq JSON mode). Features interactive canvas drag-and-drop editing, exact slide count server enforcement, JWT authentication, and dual PPTX/PDF export.",
       bullets: [
         "Built a full-stack app (React, Node.js, Express, MongoDB) that turns a natural-language prompt into a designed slide deck using an LLM (Groq, JSON mode), with tunable slide count, tone, and audience; the server enforces the exact slide count and falls back to a deterministic generator if the LLM fails.",
         "Implemented JWT and bcrypt authentication with Google OAuth, owner-only access control on decks, and public read-only share links that never expose user IDs.",
@@ -167,7 +167,7 @@ export const rawContent = {
       shortTitle: "MongoDB MCP",
       tagline: "TypeScript Model Context Protocol server exposing controlled, read-only database inspection to LLMs.",
       description:
-        "Production-grade MCP server for safe MongoDB inspection: lists collections, infers schemas from live samples, and runs strictly read-only, allowlisted queries. Built with TypeScript, Zod validation, and Docker-ready deployment.",
+        "Production-grade TypeScript Model Context Protocol (MCP) server for safe database inspection. Enforces strict read-only queries with Zod validation, automated schema inference, and containerized Docker deployment.",
       bullets: [
         "Built a TypeScript Model Context Protocol (MCP) server that gives AI tools structured access to MongoDB, with schema inference and collection discovery.",
         "Enforced a read-only security model that blocks write operations and exposes only controlled queries to AI clients.",
@@ -212,7 +212,7 @@ export const rawContent = {
       shortTitle: "Parcel Locker",
       tagline: "Event-driven AWS architecture with EC2 warden dashboard, S3 photo capture, and automated notifications.",
       description:
-        "Full cloud-native parcel logistics system featuring a warden dashboard on EC2, automated photo upload to S3, barcode scanning, and asynchronous event notifications via SNS, SQS, and EventBridge.",
+        "Event-driven AWS parcel logistics platform with an EC2 warden dashboard and automated S3 photo capture. Integrates Lambda, DynamoDB, SNS fan-out notifications, and SQS dead-letter queues.",
       bullets: [
         "Built the warden dashboard on EC2 (Node.js, Express) to log parcels with photo upload, scan pickup codes, and view live parcel status from DynamoDB.",
         "Integrated S3 for parcel photo storage and invoked the core-logic Lambda from the dashboard in an event-driven AWS architecture (Lambda, DynamoDB, SNS, SQS, EventBridge).",
@@ -230,6 +230,7 @@ export const rawContent = {
         "Express",
       ],
       category: "featured",
+      live: "https://15.207.54.197/",
       github: "https://github.com/Drv4ever",
       architectureSteps: [
         {
@@ -265,7 +266,7 @@ export const rawContent = {
       shortTitle: "TCRAS",
       tagline: "Real-time file transfer platform with Python FastAPI risk engine and Isolation Forest anomaly scoring.",
       description:
-        "A secure file transfer platform with a React frontend, Node.js transfer APIs, a Python FastAPI risk engine, and ML-based anomaly scoring to evaluate transfer-chain risk in real time.",
+        "Secure file transfer platform with a React interface and high-concurrency FastAPI microservice. Flags atypical transfer-chain propagation anomalies in real time using Isolation Forest machine learning.",
       bullets: [
         "A secure file transfer platform with a React frontend, Node.js transfer APIs, a Python FastAPI risk engine, and ML-based anomaly scoring to evaluate transfer-chain risk in real time.",
         "Incorporated Isolation Forest anomaly scoring with NumPy and pandas data pipelines to flag atypical propagation patterns.",
@@ -319,7 +320,7 @@ export const rawContent = {
       shortTitle: "Vaultify",
       tagline: "Learning project exploring cryptographic backend principles, encrypted vault storage, and JWT auth.",
       description:
-        "Personal learning project: a password manager built to learn backend principles. Implements encrypted vault storage, JWT authentication, and read/write routes with Node.js + Express and MongoDB. Deployed for demo and available on GitHub.",
+        "Encrypted vault exploring backend security principles, zero-knowledge storage, and JWT authentication. Implements client-side encryption and read/write REST endpoints with Node.js, Express, and MongoDB.",
       bullets: [
         "Personal learning project: a password manager built to learn backend principles.",
         "Implements encrypted vault storage, JWT authentication, and read/write routes with Node.js + Express and MongoDB.",

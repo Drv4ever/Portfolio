@@ -2,20 +2,29 @@
 
 import * as React from "react";
 import { spotlightProject } from "@/content";
-import { ExternalLink, Github } from "lucide-react";
+import { ExternalLink, Github, Eye } from "lucide-react";
+import { motion, AnimatePresence } from "motion/react";
+import { ProjectLandingPreview } from "./ProjectLandingPreview";
 
 export function SlideOSSpotlight({
   project = spotlightProject,
 }: {
   project?: typeof spotlightProject | null;
 } = {}) {
+  const [isHovered, setIsHovered] = React.useState(false);
+  const [showPreview, setShowPreview] = React.useState(false);
+
   if (!project) return null;
+
+  const isPreviewActive = isHovered || showPreview;
 
   return (
     <article
       id="slideos-spotlight"
       aria-label="SlideOS Spotlight Project"
-      className="rounded-lg border border-border bg-card p-6 space-y-3.5 transition-colors hover:border-border/80"
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group rounded-lg border border-border bg-card p-6 space-y-3.5 transition-all hover:border-emerald-500/40"
     >
       {/* Header Row: Title, Badges, Links */}
       <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border/40 pb-3">
@@ -63,13 +72,13 @@ export function SlideOSSpotlight({
         </div>
       </div>
 
-      {/* Simple Description (Clean & Focused) */}
+      {/* Concise 3-4 Liner Description */}
       <p className="text-sm leading-relaxed text-muted-foreground">
         {project.description}
       </p>
 
       {/* Tech Stack Chips */}
-      <div className="flex flex-wrap gap-1.5 pt-1">
+      <div className="flex flex-wrap gap-1.5 pt-0.5">
         {project.techStack.map((tech) => (
           <span
             key={tech}
@@ -80,15 +89,33 @@ export function SlideOSSpotlight({
         ))}
       </div>
 
-      {/* Simple En-Dash Bullets */}
-      <ul className="flex flex-col gap-1.5 pt-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed">
-        {project.bullets.map((bullet, idx) => (
-          <li key={idx} className="flex gap-2">
-            <span className="text-muted-foreground shrink-0 font-bold">–</span>
-            <span>{bullet}</span>
-          </li>
-        ))}
-      </ul>
+      {/* Hover preview trigger bar */}
+      <div className="flex items-center justify-between pt-1 text-[11px] font-mono text-muted-foreground/75">
+        <button
+          type="button"
+          onClick={() => setShowPreview((prev) => !prev)}
+          className="inline-flex items-center gap-1.5 hover:text-foreground transition-colors cursor-pointer"
+        >
+          <Eye className="h-3 w-3 text-emerald-500" />
+          <span>{isPreviewActive ? "Hide Landing Page" : "Hover or click to preview landing page"}</span>
+        </button>
+        <span className="text-emerald-500 font-bold">slide-os.vercel.app</span>
+      </div>
+
+      {/* Animated Landing Page Preview on Hover */}
+      <AnimatePresence>
+        {isPreviewActive && (
+          <motion.div
+            initial={{ opacity: 0, height: 0, scale: 0.98 }}
+            animate={{ opacity: 1, height: "auto", scale: 1 }}
+            exit={{ opacity: 0, height: 0, scale: 0.98 }}
+            transition={{ duration: 0.25, ease: [0.16, 1, 0.3, 1] }}
+            className="overflow-hidden"
+          >
+            <ProjectLandingPreview project={project} />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </article>
   );
 }

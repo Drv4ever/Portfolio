@@ -8,6 +8,7 @@ import { ProjectDetailDialog } from "../ProjectDetailDialog";
 import { ProjectCard } from "../ProjectCard";
 import { LearningProjects } from "../LearningProjects";
 import { ProjectsSection } from "../ProjectsSection";
+import { ProjectLandingPreview } from "../ProjectLandingPreview";
 import { content } from "@/content";
 
 describe("SlideOSSpotlight", () => {
@@ -82,6 +83,11 @@ describe("ProjectCard and Detail Dialog", () => {
     await user.click(inspectBtn);
 
     expect(onSelect).toHaveBeenCalledWith(project);
+
+    // Toggle preview button
+    const toggleBtn = screen.getByRole("button", { name: /landing page/i });
+    await user.click(toggleBtn);
+    expect(screen.getByText("MCP Inspector Client")).toBeInTheDocument();
   });
 
   it("handles mouse movements and tilt calculation on fine pointer devices", () => {
@@ -142,6 +148,15 @@ describe("LearningProjects & ProjectsSection", () => {
     render(<LearningProjects />);
     expect(screen.getByRole("heading", { name: "Vaultify — Password Manager" })).toBeInTheDocument();
     expect(screen.getByText("Backend Cryptography Practice")).toBeInTheDocument();
+
+    const vaultifyArticle = screen.getByRole("article");
+    fireEvent.mouseEnter(vaultifyArticle);
+    expect(screen.getByText("Vaultify Security Dashboard")).toBeInTheDocument();
+    fireEvent.mouseLeave(vaultifyArticle);
+
+    const toggleBtn = screen.getByRole("button", { name: /landing page/i });
+    fireEvent.click(toggleBtn);
+    expect(screen.getByText("Vaultify Security Dashboard")).toBeInTheDocument();
   });
 
   it("ProjectsSection integrates spotlight, cards, and opens modal on click", async () => {
@@ -156,5 +171,80 @@ describe("LearningProjects & ProjectsSection", () => {
 
     // Modal opens
     expect(screen.getByRole("dialog")).toBeInTheDocument();
+  });
+
+  it("handles hover and click preview toggling on cards", async () => {
+    const user = userEvent.setup();
+    render(<SlideOSSpotlight />);
+
+    const spotlightArticle = screen.getByRole("article", { name: "SlideOS Spotlight Project" });
+    fireEvent.mouseEnter(spotlightArticle);
+    expect(screen.getByText("Scalable Distributed Systems")).toBeInTheDocument();
+
+    fireEvent.mouseLeave(spotlightArticle);
+
+    // Toggle via button
+    const toggleBtn = screen.getByRole("button", { name: /landing page/i });
+    await user.click(toggleBtn);
+    expect(screen.getByText("Scalable Distributed Systems")).toBeInTheDocument();
+  });
+});
+
+describe("ProjectLandingPreview Component", () => {
+  it("renders mockups for all project types correctly", () => {
+    const slideOs = content.projects.find((p) => p.id === "slide-os")!;
+    const parcel = content.projects.find((p) => p.id === "parcel-locker")!;
+    const mongo = content.projects.find((p) => p.id === "mongo-mcp")!;
+    const tcras = content.projects.find((p) => p.id === "tcras")!;
+    const vaultify = content.projects.find((p) => p.id === "vaultify")!;
+
+    const { rerender } = render(<ProjectLandingPreview project={slideOs} />);
+    expect(screen.getByText("SlideOS AI")).toBeInTheDocument();
+    expect(screen.getByText("Scalable Distributed Systems")).toBeInTheDocument();
+
+    rerender(<ProjectLandingPreview project={parcel} />);
+    expect(screen.getByText("AWS EC2 Warden Portal")).toBeInTheDocument();
+    expect(screen.getByText("15.207.54.197:443")).toBeInTheDocument();
+
+    rerender(<ProjectLandingPreview project={mongo} />);
+    expect(screen.getByText("MCP Inspector Client")).toBeInTheDocument();
+    expect(screen.getByText("Read-Only Safe")).toBeInTheDocument();
+
+    rerender(<ProjectLandingPreview project={tcras} />);
+    expect(screen.getByText("Risk Amplification Engine")).toBeInTheDocument();
+    expect(screen.getByText(/Anomaly Score: 0.14/)).toBeInTheDocument();
+
+    rerender(<ProjectLandingPreview project={vaultify} />);
+    expect(screen.getByText("Vaultify Security Dashboard")).toBeInTheDocument();
+    expect(screen.getByText("GitHub Auth Token")).toBeInTheDocument();
+  });
+
+  it("handles fallback domain when url parsing fails or when url is missing", () => {
+    const mockProjectNoUrls = {
+      ...content.projects[0],
+      live: undefined,
+      github: undefined,
+    };
+    const { rerender } = render(<ProjectLandingPreview project={mockProjectNoUrls} />);
+    expect(screen.getByText("project.internal")).toBeInTheDocument();
+    expect(screen.getByText("preview")).toBeInTheDocument();
+
+    // Invalid url fallback branch
+    const mockProjectInvalidLive = {
+      ...content.projects[0],
+      live: "not-a-valid-url",
+      github: undefined,
+    };
+    rerender(<ProjectLandingPreview project={mockProjectInvalidLive} />);
+    expect(screen.getByText("not-a-valid-url")).toBeInTheDocument();
+
+    // Invalid github fallback branch
+    const mockProjectInvalidGithub = {
+      ...content.projects[0],
+      live: undefined,
+      github: "not-a-valid-github",
+    };
+    rerender(<ProjectLandingPreview project={mockProjectInvalidGithub} />);
+    expect(screen.getByText("not-a-valid-github")).toBeInTheDocument();
   });
 });

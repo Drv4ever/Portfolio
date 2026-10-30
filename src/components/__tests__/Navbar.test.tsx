@@ -276,10 +276,15 @@ describe("CommandPalette Component", () => {
     fireEvent.click(slideOsItem);
     expect(window.open).toHaveBeenCalledWith("https://slide-os.vercel.app/", "_blank", "noopener,noreferrer");
 
-    // Project with github repo only
+    // Project with live demo
     const parcelItem = screen.getByText(/Cloud-Based Digital Locker/);
     fireEvent.click(parcelItem);
-    expect(window.open).toHaveBeenCalledWith("https://github.com/Drv4ever", "_blank", "noopener,noreferrer");
+    expect(window.open).toHaveBeenCalledWith("https://15.207.54.197/", "_blank", "noopener,noreferrer");
+
+    // Project with github repo only
+    const mongoItem = screen.getByText(/MongoDB MCP Server for AI Tools/);
+    fireEvent.click(mongoItem);
+    expect(window.open).toHaveBeenCalledWith("https://github.com/Drv4ever/mongo-schema-explainer-mcp", "_blank", "noopener,noreferrer");
 
     // Connect link
     const linkedinItem = screen.getByText("LinkedIn");
