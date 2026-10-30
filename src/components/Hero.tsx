@@ -41,26 +41,26 @@ export function Hero() {
           <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
           <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
         </span>
-        <span className="text-foreground">{content.profile.location}</span>
-        <span>•</span>
-        <span>open for software & ai engineering</span>
+        <span className="font-semibold text-foreground">{content.profile.location}</span>
+        <span className="text-border">•</span>
+        <span className="font-medium text-muted-foreground">open for software & ai engineering</span>
       </div>
 
       <div className="flex flex-col-reverse sm:flex-row sm:items-start sm:justify-between gap-6">
         <div className="space-y-3.5 flex-1">
           {/* Name & Role */}
           <div className="space-y-1">
-            <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-foreground">
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground">
               {content.profile.name}
             </h1>
-            <p className="text-sm font-medium text-muted-foreground">
+            <p className="text-sm sm:text-base font-bold text-muted-foreground">
               {content.profile.role}
             </p>
           </div>
 
           {/* Authentic Bio */}
           <p className="text-sm leading-relaxed text-muted-foreground max-w-xl">
-            Information Technology undergraduate at Vellore Institute of Technology. I engineer full-stack platforms, autonomous AI agent protocols (MCP, LangGraph), and event-driven AWS cloud architectures.
+            <strong className="font-bold text-foreground">Information Technology undergraduate</strong> at <strong className="font-bold text-foreground">Vellore Institute of Technology</strong>. I engineer <strong className="font-bold text-foreground">full-stack platforms</strong>, autonomous AI agent protocols (<strong className="font-semibold text-foreground">MCP, LangGraph</strong>), and event-driven <strong className="font-semibold text-foreground">AWS cloud architectures</strong>.
           </p>
 
           {/* Tech Stack Chips */}
@@ -71,21 +71,21 @@ export function Hero() {
             {heroTechStack.map((tech) => (
               <span
                 key={tech}
-                className="font-mono rounded border border-border bg-background px-2 py-0.5 text-[11px] text-muted-foreground"
+                className="font-mono rounded border border-border bg-background px-2.5 py-0.5 text-[11px] font-semibold text-foreground/90"
               >
                 {tech}
               </span>
             ))}
           </div>
 
-          {/* Action Links (Amaan style clean text links with underlines) */}
+          {/* Action Links */}
           <div className="flex flex-wrap items-center gap-4 pt-2 text-xs font-mono">
             <a
               href="https://github.com/Drv4ever"
               target="_blank"
               rel="noreferrer"
               aria-label="GitHub Profile"
-              className="text-muted-foreground hover:text-foreground transition-colors underline decoration-1 decoration-border underline-offset-4 hover:decoration-foreground"
+              className="font-bold text-muted-foreground hover:text-foreground transition-colors underline decoration-1 decoration-border underline-offset-4 hover:decoration-foreground"
             >
               github ↗
             </a>
@@ -94,7 +94,7 @@ export function Hero() {
               target="_blank"
               rel="noreferrer"
               aria-label="LinkedIn Profile"
-              className="text-muted-foreground hover:text-foreground transition-colors underline decoration-1 decoration-border underline-offset-4 hover:decoration-foreground"
+              className="font-bold text-muted-foreground hover:text-foreground transition-colors underline decoration-1 decoration-border underline-offset-4 hover:decoration-foreground"
             >
               linkedin ↗
             </a>
@@ -103,21 +103,21 @@ export function Hero() {
               target="_blank"
               rel="noreferrer"
               aria-label="X (Twitter) Profile"
-              className="text-muted-foreground hover:text-foreground transition-colors underline decoration-1 decoration-border underline-offset-4 hover:decoration-foreground"
+              className="font-bold text-muted-foreground hover:text-foreground transition-colors underline decoration-1 decoration-border underline-offset-4 hover:decoration-foreground"
             >
               x ↗
             </a>
             <button
               onClick={handleCopyEmail}
               aria-label="Copy email address"
-              className="text-muted-foreground hover:text-foreground transition-colors underline decoration-1 decoration-border underline-offset-4 hover:decoration-foreground"
+              className="font-bold text-muted-foreground hover:text-foreground transition-colors underline decoration-1 decoration-border underline-offset-4 hover:decoration-foreground"
             >
               {copied ? "copied email!" : "email"}
             </button>
             <Link
               href="/resume"
               aria-label="View Resume"
-              className="text-emerald-500 hover:text-emerald-400 font-medium transition-colors underline decoration-1 decoration-emerald-500/40 underline-offset-4 hover:decoration-emerald-400"
+              className="text-emerald-500 hover:text-emerald-400 font-bold transition-colors underline decoration-1 decoration-emerald-500/40 underline-offset-4 hover:decoration-emerald-400"
             >
               resume ↗
             </Link>

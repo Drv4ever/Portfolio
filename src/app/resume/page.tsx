@@ -27,27 +27,27 @@ export default function ResumePage() {
           <div className="space-y-1">
             <Link
               href="/"
-              className="inline-flex items-center gap-1.5 text-xs font-mono text-muted-foreground hover:text-foreground transition-colors pb-2"
+              className="inline-flex items-center gap-1.5 text-xs font-mono font-semibold text-muted-foreground hover:text-foreground transition-colors pb-2"
             >
               <ArrowLeft className="h-3.5 w-3.5" />
               <span>Back to Portfolio</span>
             </Link>
-            <h1 className="font-serif text-3xl sm:text-4xl font-medium tracking-tight">
+            <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
               Curriculum Vitae
             </h1>
-            <p className="text-xs sm:text-sm text-muted-foreground font-mono">
+            <p className="text-xs sm:text-sm text-muted-foreground font-mono font-semibold">
               {content.profile.name} • Vellore Institute of Technology
             </p>
           </div>
 
           <div className="flex items-center gap-3">
-            <Button asChild size="lg" className="rounded-full gap-2 shadow-sm bg-emerald-700 hover:bg-emerald-600 text-white">
+            <Button asChild size="lg" className="rounded-full gap-2 shadow-sm bg-emerald-700 hover:bg-emerald-600 text-white font-bold">
               <a href={resumeUrl} download="Dhruv-Jain-Resume.pdf">
                 <Download className="h-4 w-4" />
                 <span>Download PDF</span>
               </a>
             </Button>
-            <Button asChild variant="outline" size="lg" className="rounded-full gap-2">
+            <Button asChild variant="outline" size="lg" className="rounded-full gap-2 font-bold">
               <a href={resumeUrl} target="_blank" rel="noreferrer">
                 <ExternalLink className="h-4 w-4" />
                 <span>Open in Tab</span>
@@ -67,7 +67,7 @@ export default function ResumePage() {
           <a
             href={resumeUrl}
             download="Dhruv-Jain-Resume.pdf"
-            className="font-medium text-emerald-600 dark:text-emerald-400 hover:underline shrink-0"
+            className="font-bold text-emerald-600 dark:text-emerald-400 hover:underline shrink-0"
           >
             Direct Download →
           </a>

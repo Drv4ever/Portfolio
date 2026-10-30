@@ -18,10 +18,10 @@ export function SkillsSection() {
   return (
     <section id="skills" aria-label="Technical Skills Matrix" className="space-y-4">
       <div className="space-y-0.5">
-        <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-foreground">
+        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
           Technical Skills & Tooling
         </h2>
-        <p className="text-xs text-muted-foreground font-mono">
+        <p className="text-xs text-muted-foreground font-mono font-medium">
           verified technologies, frameworks, and core competencies
         </p>
       </div>
@@ -37,8 +37,8 @@ export function SkillsSection() {
               onClick={() => setSelectedCategory(category)}
               className={`rounded-full px-3 py-1 text-xs font-mono transition-all border ${
                 isSelected
-                  ? "bg-foreground text-background border-foreground font-medium"
-                  : "border-border bg-card text-muted-foreground hover:text-foreground"
+                  ? "bg-foreground text-background border-foreground font-bold shadow-sm"
+                  : "border-border bg-card text-muted-foreground hover:text-foreground font-semibold"
               }`}
               role="tab"
               aria-selected={isSelected}
@@ -57,10 +57,10 @@ export function SkillsSection() {
             className="rounded-lg border border-border bg-card p-4 space-y-2.5 transition-colors hover:border-border/80"
           >
             <div className="flex items-center justify-between border-b border-border/40 pb-2">
-              <h3 className="font-mono text-xs font-medium uppercase tracking-wider text-muted-foreground">
+              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-foreground/90">
                 {cat.category}
               </h3>
-              <span className="font-mono text-[10px] text-muted-foreground">
+              <span className="font-mono text-[10px] font-semibold text-muted-foreground">
                 {cat.skills.length} skills
               </span>
             </div>
@@ -69,7 +69,7 @@ export function SkillsSection() {
               {cat.skills.map((skill) => (
                 <span
                   key={skill}
-                  className="font-mono rounded border border-border bg-background px-2 py-0.5 text-[11px] text-muted-foreground"
+                  className="font-mono rounded border border-border bg-background px-2.5 py-0.5 text-[11px] font-semibold text-foreground/90"
                 >
                   {skill}
                 </span>

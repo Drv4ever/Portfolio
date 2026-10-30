@@ -82,7 +82,7 @@
   body {
     background-color: var(--bg);
     color: var(--text);
-    font-family: var(--font-inter), system-ui, -apple-system, sans-serif;
+    font-family: var(--font-nunito), "Nunito", system-ui, -apple-system, sans-serif;
     min-height: 100vh;
     letter-spacing: -0.011em;
   }
@@ -122,7 +122,7 @@
   --color-chart-4: hsl(var(--chart-4));
   --color-chart-5: hsl(var(--chart-5));
 
-  --font-sans: var(--font-inter), system-ui, -apple-system, sans-serif;
-  --font-serif: var(--font-playfair), Georgia, serif;
+  --font-sans: var(--font-nunito), "Nunito", system-ui, -apple-system, sans-serif;
+  --font-serif: var(--font-nunito), "Nunito", system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
 }

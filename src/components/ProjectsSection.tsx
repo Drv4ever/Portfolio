@@ -25,10 +25,10 @@ export function ProjectsSection() {
   return (
     <section id="projects" aria-label="Featured Engineering Projects" className="space-y-6">
       <div className="space-y-0.5">
-        <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-foreground">
+        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
           Engineered Products & Architectures
         </h2>
-        <p className="text-xs text-muted-foreground font-mono">
+        <p className="text-xs text-muted-foreground font-mono font-medium">
           selected platforms, tools, and event-driven cloud systems
         </p>
       </div>

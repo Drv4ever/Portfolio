@@ -103,10 +103,10 @@ export function Navbar() {
               href="/"
               className="group flex items-center gap-2 text-sm font-medium tracking-tight transition-colors hover:text-emerald-500"
             >
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-background font-mono text-[11px] font-bold transition-transform group-hover:scale-105">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-background font-mono text-[11px] font-extrabold transition-transform group-hover:scale-105">
                 DJ
               </span>
-              <span className="font-mono text-sm tracking-tight text-foreground">
+              <span className="font-mono text-sm font-bold tracking-tight text-foreground">
                 dhruv<span className="text-emerald-500">.</span>
               </span>
             </Link>
@@ -124,8 +124,8 @@ export function Navbar() {
                     href={link.href}
                     className={`rounded-full px-3 py-1 transition-colors ${
                       isActive
-                        ? "bg-secondary text-foreground font-semibold"
-                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
+                        ? "bg-secondary text-foreground font-bold"
+                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/50 font-semibold"
                     }`}
                   >
                     {link.label}
@@ -141,13 +141,13 @@ export function Navbar() {
                 variant="outline"
                 size="sm"
                 onClick={() => setCommandOpen(true)}
-                className="h-7 gap-1.5 rounded-full px-2.5 text-xs text-muted-foreground hover:text-foreground"
+                className="h-7 gap-1.5 rounded-full px-2.5 text-xs text-muted-foreground hover:text-foreground font-semibold"
               >
                 <Command className="h-3 w-3" aria-hidden="true" />
                 <span className="sr-only sm:not-sr-only">Search</span>
                 <kbd
                   aria-hidden="true"
-                  className="pointer-events-none hidden h-4 select-none items-center gap-0.5 rounded border bg-muted px-1.5 font-mono text-[10px] font-medium text-muted-foreground sm:inline-flex"
+                  className="pointer-events-none hidden h-4 select-none items-center gap-0.5 rounded border bg-muted px-1.5 font-mono text-[10px] font-bold text-muted-foreground sm:inline-flex"
                 >
                   ⌘K
                 </kbd>
@@ -183,10 +183,10 @@ export function Navbar() {
                   </SheetTrigger>
                   <SheetContent side="right" className="w-72">
                     <SheetHeader className="text-left pb-4 border-b border-border/40">
-                      <SheetTitle className="text-base font-medium">
+                      <SheetTitle className="text-base font-bold">
                         {content.profile.name}
                       </SheetTitle>
-                      <p className="text-xs text-muted-foreground font-mono">
+                      <p className="text-xs text-muted-foreground font-mono font-medium">
                         {content.profile.role}
                       </p>
                     </SheetHeader>
@@ -197,7 +197,7 @@ export function Navbar() {
                           key={link.id}
                           href={link.href}
                           onClick={() => setMobileMenuOpen(false)}
-                          className="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-mono text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
+                          className="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-mono font-bold text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
                         >
                           <span>{link.label}</span>
                           <ArrowUpRight className="h-3.5 w-3.5 opacity-50" />
@@ -205,7 +205,7 @@ export function Navbar() {
                       ))}
 
                       <div className="pt-4 mt-4 border-t border-border/40 flex flex-col gap-2">
-                        <Button asChild size="sm" className="w-full justify-start gap-2 rounded-full">
+                        <Button asChild size="sm" className="w-full justify-start gap-2 rounded-full font-bold">
                           <Link href="/resume">
                             <FileText className="h-3.5 w-3.5" />
                             <span>Download Resume PDF</span>
@@ -215,7 +215,7 @@ export function Navbar() {
                           asChild
                           variant="outline"
                           size="sm"
-                          className="w-full justify-start gap-2 rounded-full"
+                          className="w-full justify-start gap-2 rounded-full font-bold"
                         >
                           <a href={`mailto:${content.profile.email}`}>
                             <Mail className="h-3.5 w-3.5" />

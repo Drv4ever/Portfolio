@@ -16,7 +16,7 @@ export function LearningProjects({ projects = defaultProjects }: LearningProject
     <div className="space-y-3 pt-2">
       <div className="flex items-center gap-2">
         <BookOpen className="h-3.5 w-3.5 text-muted-foreground" />
-        <h3 className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+        <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
           Foundational & Learning Projects
         </h3>
       </div>
@@ -28,7 +28,7 @@ export function LearningProjects({ projects = defaultProjects }: LearningProject
             className="rounded-lg border border-border bg-card p-5 space-y-2.5 transition-colors hover:border-border/80"
           >
             <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/40 pb-2.5">
-              <h4 className="text-base font-medium text-foreground">
+              <h4 className="text-base sm:text-lg font-bold text-foreground">
                 {project.title}
               </h4>
               <div className="flex items-center gap-2 font-mono text-xs">
@@ -37,7 +37,7 @@ export function LearningProjects({ projects = defaultProjects }: LearningProject
                     href={project.github}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-muted-foreground hover:text-foreground text-xs flex items-center gap-1 font-mono transition-colors"
+                    className="text-muted-foreground hover:text-foreground text-xs flex items-center gap-1 font-mono font-bold transition-colors"
                   >
                     <Github className="h-3.5 w-3.5" aria-hidden="true" />
                     <span>Code</span>
@@ -49,7 +49,7 @@ export function LearningProjects({ projects = defaultProjects }: LearningProject
                     href={project.live}
                     target="_blank"
                     rel="noreferrer"
-                    className="text-muted-foreground hover:text-foreground text-xs flex items-center gap-1 font-mono transition-colors"
+                    className="text-muted-foreground hover:text-foreground text-xs flex items-center gap-1 font-mono font-bold transition-colors"
                   >
                     <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                     <span>Demo</span>
@@ -59,7 +59,7 @@ export function LearningProjects({ projects = defaultProjects }: LearningProject
               </div>
             </div>
 
-            <p className="font-mono text-[10px] text-muted-foreground uppercase">
+            <p className="font-mono text-[10px] font-bold text-muted-foreground uppercase">
               Backend Cryptography Practice
             </p>
 
@@ -71,7 +71,7 @@ export function LearningProjects({ projects = defaultProjects }: LearningProject
               {project.techStack.map((tech) => (
                 <span
                   key={tech}
-                  className="font-mono rounded border border-border bg-background px-2 py-0.5 text-[11px] text-muted-foreground"
+                  className="font-mono rounded border border-border bg-background px-2.5 py-0.5 text-[11px] font-semibold text-foreground/90"
                 >
                   {tech}
                 </span>

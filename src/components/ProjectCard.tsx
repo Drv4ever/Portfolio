@@ -43,7 +43,7 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
       {/* Header Row: Title, Links, and Category */}
       <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/40 pb-3">
         <div className="flex flex-wrap items-center gap-2.5">
-          <h3 className="text-base sm:text-lg font-medium text-foreground">
+          <h3 className="text-base sm:text-lg font-bold text-foreground">
             <a
               href={project.github}
               target="_blank"
@@ -61,7 +61,7 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`${project.title} Live Demo`}
-                className="text-emerald-500 border border-emerald-500/20 bg-emerald-500/10 rounded px-1.5 py-0.5 hover:bg-emerald-500/20 transition-colors flex items-center gap-1"
+                className="text-emerald-500 font-bold border border-emerald-500/20 bg-emerald-500/10 rounded px-1.5 py-0.5 hover:bg-emerald-500/20 transition-colors flex items-center gap-1"
               >
                 <span>Live</span>
                 <ExternalLink className="h-3 w-3" />
@@ -73,7 +73,7 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`${project.title} GitHub Repository`}
-                className="text-muted-foreground hover:text-foreground transition-colors flex items-center gap-1"
+                className="text-muted-foreground hover:text-foreground font-bold transition-colors flex items-center gap-1"
               >
                 <span>GitHub</span>
                 <Github className="h-3 w-3" />
@@ -82,7 +82,7 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
           </div>
         </div>
 
-        <span className="font-mono text-xs text-muted-foreground">
+        <span className="font-mono text-xs font-semibold text-muted-foreground">
           {project.shortTitle}
         </span>
       </div>
@@ -97,7 +97,7 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
         {project.techStack.map((tech) => (
           <span
             key={tech}
-            className="font-mono rounded border border-border bg-background px-2 py-0.5 text-[11px] text-muted-foreground"
+            className="font-mono rounded border border-border bg-background px-2.5 py-0.5 text-[11px] font-semibold text-foreground/90"
           >
             {tech}
           </span>
@@ -108,7 +108,7 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
       <ul className="flex flex-col gap-1.5 pt-1 text-xs sm:text-sm leading-relaxed text-muted-foreground">
         {project.bullets.map((bullet, idx) => (
           <li key={idx} className="flex gap-2">
-            <span className="text-muted-foreground shrink-0">–</span>
+            <span className="text-muted-foreground shrink-0 font-bold">–</span>
             <span>{bullet}</span>
           </li>
         ))}
@@ -120,7 +120,7 @@ export function ProjectCard({ project, onSelect }: ProjectCardProps) {
           type="button"
           onClick={() => onSelect(project)}
           aria-label={`Inspect Architecture & Spec for ${project.title}`}
-          className="inline-flex items-center gap-1.5 font-mono text-xs text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
         >
           <Workflow className="h-3.5 w-3.5" />
           <span>Inspect Architecture & Spec ↗</span>

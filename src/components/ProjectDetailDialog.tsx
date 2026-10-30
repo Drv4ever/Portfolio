@@ -32,13 +32,13 @@ export function ProjectDetailDialog({
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto sm:rounded-2xl">
         <DialogHeader className="space-y-2 text-left">
           <div className="flex flex-wrap items-center justify-between gap-2 pr-6">
-            <span className="font-mono text-xs uppercase text-emerald-500 font-semibold tracking-wider">
+            <span className="font-mono text-xs uppercase text-emerald-500 font-bold tracking-wider">
               {project.category} Project
             </span>
 
             <div className="flex items-center gap-2">
               {project.github && (
-                <Button asChild variant="outline" size="sm" className="h-7 gap-1 text-xs rounded-full">
+                <Button asChild variant="outline" size="sm" className="h-7 gap-1 text-xs rounded-full font-bold">
                   <a href={project.github} target="_blank" rel="noreferrer">
                     <Github className="h-3.5 w-3.5" />
                     <span>Repo</span>
@@ -46,7 +46,7 @@ export function ProjectDetailDialog({
                 </Button>
               )}
               {project.live && (
-                <Button asChild size="sm" className="h-7 gap-1 text-xs rounded-full bg-emerald-600 hover:bg-emerald-500 text-white">
+                <Button asChild size="sm" className="h-7 gap-1 text-xs rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold">
                   <a href={project.live} target="_blank" rel="noreferrer">
                     <ExternalLink className="h-3.5 w-3.5" />
                     <span>Live</span>
@@ -56,7 +56,7 @@ export function ProjectDetailDialog({
             </div>
           </div>
 
-          <DialogTitle className="font-serif text-2xl font-medium sm:text-3xl">
+          <DialogTitle className="text-2xl font-extrabold sm:text-3xl">
             {project.title}
           </DialogTitle>
           <DialogDescription className="text-sm text-muted-foreground leading-relaxed">
@@ -71,7 +71,7 @@ export function ProjectDetailDialog({
 
         {/* Resume Key Contributions */}
         <div className="space-y-3 pt-2">
-          <h4 className="font-mono text-xs uppercase tracking-wider text-muted-foreground font-semibold">
+          <h4 className="font-mono text-xs uppercase tracking-wider text-foreground/90 font-bold">
             Key Engineering Highlights
           </h4>
           <ul className="space-y-2 text-xs text-muted-foreground leading-relaxed">
@@ -86,7 +86,7 @@ export function ProjectDetailDialog({
 
         {/* Tech Stack Chips */}
         <div className="pt-3 border-t border-border/40">
-          <h4 className="font-mono text-xs uppercase tracking-wider text-muted-foreground pb-2">
+          <h4 className="font-mono text-xs uppercase tracking-wider text-foreground/90 font-bold pb-2">
             Technologies Used
           </h4>
           <div className="flex flex-wrap gap-1.5">
@@ -94,7 +94,7 @@ export function ProjectDetailDialog({
               <Badge
                 key={tech}
                 variant="secondary"
-                className="font-mono text-[11px] px-2 py-0.5 border border-border/40"
+                className="font-mono text-[11px] font-semibold px-2.5 py-0.5 border border-border/40 text-foreground/90"
               >
                 {tech}
               </Badge>

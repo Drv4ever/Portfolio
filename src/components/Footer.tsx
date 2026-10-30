@@ -39,13 +39,13 @@ export function Footer() {
         {/* Contact Card (Amaan style) */}
         <article className="rounded-lg border border-border bg-card p-6 space-y-3.5">
           <div className="space-y-1">
-            <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground">
+            <span className="font-mono text-xs uppercase tracking-wider text-muted-foreground font-bold">
               Contact
             </span>
-            <h2 className="text-lg sm:text-xl font-medium text-foreground">
+            <h2 className="text-xl sm:text-2xl font-bold text-foreground">
               Let&apos;s build intelligent systems together.
             </h2>
-            <p className="text-xs sm:text-sm text-muted-foreground">
+            <p className="text-xs sm:text-sm font-medium text-muted-foreground">
               Open to Software Engineering and Full-Stack Internships.
             </p>
           </div>
@@ -53,7 +53,7 @@ export function Footer() {
           <div className="flex flex-wrap items-center gap-3 pt-1">
             <a
               href={`mailto:${content.profile.email}`}
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3.5 py-1 font-mono text-xs text-foreground hover:bg-secondary transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3.5 py-1 font-mono text-xs font-bold text-foreground hover:bg-secondary transition-colors"
             >
               <Mail className="h-3 w-3" />
               <span>Send Email</span>
@@ -63,7 +63,7 @@ export function Footer() {
               type="button"
               onClick={handleCopyEmail}
               aria-label="Copy Address to clipboard"
-              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3.5 py-1 font-mono text-xs text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3.5 py-1 font-mono text-xs font-bold text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
             >
               {copied ? (
                 <Check className="h-3 w-3 text-emerald-500" />
@@ -78,11 +78,11 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-border/40 pt-6 text-xs font-mono text-muted-foreground">
           <div className="flex items-center gap-2">
-            <span className="font-medium text-foreground">
+            <span className="font-bold text-foreground">
               {content.profile.name}
             </span>
             <span>•</span>
-            <span>{content.profile.location}</span>
+            <span className="font-medium">{content.profile.location}</span>
           </div>
 
           <div className="flex items-center gap-4">
@@ -117,7 +117,7 @@ export function Footer() {
               type="button"
               onClick={scrollToTop}
               aria-label="Back to top of page"
-              className="hover:text-foreground transition-colors flex items-center gap-1"
+              className="hover:text-foreground transition-colors flex items-center gap-1 font-bold"
             >
               <ArrowUp className="h-3.5 w-3.5" />
               <span>top</span>
