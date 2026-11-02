@@ -2,33 +2,38 @@
 
 import * as React from "react";
 import { useInView } from "motion/react";
-import { Github } from "lucide-react";
-
-interface ContributionDay {
-  date: string;
-  contributionCount: number;
-  color: string;
-}
-
-interface ContributionWeek {
-  contributionDays: ContributionDay[];
-}
-
-interface ContributionCalendar {
-  totalContributions: number;
-  weeks: ContributionWeek[];
-}
+import { Github, Flame } from "lucide-react";
+import type { ContributionCalendar, ContributionWeek } from "./GithubHeatmap";
+import { parseJogruberContributions } from "./GithubHeatmap";
 
 interface GithubHeatmapClientProps {
   calendar: ContributionCalendar;
 }
 
 export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
+  const [data, setData] = React.useState<ContributionCalendar>(calendar);
   const containerRef = React.useRef<HTMLDivElement>(null);
   const isVisible = useInView(containerRef, { once: true, amount: 0.1 });
 
+  React.useEffect(() => {
+    let isMounted = true;
+    fetch("https://github-contributions-api.jogruber.de/v4/Drv4ever?y=last")
+      .then((res) => (res.ok ? res.json() : null))
+      .then((json) => {
+        if (json && isMounted) {
+          setData(parseJogruberContributions(json));
+        }
+      })
+      .catch(() => {
+        // preserve server data on network failure
+      });
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   // Use the last 35 weeks for clean responsive fit matching Amaan's layout
-  const recentWeeks = calendar.weeks.slice(-35);
+  const recentWeeks = data.weeks.slice(-35);
 
   const getMonthLabel = (week: ContributionWeek, index: number) => {
     if (index === 0) return "";
@@ -62,16 +67,24 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
       aria-label="GitHub Activity Heatmap"
       className="space-y-3 pt-2"
     >
-      <div className="flex items-center justify-between text-xs font-mono pb-1 border-b border-border/40">
+      <div className="flex flex-wrap items-center justify-between text-xs font-mono pb-1 border-b border-border/40 gap-2">
         <div className="flex items-center gap-2">
           <Github className="h-4 w-4 text-foreground" />
           <h2 className="font-bold text-foreground">GitHub Activity Stream</h2>
           <span className="text-muted-foreground text-[11px]">• @Drv4ever</span>
         </div>
 
-        <span className="text-emerald-500 font-bold text-[11px]">
-          {calendar.totalContributions} Contributions This Year
-        </span>
+        <div className="flex items-center gap-3 text-[11px] font-bold">
+          {data.longestStreak ? (
+            <span className="text-amber-500 dark:text-amber-400 flex items-center gap-1">
+              <Flame className="h-3.5 w-3.5" />
+              <span>{data.longestStreak}d best streak</span>
+            </span>
+          ) : null}
+          <span className="text-emerald-500 font-bold">
+            {data.totalContributions} Contributions This Year
+          </span>
+        </div>
       </div>
 
       {/* Heatmap Grid in Amaan's Style */}

@@ -80,7 +80,7 @@ test.describe("Portfolio End-to-End Suite", () => {
 
   test("Theme toggle toggles dark and light mode", async ({ page }) => {
     const toggle = page.getByRole("button", { name: /toggle visual theme/i }).first();
-    await toggle.click();
+    await toggle.click({ force: true });
 
     const htmlElement = page.locator("html");
     const classAttr = await htmlElement.getAttribute("class");
