@@ -37,9 +37,55 @@ describe("Navbar Component", () => {
   it("renders monogram, title, and nav links", () => {
     render(<Navbar />);
     expect(screen.getByText("DJ")).toBeInTheDocument();
-    expect(screen.getByText("Projects")).toBeInTheDocument();
-    expect(screen.getByText("Skills")).toBeInTheDocument();
-    expect(screen.getByText("Resume")).toBeInTheDocument();
+    expect(screen.getByText("projects")).toBeInTheDocument();
+    expect(screen.getByText("skills")).toBeInTheDocument();
+    expect(screen.getByText("resume")).toBeInTheDocument();
+  });
+
+  it("toggles audio effects on and off with sound button", async () => {
+    const user = userEvent.setup();
+    const mockOscillator = {
+      type: "sine",
+      frequency: { setValueAtTime: vi.fn() },
+      connect: vi.fn(),
+      start: vi.fn(),
+      stop: vi.fn(),
+    };
+    const mockGain = {
+      gain: {
+        setValueAtTime: vi.fn(),
+        exponentialRampToValueAtTime: vi.fn(),
+      },
+      connect: vi.fn(),
+    };
+    window.AudioContext = vi.fn().mockImplementation(() => ({
+      createOscillator: () => mockOscillator,
+      createGain: () => mockGain,
+      currentTime: 0,
+      destination: {},
+    })) as unknown as typeof AudioContext;
+
+    const { unmount } = render(<Navbar />);
+
+    const soundBtn = screen.getByRole("button", { name: /unmute audio effects/i });
+    await user.click(soundBtn);
+
+    // Now unmuted, clicking it again mutes
+    const muteBtn = screen.getByRole("button", { name: /mute audio effects/i });
+    await user.click(muteBtn);
+
+    expect(screen.getByRole("button", { name: /unmute audio effects/i })).toBeInTheDocument();
+    unmount();
+
+    // AudioContext exception branch
+    window.AudioContext = vi.fn().mockImplementation(() => {
+      throw new Error("Blocked");
+    }) as unknown as typeof AudioContext;
+
+    render(<Navbar />);
+    const soundBtnErr = screen.getByRole("button", { name: /unmute audio effects/i });
+    await user.click(soundBtnErr);
+    expect(screen.getByRole("button", { name: /mute audio effects/i })).toBeInTheDocument();
   });
 
   it("toggles visual theme when theme button clicked", async () => {
@@ -115,7 +161,7 @@ describe("Navbar Component", () => {
     const hamburger = screen.getByRole("button", { name: /open mobile menu/i });
     await user.click(hamburger);
 
-    expect(screen.getByText("Download Resume PDF")).toBeInTheDocument();
+    expect(screen.getByText("view resume")).toBeInTheDocument();
 
     // Click a link inside mobile sheet to trigger setMobileMenuOpen(false)
     const mobileProjectsLink = screen.getAllByRole("link", { name: /projects/i }).find(
@@ -124,6 +170,12 @@ describe("Navbar Component", () => {
     if (mobileProjectsLink) {
       fireEvent.click(mobileProjectsLink);
     }
+
+    // Re-open mobile sheet and click view resume
+    const hamburgerAgain = screen.getByRole("button", { name: /open mobile menu/i });
+    await user.click(hamburgerAgain);
+    const resumeLink = screen.getByText("view resume");
+    fireEvent.click(resumeLink);
   });
 
   it("observes all sections and updates active section on intersection", () => {

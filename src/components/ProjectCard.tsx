@@ -23,7 +23,7 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
     <article
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group rounded-lg border border-border bg-card p-6 space-y-3 transition-all hover:border-emerald-500/40"
+      className="group rounded-xl border border-border/70 bg-card p-5 sm:p-6 space-y-3 transition-all hover:border-emerald-500/40 shadow-sm"
     >
       {/* Header Row: Title, Links, and Category */}
       <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/40 pb-3">
@@ -46,7 +46,7 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`${project.title} Live Demo`}
-                className="text-emerald-500 font-bold border border-emerald-500/20 bg-emerald-500/10 rounded px-1.5 py-0.5 hover:bg-emerald-500/20 transition-colors flex items-center gap-1"
+                className="text-emerald-500 font-bold border border-emerald-500/20 bg-emerald-500/10 rounded-full px-2 py-0.5 hover:bg-emerald-500/20 transition-colors flex items-center gap-1"
               >
                 <span>Live</span>
                 <ExternalLink className="h-3 w-3" />
@@ -77,12 +77,12 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
         {project.description}
       </p>
 
-      {/* Tech Stack Chips */}
+      {/* Tech Stack Pills in Amaan style */}
       <div className="flex flex-wrap gap-1.5 pt-0.5">
         {project.techStack.map((tech) => (
           <span
             key={tech}
-            className="font-mono rounded border border-border bg-background px-2.5 py-0.5 text-[11px] font-semibold text-foreground/90"
+            className="font-mono rounded-full border border-border/60 bg-secondary/70 px-2.5 py-0.5 text-[11px] font-medium text-foreground/80"
           >
             {tech}
           </span>
@@ -95,7 +95,7 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
           type="button"
           onClick={() => onSelect(project)}
           aria-label={`Inspect Architecture & Spec for ${project.title}`}
-          className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors"
+          className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
           <Workflow className="h-3.5 w-3.5" />
           <span>Inspect Architecture & Spec ↗</span>

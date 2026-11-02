@@ -4,6 +4,7 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useTheme } from "next-themes";
+import { toast } from "sonner";
 import { CommandPalette } from "./CommandPalette";
 import { Button } from "@/components/ui/button";
 import {
@@ -21,6 +22,8 @@ import {
   FileText,
   Mail,
   ArrowUpRight,
+  Volume2,
+  VolumeX,
 } from "lucide-react";
 import { content } from "@/content";
 
@@ -38,6 +41,7 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
   const [activeSection, setActiveSection] = React.useState<string>("");
   const [scrollProgress, setScrollProgress] = React.useState(0);
+  const [soundMuted, setSoundMuted] = React.useState(true);
 
   React.useEffect(() => {
     setMounted(true);
@@ -83,6 +87,34 @@ export function Navbar() {
     };
   }, [pathname]);
 
+  const toggleSound = () => {
+    setSoundMuted((prev) => {
+      const next = !prev;
+      if (!next) {
+        try {
+          if (typeof window !== "undefined" && window.AudioContext) {
+            const ctx = new window.AudioContext();
+            const osc = ctx.createOscillator();
+            const gain = ctx.createGain();
+            osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+            gain.gain.setValueAtTime(0.04, ctx.currentTime);
+            gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.15);
+            osc.connect(gain);
+            gain.connect(ctx.destination);
+            osc.start();
+            osc.stop(ctx.currentTime + 0.15);
+          }
+        } catch {
+          // Audio optional
+        }
+        toast.success("Sound effects enabled");
+      } else {
+        toast.info("Sound effects muted");
+      }
+      return next;
+    });
+  };
+
   return (
     <>
       <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
@@ -96,22 +128,38 @@ export function Navbar() {
         <div className="mx-auto max-w-2xl px-4 pt-3 pb-2 sm:px-6">
           <nav
             aria-label="Main Navigation"
-            className="flex items-center justify-between rounded-full border border-border/80 bg-background/80 px-4 py-1.5 backdrop-blur-md shadow-sm"
+            className="flex items-center justify-between rounded-full border border-border/80 bg-background/85 px-4 py-1.5 backdrop-blur-md shadow-sm"
           >
-            {/* Logo / Monogram */}
-            <Link
-              href="/"
-              className="group flex items-center gap-2 text-sm font-medium tracking-tight transition-colors hover:text-emerald-500"
-            >
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-background font-mono text-[11px] font-extrabold transition-transform group-hover:scale-105">
-                DJ
-              </span>
-              <span className="font-mono text-sm font-bold tracking-tight text-foreground">
-                dhruv<span className="text-emerald-500">.</span>
-              </span>
-            </Link>
+            {/* Left Controls: Audio Icon & Logo */}
+            <div className="flex items-center gap-1.5 sm:gap-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={toggleSound}
+                className="h-7 w-7 rounded-full text-muted-foreground hover:text-foreground"
+                aria-label={soundMuted ? "Unmute audio effects" : "Mute audio effects"}
+              >
+                {soundMuted ? (
+                  <VolumeX className="h-3.5 w-3.5" />
+                ) : (
+                  <Volume2 className="h-3.5 w-3.5 text-emerald-500" />
+                )}
+              </Button>
 
-            {/* Desktop Navigation Links */}
+              <Link
+                href="/"
+                className="group flex items-center gap-2 text-sm font-medium tracking-tight transition-colors hover:text-emerald-500"
+              >
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-background font-mono text-[11px] font-extrabold transition-transform group-hover:scale-105">
+                  DJ
+                </span>
+                <span className="font-mono text-sm font-bold tracking-tight text-foreground">
+                  dhruv<span className="text-emerald-500">.</span>
+                </span>
+              </Link>
+            </div>
+
+            {/* Desktop Navigation Links with Amaan-style Underline Indicator */}
             <div className="hidden md:flex items-center gap-1 text-xs font-mono">
               {NAV_LINKS.map((link) => {
                 const isActive =
@@ -122,20 +170,23 @@ export function Navbar() {
                   <Link
                     key={link.id}
                     href={link.href}
-                    className={`rounded-full px-3 py-1 transition-colors ${
+                    className={`relative px-3 py-1 lowercase transition-colors ${
                       isActive
-                        ? "bg-secondary text-foreground font-bold"
-                        : "text-muted-foreground hover:text-foreground hover:bg-secondary/50 font-semibold"
+                        ? "text-foreground font-bold"
+                        : "text-muted-foreground hover:text-foreground font-semibold"
                     }`}
                   >
-                    {link.label}
+                    <span>{link.label.toLowerCase()}</span>
+                    {isActive && (
+                      <span className="absolute bottom-0 left-2 right-2 h-[2px] rounded-full bg-emerald-500" />
+                    )}
                   </Link>
                 );
               })}
             </div>
 
             {/* Right Action Controls */}
-            <div className="flex items-center gap-2">
+            <div className="flex items-center gap-1.5 sm:gap-2">
               {/* Command Palette Button */}
               <Button
                 variant="outline"
@@ -199,29 +250,27 @@ export function Navbar() {
                           onClick={() => setMobileMenuOpen(false)}
                           className="flex items-center justify-between rounded-lg px-3 py-2 text-sm font-mono font-bold text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
                         >
-                          <span>{link.label}</span>
-                          <ArrowUpRight className="h-3.5 w-3.5 opacity-50" />
+                          <span>{link.label.toLowerCase()}</span>
+                          <ArrowUpRight className="h-4 w-4" />
                         </Link>
                       ))}
 
-                      <div className="pt-4 mt-4 border-t border-border/40 flex flex-col gap-2">
-                        <Button asChild size="sm" className="w-full justify-start gap-2 rounded-full font-bold">
-                          <Link href="/resume">
-                            <FileText className="h-3.5 w-3.5" />
-                            <span>Download Resume PDF</span>
-                          </Link>
-                        </Button>
-                        <Button
-                          asChild
-                          variant="outline"
-                          size="sm"
-                          className="w-full justify-start gap-2 rounded-full font-bold"
+                      <div className="pt-4 border-t border-border/40 space-y-2">
+                        <Link
+                          href="/resume"
+                          onClick={() => setMobileMenuOpen(false)}
+                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-mono font-bold text-emerald-500 hover:bg-emerald-500/10 transition-colors"
                         >
-                          <a href={`mailto:${content.profile.email}`}>
-                            <Mail className="h-3.5 w-3.5" />
-                            <span>Send Email</span>
-                          </a>
-                        </Button>
+                          <FileText className="h-4 w-4" />
+                          <span>view resume</span>
+                        </Link>
+                        <a
+                          href={`mailto:${content.profile.email}`}
+                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-mono font-bold text-muted-foreground hover:bg-accent hover:text-foreground transition-colors"
+                        >
+                          <Mail className="h-4 w-4" />
+                          <span>contact via email</span>
+                        </a>
                       </div>
                     </div>
                   </SheetContent>

@@ -179,7 +179,7 @@ describe("LearningProjects & ProjectsSection", () => {
     const user = userEvent.setup();
     const { container } = render(<ProjectsSection />);
 
-    expect(screen.getByText("Engineered Products & Architectures")).toBeInTheDocument();
+    expect(screen.getByText("coolest stuff i've built (yet)")).toBeInTheDocument();
     expect(screen.getByText("SlideOS — AI-Powered Presentation Builder")).toBeInTheDocument();
 
     const section = container.querySelector("section")!;

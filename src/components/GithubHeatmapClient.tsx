@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import { useInView } from "motion/react";
-import { Github, Flame } from "lucide-react";
+import { Github } from "lucide-react";
 
 interface ContributionDay {
   date: string;
@@ -27,80 +27,119 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
   const containerRef = React.useRef<HTMLDivElement>(null);
   const isVisible = useInView(containerRef, { once: true, amount: 0.1 });
 
-  // Display the last 32 weeks for a clean responsive layout
-  const recentWeeks = calendar.weeks.slice(-32);
+  // Use the last 35 weeks for clean responsive fit matching Amaan's layout
+  const recentWeeks = calendar.weeks.slice(-35);
+
+  const getMonthLabel = (week: ContributionWeek, index: number) => {
+    if (index === 0) return "";
+    const firstDay = week.contributionDays[0];
+    const prevWeek = recentWeeks[index - 1];
+    const prevFirstDay = prevWeek?.contributionDays[0];
+    if (!firstDay?.date || !prevFirstDay?.date) return "";
+
+    const currentMonth = new Date(firstDay.date).getUTCMonth();
+    const prevMonth = new Date(prevFirstDay.date).getUTCMonth();
+
+    if (currentMonth !== prevMonth) {
+      const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+      return monthNames[currentMonth];
+    }
+    return "";
+  };
+
+  const getLevelClass = (count: number) => {
+    if (count === 0) return "bg-border/40 dark:bg-zinc-800/60";
+    if (count < 3) return "bg-emerald-800/50 dark:bg-[#0e4429]";
+    if (count < 6) return "bg-emerald-600/70 dark:bg-[#006d32]";
+    if (count < 8) return "bg-emerald-500 dark:bg-[#26a641]";
+    return "bg-emerald-400 dark:bg-[#39d353]";
+  };
 
   return (
     <section
       ref={containerRef}
       id="github-activity"
       aria-label="GitHub Activity Heatmap"
-      className="space-y-4"
+      className="space-y-3 pt-2"
     >
-      <article className="rounded-lg border border-border bg-card p-6 space-y-5 transition-colors hover:border-border/80">
-        <div className="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-border/40">
-          <div className="flex items-center gap-2.5">
-            <Github className="h-5 w-5 text-foreground" />
-            <div>
-              <h3 className="text-lg font-medium text-foreground">
-                GitHub Activity Stream
-              </h3>
-              <p className="text-xs text-muted-foreground font-mono">
-                @Drv4ever • Verified Public Commits
-              </p>
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <span className="font-mono text-xs text-emerald-500 border border-emerald-500/30 bg-emerald-500/10 rounded px-2.5 py-1 flex items-center gap-1.5">
-              <Flame className="h-3.5 w-3.5" />
-              <span>{calendar.totalContributions} Contributions This Year</span>
-            </span>
-          </div>
+      <div className="flex items-center justify-between text-xs font-mono pb-1 border-b border-border/40">
+        <div className="flex items-center gap-2">
+          <Github className="h-4 w-4 text-foreground" />
+          <h2 className="font-bold text-foreground">GitHub Activity Stream</h2>
+          <span className="text-muted-foreground text-[11px]">• @Drv4ever</span>
         </div>
 
-        {/* Heatmap Grid */}
-        <div className="overflow-x-auto pb-2">
-          <div className="flex gap-1.5 min-w-[500px]">
-            {recentWeeks.map((week, wIdx) => (
-              <div key={wIdx} className="flex flex-col gap-1.5 flex-1">
-                {week.contributionDays.map((day, dIdx) => {
-                  const level =
-                    day.contributionCount === 0
-                      ? "bg-border/40"
-                      : day.contributionCount < 3
-                      ? "bg-emerald-500/30"
-                      : day.contributionCount < 6
-                      ? "bg-emerald-500/60"
-                      : "bg-emerald-500";
+        <span className="text-emerald-500 font-bold text-[11px]">
+          {calendar.totalContributions} Contributions This Year
+        </span>
+      </div>
 
-                  return (
-                    <div
-                      key={day.date || dIdx}
-                      title={`${day.date}: ${day.contributionCount} contributions`}
-                      className={`h-3 w-full rounded-sm transition-all duration-300 ${level}`}
-                      style={{
-                        opacity: isVisible ? 1 : 0.4,
-                      }}
-                    />
-                  );
-                })}
+      {/* Heatmap Grid in Amaan's Style */}
+      <div className="rounded-xl border border-border/60 bg-card/60 p-3 sm:p-4 space-y-2 overflow-x-auto">
+        {/* Months Row */}
+        <div className="flex pl-7 text-[10px] font-mono text-muted-foreground select-none">
+          {recentWeeks.map((week, idx) => {
+            const label = getMonthLabel(week, idx);
+            return (
+              <div key={idx} className="w-3 shrink-0 text-left">
+                {label && <span className="absolute -translate-y-0.5">{label}</span>}
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Days Column + Matrix */}
+        <div className="flex gap-1.5 items-center">
+          <div className="flex flex-col justify-between h-[84px] text-[9px] font-mono text-muted-foreground w-6 pr-1 select-none">
+            <span>Mon</span>
+            <span>Wed</span>
+            <span>Fri</span>
+          </div>
+
+          <div className="flex gap-1 overflow-x-auto pb-1 flex-1">
+            {recentWeeks.map((week, wIdx) => (
+              <div key={wIdx} className="flex flex-col gap-1 shrink-0">
+                {week.contributionDays.map((day, dIdx) => (
+                  <div
+                    key={day.date || dIdx}
+                    title={`${day.date || "Unknown date"}: ${day.contributionCount} contributions`}
+                    className={`h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-[2px] transition-all duration-300 ${getLevelClass(
+                      day.contributionCount
+                    )}`}
+                    style={{
+                      opacity: isVisible ? 1 : 0.4,
+                    }}
+                  />
+                ))}
               </div>
             ))}
           </div>
         </div>
 
-        <div className="flex items-center justify-between text-xs font-mono text-muted-foreground pt-1">
-          <span>Less</span>
-          <div className="flex items-center gap-1">
-            <div className="h-2.5 w-2.5 rounded-sm bg-border/40" />
-            <div className="h-2.5 w-2.5 rounded-sm bg-emerald-500/30" />
-            <div className="h-2.5 w-2.5 rounded-sm bg-emerald-500/60" />
-            <div className="h-2.5 w-2.5 rounded-sm bg-emerald-500" />
+        {/* Bottom Legend Bar */}
+        <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground pt-1 border-t border-border/40">
+          <a
+            href="https://github.com/Drv4ever"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:text-foreground transition-colors underline decoration-1 decoration-border underline-offset-4 hover:decoration-foreground"
+          >
+            @Drv4ever on GitHub ↗
+          </a>
+
+          <div className="flex items-center gap-1.5 text-[10px]">
+            <span>Less</span>
+            <div className="flex items-center gap-1">
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-border/40 dark:bg-zinc-800/60" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-emerald-800/50 dark:bg-[#0e4429]" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-emerald-600/70 dark:bg-[#006d32]" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-emerald-500 dark:bg-[#26a641]" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-emerald-400 dark:bg-[#39d353]" />
+            </div>
+            <span>More</span>
           </div>
-          <span>More</span>
         </div>
-      </article>
+      </div>
     </section>
   );
 }

@@ -22,7 +22,7 @@ export function SlideOSSpotlight({
       aria-label="SlideOS Spotlight Project"
       onMouseEnter={() => onHover?.(project)}
       onMouseLeave={() => onHover?.(null)}
-      className="group rounded-lg border border-border bg-card p-6 space-y-3.5 transition-all hover:border-emerald-500/40"
+      className="group rounded-xl border border-border/70 bg-card p-5 sm:p-6 space-y-3.5 transition-all hover:border-emerald-500/40 shadow-sm"
     >
       {/* Header Row: Title, Badges, Links */}
       <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border/40 pb-3">
@@ -37,7 +37,7 @@ export function SlideOSSpotlight({
               {project.title}
             </a>
           </h2>
-          <span className="font-mono text-xs font-bold text-emerald-500 border border-emerald-500/20 bg-emerald-500/10 rounded px-2 py-0.5">
+          <span className="font-mono text-xs font-bold text-emerald-500 border border-emerald-500/20 bg-emerald-500/10 rounded-full px-2.5 py-0.5">
             Active Project
           </span>
         </div>
@@ -75,12 +75,12 @@ export function SlideOSSpotlight({
         {project.description}
       </p>
 
-      {/* Tech Stack Chips */}
+      {/* Tech Stack Pills in Amaan style */}
       <div className="flex flex-wrap gap-1.5 pt-0.5">
         {project.techStack.map((tech) => (
           <span
             key={tech}
-            className="font-mono rounded border border-border bg-background px-2.5 py-0.5 text-[11px] font-semibold text-foreground/90"
+            className="font-mono rounded-full border border-border/60 bg-secondary/70 px-2.5 py-0.5 text-[11px] font-medium text-foreground/80"
           >
             {tech}
           </span>

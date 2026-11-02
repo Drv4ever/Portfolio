@@ -21,7 +21,7 @@ function LearningProjectItem({
     <article
       onMouseEnter={() => onHover?.(project)}
       onMouseLeave={() => onHover?.(null)}
-      className="group rounded-lg border border-border bg-card p-5 space-y-2.5 transition-all hover:border-emerald-500/40"
+      className="group rounded-xl border border-border/70 bg-card p-5 space-y-2.5 transition-all hover:border-emerald-500/40 shadow-sm"
     >
       <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/40 pb-2.5">
         <h4 className="text-base sm:text-lg font-bold text-foreground">
@@ -64,11 +64,12 @@ function LearningProjectItem({
         {project.description}
       </p>
 
+      {/* Tech Stack Pills in Amaan style */}
       <div className="flex flex-wrap gap-1.5 pt-0.5">
         {project.techStack.map((tech) => (
           <span
             key={tech}
-            className="font-mono rounded border border-border bg-background px-2.5 py-0.5 text-[11px] font-semibold text-foreground/90"
+            className="font-mono rounded-full border border-border/60 bg-secondary/70 px-2.5 py-0.5 text-[11px] font-medium text-foreground/80"
           >
             {tech}
           </span>

@@ -15,7 +15,7 @@ test.describe("Portfolio End-to-End Suite", () => {
   });
 
   test("Floating navigation and smooth scrolling to sections", async ({ page }) => {
-    const projectsLink = page.getByRole("navigation").getByRole("link", { name: "Projects" });
+    const projectsLink = page.getByRole("navigation").getByRole("link", { name: /projects/i }).first();
     if (await projectsLink.isVisible()) {
       await projectsLink.click();
       await expect(page.locator("#projects")).toBeInViewport();
@@ -59,12 +59,7 @@ test.describe("Portfolio End-to-End Suite", () => {
     await expect(dialog.locator("svg[viewBox='0 0 680 180']")).toBeVisible();
 
     // Close dialog
-    const closeBtn = dialog.getByRole("button", { name: /close/i });
-    if (await closeBtn.isVisible()) {
-      await closeBtn.click();
-    } else {
-      await page.keyboard.press("Escape");
-    }
+    await page.keyboard.press("Escape");
     await expect(dialog).not.toBeVisible();
   });
 

@@ -2,7 +2,7 @@
 
 import * as React from "react";
 import dynamic from "next/dynamic";
-import { featuredProjects } from "@/content";
+import { featuredProjects, content } from "@/content";
 import { Project } from "@/content/schema";
 import { SlideOSSpotlight } from "./SlideOSSpotlight";
 import { ProjectCard } from "./ProjectCard";
@@ -36,12 +36,18 @@ export function ProjectsSection() {
       onMouseMove={handleMouseMove}
       className="space-y-6"
     >
-      <div className="space-y-0.5">
-        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
-          Engineered Products & Architectures
-        </h2>
-        <p className="text-xs text-muted-foreground font-mono font-medium">
-          selected platforms, tools, and event-driven cloud systems
+      {/* Amaan-style Section Header */}
+      <div className="space-y-1 border-b border-border/40 pb-3">
+        <div className="flex items-center justify-between">
+          <h2 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-muted-foreground">
+            PROJECTS ({content.projects.length})
+          </h2>
+          <span className="font-mono text-[11px] text-emerald-500 font-semibold">
+            live & open-source
+          </span>
+        </div>
+        <p className="text-sm sm:text-base font-bold text-foreground">
+          coolest stuff i&apos;ve built (yet)
         </p>
       </div>
 
@@ -49,7 +55,7 @@ export function ProjectsSection() {
       <SlideOSSpotlight onHover={setHoveredProject} />
 
       {/* Featured Works Grid */}
-      <div className="space-y-4 pt-2">
+      <div className="space-y-4 pt-1">
         <div className="grid grid-cols-1 gap-4">
           {featuredProjects.map((project) => (
             <ProjectCard

@@ -1,7 +1,6 @@
 import React from "react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import { render, screen, act, fireEvent } from "@testing-library/react";
-import userEvent from "@testing-library/user-event";
+import { render, screen, fireEvent, act } from "@testing-library/react";
 import { Hero } from "../Hero";
 import { StatStrip } from "../StatStrip";
 import { createPoints } from "../HeroCanvas";
@@ -26,22 +25,24 @@ describe("Hero Component", () => {
     vi.clearAllMocks();
   });
 
-  it("renders personal branding, headline, and bio accurately", () => {
+  it("renders personal branding, headline, and bio in Amaan style", () => {
     render(<Hero />);
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/hi, im dhruv/i);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Dhruv Jain");
-    expect(screen.getByText("Full-Stack Developer & AI Systems Builder")).toBeInTheDocument();
-    expect(screen.getByText(/Information Technology undergraduate/)).toBeInTheDocument();
-    expect(screen.getByText("Vellore, India")).toBeInTheDocument();
+    expect(screen.getByText(/backend-heavy full-stack apps/i)).toBeInTheDocument();
+    expect(screen.getByText(/open to opportunities/i)).toBeInTheDocument();
   });
 
-  it("renders core tech stack badges", () => {
+  it("renders core domain theme pills", () => {
     render(<Hero />);
-    expect(screen.getByText("TypeScript")).toBeInTheDocument();
-    expect(screen.getByText("React.js")).toBeInTheDocument();
-    expect(screen.getByText("Node.js")).toBeInTheDocument();
-    expect(screen.getByText("MongoDB")).toBeInTheDocument();
-    expect(screen.getByText("AWS")).toBeInTheDocument();
-    expect(screen.getByText("MCP")).toBeInTheDocument();
+    expect(screen.getByText("backends")).toBeInTheDocument();
+    expect(screen.getByText("typescript")).toBeInTheDocument();
+    expect(screen.getByText("ai agents")).toBeInTheDocument();
+    expect(screen.getByText("nextjs")).toBeInTheDocument();
+    expect(screen.getByText("distributed systems")).toBeInTheDocument();
+    expect(screen.getByText("aws")).toBeInTheDocument();
+    expect(screen.getByText("mcp")).toBeInTheDocument();
+    expect(screen.getByText("python")).toBeInTheDocument();
   });
 
   it("handles copy email action with clipboard interaction", async () => {
@@ -56,11 +57,17 @@ describe("Hero Component", () => {
 
   it("renders navigation buttons to resume and social profiles", () => {
     render(<Hero />);
-    const resumeLink = screen.getByRole("link", { name: /view resume/i });
-    expect(resumeLink).toHaveAttribute("href", "/resume");
+    const resumeLinks = screen.getAllByRole("link", { name: /resume/i });
+    expect(resumeLinks.length).toBeGreaterThanOrEqual(1);
 
     const githubLink = screen.getByRole("link", { name: /github profile/i });
     expect(githubLink).toHaveAttribute("href", "https://github.com/Drv4ever");
+
+    const linkedinLink = screen.getByRole("link", { name: /linkedin profile/i });
+    expect(linkedinLink).toHaveAttribute("href", "https://linkedin.com/in/dhruv-jain-4284a8263/");
+
+    const xLink = screen.getByRole("link", { name: /x \(twitter\) profile/i });
+    expect(xLink).toHaveAttribute("href", "https://x.com/Drv4ever632");
   });
 });
 
@@ -104,16 +111,16 @@ describe("StatStrip Component", () => {
       unobserve = vi.fn();
       disconnect = vi.fn();
     }
+
+    const origObserver = window.IntersectionObserver;
     window.IntersectionObserver = TestIntersectionObserver as unknown as typeof IntersectionObserver;
 
     let frameCount = 0;
     vi.spyOn(window, "requestAnimationFrame").mockImplementation((cb) => {
       frameCount++;
       if (frameCount === 1) {
-        // Midway frame: tests line 49
         cb(performance.now() + 500);
       } else {
-        // Completion frame
         cb(performance.now() + 2000);
       }
       return 1;
@@ -127,5 +134,7 @@ describe("StatStrip Component", () => {
 
     expect(screen.getByText("209")).toBeInTheDocument();
     expect(screen.getByText("220")).toBeInTheDocument();
+
+    window.IntersectionObserver = origObserver;
   });
 });

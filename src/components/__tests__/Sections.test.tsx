@@ -34,13 +34,16 @@ describe("SkillsSection Component", () => {
 });
 
 describe("GithubHeatmap Component", () => {
-  it("returns null when GITHUB_TOKEN is not defined", async () => {
+  it("returns null for getGithubContributions when GITHUB_TOKEN is not defined and renders fallback calendar in component", async () => {
     delete process.env.GITHUB_TOKEN;
     const result = await getGithubContributions();
     expect(result).toBeNull();
 
     const Component = await GithubHeatmap();
-    expect(Component).toBeNull();
+    expect(Component).not.toBeNull();
+    render(Component!);
+    expect(screen.getByText("GitHub Activity Stream")).toBeInTheDocument();
+    expect(screen.getByText(/Contributions This Year/i)).toBeInTheDocument();
   });
 
   it("fetches contributions and renders component when token is provided", async () => {
@@ -102,7 +105,7 @@ describe("GithubHeatmap Component", () => {
     delete process.env.GITHUB_TOKEN;
   });
 
-  it("GithubHeatmapClient renders contribution grid in both out-of-view and in-view states", () => {
+  it("GithubHeatmapClient renders contribution grid in both out-of-view and in-view states and renders month labels", () => {
     const calendar = {
       totalContributions: 240,
       weeks: [
@@ -112,6 +115,16 @@ describe("GithubHeatmap Component", () => {
             { date: "2026-01-02", contributionCount: 2, color: "#10b981" },
             { date: "2026-01-03", contributionCount: 4, color: "#10b981" },
             { date: "", contributionCount: 7, color: "#10b981" },
+          ],
+        },
+        {
+          contributionDays: [
+            { date: "2026-02-01", contributionCount: 1, color: "#10b981" },
+          ],
+        },
+        {
+          contributionDays: [
+            { date: "", contributionCount: 0, color: "#eee" },
           ],
         },
       ],

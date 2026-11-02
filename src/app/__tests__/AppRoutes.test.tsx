@@ -36,7 +36,7 @@ describe("App Route Pages & Error Boundaries", () => {
     const Component = await HomePage();
     render(Component);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Dhruv Jain");
-    expect(screen.getByText("Engineered Products & Architectures")).toBeInTheDocument();
+    expect(screen.getByText("coolest stuff i've built (yet)")).toBeInTheDocument();
   });
 
   it("ResumePage renders CV details, download links, and iframe", () => {
@@ -49,9 +49,10 @@ describe("App Route Pages & Error Boundaries", () => {
     expect(screen.getByTitle("Dhruv Jain Resume PDF")).toBeInTheDocument();
   });
 
-  it("NotFound page renders 404 message and return link", () => {
+  it("NotFound page renders 404 message and home link", () => {
     render(<NotFound />);
-    expect(screen.getByText(/404 — Page Not Found/)).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("The requested page does not exist.");
+    expect(screen.getByText("404 — Page Not Found")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /return to portfolio/i })).toHaveAttribute("href", "/");
   });
 
@@ -61,10 +62,10 @@ describe("App Route Pages & Error Boundaries", () => {
     const error = new Error("Sample test error");
 
     render(<ErrorPage error={error} reset={reset} />);
-    expect(screen.getByText("Something unexpected occurred.")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Something unexpected occurred.");
 
-    const retryBtn = screen.getByRole("button", { name: /try again/i });
-    await user.click(retryBtn);
+    const resetBtn = screen.getByRole("button", { name: /try again/i });
+    await user.click(resetBtn);
     expect(reset).toHaveBeenCalled();
   });
 
@@ -74,22 +75,22 @@ describe("App Route Pages & Error Boundaries", () => {
     const error = new Error("Fatal root error");
 
     render(<GlobalError error={error} reset={reset} />);
-    expect(screen.getByText("Critical System Failure")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Critical System Failure");
 
-    const reloadBtn = screen.getByRole("button", { name: /reload application/i });
-    await user.click(reloadBtn);
+    const rebootBtn = screen.getByRole("button", { name: /reload application/i });
+    await user.click(rebootBtn);
     expect(reset).toHaveBeenCalled();
   });
 
-  it("sitemap generator returns valid canonical routes", () => {
-    const siteMapData = sitemap();
-    expect(siteMapData).toHaveLength(2);
-    expect(siteMapData[0].url).toBe("https://drv-dev.vercel.app");
-    expect(siteMapData[1].url).toBe("https://drv-dev.vercel.app/resume");
+  it("sitemap generator returns all production endpoints with change frequencies", () => {
+    const entries = sitemap();
+    expect(entries).toHaveLength(2);
+    expect(entries[0].url).toBe("https://drv-dev.vercel.app");
+    expect(entries[1].url).toBe("https://drv-dev.vercel.app/resume");
   });
 
-  it("robots generator returns valid rules and sitemap link", () => {
-    const robotsData = robots();
-    expect(robotsData.sitemap).toBe("https://drv-dev.vercel.app/sitemap.xml");
+  it("robots config defines crawler access rules and points to sitemap", () => {
+    const config = robots();
+    expect(config.sitemap).toBe("https://drv-dev.vercel.app/sitemap.xml");
   });
 });
