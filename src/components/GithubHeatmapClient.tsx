@@ -53,11 +53,11 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
   };
 
   const getLevelClass = (count: number) => {
-    if (count === 0) return "bg-border/40 dark:bg-zinc-800/60";
-    if (count < 3) return "bg-amber-900/50 dark:bg-[#451a03]";
-    if (count < 6) return "bg-amber-700/70 dark:bg-[#9a3412]";
+    if (count === 0) return "bg-zinc-200/90 dark:bg-zinc-800/60";
+    if (count < 3) return "bg-orange-200 dark:bg-[#451a03]";
+    if (count < 6) return "bg-orange-300 dark:bg-[#9a3412]";
     if (count < 8) return "bg-orange-500 dark:bg-[#ea580c]";
-    return "bg-amber-400 dark:bg-[#f59e0b]";
+    return "bg-amber-500 dark:bg-[#f59e0b]";
   };
 
   return (
@@ -87,7 +87,7 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
         </div>
       </div>
 
-      {/* Heatmap Grid in Amaan's Style with Playful Amber-Orange Palette */}
+      {/* Heatmap Grid in Amaan's Style with Lightish Gray Zero Squares in Light Theme */}
       <div className="rounded-xl border border-border/60 bg-card/60 p-3 sm:p-4 space-y-2 overflow-x-auto">
         {/* Months Row */}
         <div className="flex pl-7 text-[10px] font-mono text-muted-foreground select-none">
@@ -143,11 +143,11 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
           <div className="flex items-center gap-1.5 text-[10px]">
             <span>Less</span>
             <div className="flex items-center gap-1">
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-border/40 dark:bg-zinc-800/60" />
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-amber-900/50 dark:bg-[#451a03]" />
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-amber-700/70 dark:bg-[#9a3412]" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-zinc-200/90 dark:bg-zinc-800/60" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-orange-200 dark:bg-[#451a03]" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-orange-300 dark:bg-[#9a3412]" />
               <div className="h-2.5 w-2.5 rounded-[2px] bg-orange-500 dark:bg-[#ea580c]" />
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-amber-400 dark:bg-[#f59e0b]" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-amber-500 dark:bg-[#f59e0b]" />
             </div>
             <span>More</span>
           </div>
