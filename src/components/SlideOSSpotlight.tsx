@@ -4,6 +4,7 @@ import * as React from "react";
 import { spotlightProject } from "@/content";
 import { Project } from "@/content/schema";
 import { ExternalLink, Github } from "lucide-react";
+import { SlideOSStage } from "./stageshow/SlideOSStage";
 
 interface SlideOSSpotlightProps {
   project?: typeof spotlightProject | null;
@@ -22,7 +23,7 @@ export function SlideOSSpotlight({
       aria-label="SlideOS Spotlight Project"
       onMouseEnter={() => onHover?.(project)}
       onMouseLeave={() => onHover?.(null)}
-      className="group rounded-xl border border-border/70 bg-card p-5 sm:p-6 space-y-3.5 transition-all hover:border-emerald-500/40 shadow-sm"
+      className="group rounded-2xl border border-border/80 bg-card/70 p-5 sm:p-6 space-y-4 transition-all duration-300 hover:border-emerald-500/40 shadow-sm"
     >
       {/* Header Row: Title, Badges, Links */}
       <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border/40 pb-3">
@@ -70,17 +71,22 @@ export function SlideOSSpotlight({
         </div>
       </div>
 
-      {/* Concise 3-4 Liner Description */}
+      {/* Concise Description */}
       <p className="text-sm leading-relaxed text-muted-foreground">
         {project.description}
       </p>
 
+      {/* Stageshow Believable Product Interface Preview */}
+      <div className="pt-1">
+        <SlideOSStage className="border-border/60 shadow-sm" />
+      </div>
+
       {/* Tech Stack Pills in Amaan style */}
-      <div className="flex flex-wrap gap-1.5 pt-0.5">
+      <div className="flex flex-wrap gap-1.5 pt-1">
         {project.techStack.map((tech) => (
           <span
             key={tech}
-            className="font-mono rounded-full border border-border/60 bg-secondary/70 px-2.5 py-0.5 text-[11px] font-medium text-foreground/80"
+            className="font-mono rounded-full border border-border/60 bg-secondary/70 px-2.5 py-0.5 text-[11px] font-medium text-foreground/80 transition-all hover:bg-secondary hover:border-border"
           >
             {tech}
           </span>

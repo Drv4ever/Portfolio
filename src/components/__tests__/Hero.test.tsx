@@ -25,10 +25,11 @@ describe("Hero Component", () => {
     vi.clearAllMocks();
   });
 
-  it("renders personal branding, headline, and bio in Amaan style", () => {
+  it("renders personal branding, headline, profile avatar, and bio in Amaan style", () => {
     render(<Hero />);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent(/hi, im dhruv/i);
     expect(screen.getByRole("heading", { level: 1 })).toHaveTextContent("Dhruv Jain");
+    expect(screen.getByRole("img", { name: "Dhruv Jain" })).toBeInTheDocument();
     expect(screen.getByText(/backend-heavy full-stack apps/i)).toBeInTheDocument();
     expect(screen.getByText(/open to opportunities/i)).toBeInTheDocument();
   });
@@ -87,8 +88,6 @@ describe("StatStrip Component", () => {
       onchange: null,
       addListener: vi.fn(),
       removeListener: vi.fn(),
-      addEventListener: vi.fn(),
-      removeEventListener: vi.fn(),
       dispatchEvent: vi.fn(),
     }));
 

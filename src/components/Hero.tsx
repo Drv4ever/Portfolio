@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
 import { Github, Linkedin, Mail, FileText } from "lucide-react";
@@ -48,16 +49,40 @@ export function Hero() {
       aria-label="Introduction"
       className="pt-20 pb-2 sm:pt-24 space-y-5"
     >
-      {/* Top Header Row: Name & Social Icons in Amaan style */}
-      <div className="flex flex-wrap items-baseline justify-between gap-4">
-        <div>
-          <h1 className="text-3xl sm:text-4xl font-extrabold tracking-tight text-foreground lowercase">
-            hi, im dhruv <span className="sr-only">Dhruv Jain</span>
-          </h1>
-          <p className="sr-only">Full-Stack Developer & AI Systems Builder — Vellore, India</p>
+      {/* Top Header Row: Profile Avatar, Name & Social Icons in Amaan/Aysh style */}
+      <div className="flex flex-wrap items-center justify-between gap-4">
+        <div className="flex items-center gap-3.5 sm:gap-4">
+          <div className="relative group shrink-0">
+            <div className="relative h-14 w-14 sm:h-16 sm:w-16 overflow-hidden rounded-full border-2 border-border/80 bg-muted shadow-md transition-all duration-300 group-hover:scale-105 group-hover:border-emerald-500/50">
+              <Image
+                src="/avatar.png"
+                alt="Dhruv Jain"
+                width={64}
+                height={64}
+                priority
+                className="h-full w-full object-cover transition-all duration-300 group-hover:contrast-105"
+              />
+            </div>
+            {/* Live active dot indicator pinned to avatar */}
+            <span
+              className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full bg-emerald-500 ring-2 ring-background flex items-center justify-center"
+              title="Open to opportunities"
+            >
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+            </span>
+          </div>
+
+          <div>
+            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground lowercase flex items-center gap-1.5">
+              hi, im dhruv <span className="sr-only">Dhruv Jain</span>
+            </h1>
+            <p className="text-xs text-muted-foreground font-mono">
+              full-stack & ai systems builder
+            </p>
+          </div>
         </div>
 
-        {/* Social Icons row & Active status dot */}
+        {/* Social Icons row & Active status badge */}
         <div className="flex flex-col items-end gap-1.5">
           <div className="flex items-center gap-2.5 text-muted-foreground">
             <a
@@ -125,7 +150,7 @@ export function Hero() {
         {domainThemes.map((theme) => (
           <span
             key={theme}
-            className="rounded-full border border-border/70 bg-secondary/80 px-3.5 py-1 text-xs font-semibold text-foreground/90 transition-all hover:bg-secondary hover:border-border cursor-default"
+            className="rounded-full border border-border/70 bg-secondary/80 px-3.5 py-1 text-xs font-semibold text-foreground/90 transition-all hover:bg-secondary hover:border-border cursor-default hover:scale-[1.02] active:scale-[0.98]"
           >
             {theme}
           </span>

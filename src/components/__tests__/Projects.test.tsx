@@ -207,28 +207,24 @@ describe("ProjectSquarePopup Component", () => {
     const vaultify = content.projects.find((p) => p.id === "vaultify")!;
 
     const { rerender } = render(<ProjectSquarePopup project={slideOs} mousePos={{ x: 50, y: 50 }} />);
-    expect(screen.getByText("SlideOS")).toBeInTheDocument();
-    expect(screen.getByText("Scalable Distributed Systems")).toBeInTheDocument();
-    expect(screen.getByText("slide-os.vercel.app")).toBeInTheDocument();
+    expect(screen.getAllByText("slide-os.vercel.app/editor").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getAllByText("Autonomous Agent Orchestration").length).toBeGreaterThanOrEqual(1);
 
     rerender(<ProjectSquarePopup project={parcel} mousePos={{ x: 50, y: 50 }} />);
-    expect(screen.getByText("Warden Portal")).toBeInTheDocument();
-    expect(screen.getAllByText("15.207.54.197").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getByText("Digital Parcel Locker")).toBeInTheDocument();
+    expect(screen.getByText("15.207.54.197:443/health")).toBeInTheDocument();
+    expect(screen.getByText("EC2 ap-south-1a")).toBeInTheDocument();
 
     rerender(<ProjectSquarePopup project={mongo} mousePos={{ x: 50, y: 50 }} />);
-    expect(screen.getByText("MongoDB MCP")).toBeInTheDocument();
-    expect(screen.getByText(/tools\/call: list_collections/)).toBeInTheDocument();
+    expect(screen.getByText("Autonomous Agent Stream")).toBeInTheDocument();
+    expect(screen.getByText(/tools\/call: infer_schema/)).toBeInTheDocument();
 
     rerender(<ProjectSquarePopup project={tcras} mousePos={{ x: 50, y: 50 }} />);
-    expect(screen.getByText("TCRAS")).toBeInTheDocument();
-    expect(screen.getByText("Risk Amplification System")).toBeInTheDocument();
-    expect(screen.getByText(/0.14 \[LOW RISK\]/)).toBeInTheDocument();
+    expect(screen.getByText("Risk Amplification Engine")).toBeInTheDocument();
+    expect(screen.getByText(/Isolation Forest Evaluation/)).toBeInTheDocument();
 
     rerender(<ProjectSquarePopup project={vaultify} mousePos={{ x: 50, y: 50 }} />);
-    expect(screen.getByText("Vaultify")).toBeInTheDocument();
-    expect(screen.getByText("Password Manager")).toBeInTheDocument();
-    expect(screen.getByText("GitHub Token")).toBeInTheDocument();
+    expect(screen.getByText("AES-256 Secure Vault")).toBeInTheDocument();
+    expect(screen.getByText(/Zero-Knowledge Encryption Pipeline/)).toBeInTheDocument();
   });
 
   it("handles an unknown project id gracefully", () => {
@@ -238,7 +234,7 @@ describe("ProjectSquarePopup Component", () => {
       title: "Unknown Project",
     };
     render(<ProjectSquarePopup project={unknownProject} mousePos={{ x: 50, y: 50 }} />);
-    expect(screen.getByText("slide-os.vercel.app")).toBeInTheDocument();
+    expect(screen.getAllByText("slide-os.vercel.app/editor").length).toBeGreaterThanOrEqual(1);
   });
 
   it("handles domain fallbacks when url parsing fails or when url is missing", () => {
@@ -248,7 +244,7 @@ describe("ProjectSquarePopup Component", () => {
       github: undefined,
     };
     const { rerender } = render(<ProjectSquarePopup project={mockProjectNoUrls} mousePos={{ x: 50, y: 50 }} />);
-    expect(screen.getByText("project.internal")).toBeInTheDocument();
+    expect(screen.getByTestId("popup-domain")).toHaveTextContent("project.internal");
 
     // Invalid url fallback branch for live
     const mockProjectInvalidLive = {
@@ -257,7 +253,7 @@ describe("ProjectSquarePopup Component", () => {
       github: undefined,
     };
     rerender(<ProjectSquarePopup project={mockProjectInvalidLive} mousePos={{ x: 50, y: 50 }} />);
-    expect(screen.getByText("not-a-valid-url")).toBeInTheDocument();
+    expect(screen.getByTestId("popup-domain")).toHaveTextContent("not-a-valid-url");
 
     // Invalid github fallback branch
     const mockProjectInvalidGithub = {
@@ -266,7 +262,7 @@ describe("ProjectSquarePopup Component", () => {
       github: "not-a-valid-github",
     };
     rerender(<ProjectSquarePopup project={mockProjectInvalidGithub} mousePos={{ x: 50, y: 50 }} />);
-    expect(screen.getByText("not-a-valid-github")).toBeInTheDocument();
+    expect(screen.getByTestId("popup-domain")).toHaveTextContent("not-a-valid-github");
   });
 
   it("adjusts coordinates when near window boundaries and clamps to padding", () => {
@@ -278,14 +274,14 @@ describe("ProjectSquarePopup Component", () => {
 
     const slideOs = content.projects.find((p) => p.id === "slide-os")!;
 
-    // Near right edge: targetX + 280 > 1024 - 16 (e.g. x = 900)
+    // Near right edge: targetX + 340 > 1024 - 16 (e.g. x = 900)
     // Near bottom edge: targetY + 280 > 768 - 16 (e.g. y = 600)
     const { rerender } = render(<ProjectSquarePopup project={slideOs} mousePos={{ x: 900, y: 600 }} />);
-    expect(screen.getByText("SlideOS")).toBeInTheDocument();
+    expect(screen.getAllByText("slide-os.vercel.app/editor").length).toBeGreaterThanOrEqual(1);
 
     // Clamping to padding when negative
     rerender(<ProjectSquarePopup project={slideOs} mousePos={{ x: -100, y: -100 }} />);
-    expect(screen.getByText("SlideOS")).toBeInTheDocument();
+    expect(screen.getAllByText("slide-os.vercel.app/editor").length).toBeGreaterThanOrEqual(1);
 
     Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: originalInnerWidth });
     Object.defineProperty(window, "innerHeight", { writable: true, configurable: true, value: originalInnerHeight });

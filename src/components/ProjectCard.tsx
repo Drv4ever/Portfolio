@@ -82,20 +82,25 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
         {project.techStack.map((tech) => (
           <span
             key={tech}
-            className="font-mono rounded-full border border-border/60 bg-secondary/70 px-2.5 py-0.5 text-[11px] font-medium text-foreground/80"
+            className="font-mono rounded-full border border-border/60 bg-secondary/70 px-2.5 py-0.5 text-[11px] font-medium text-foreground/80 transition-all hover:bg-secondary hover:border-border"
           >
             {tech}
           </span>
         ))}
       </div>
 
-      {/* Architecture Spec Trigger */}
-      <div className="pt-2 border-t border-border/40 flex items-center justify-end">
+      {/* Architecture Spec & Preview Footer */}
+      <div className="pt-2 border-t border-border/40 flex items-center justify-between font-mono text-xs">
+        <span className="text-[10px] text-muted-foreground hidden sm:inline flex items-center gap-1">
+          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+          <span>hover for live preview</span>
+        </span>
+
         <button
           type="button"
           onClick={() => onSelect(project)}
           aria-label={`Inspect Architecture & Spec for ${project.title}`}
-          className="inline-flex items-center gap-1.5 font-mono text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
         >
           <Workflow className="h-3.5 w-3.5" />
           <span>Inspect Architecture & Spec ↗</span>
