@@ -18,10 +18,10 @@ export default function ResumePage() {
   const resumeUrl = "/Dhruv-Jain-Resume.pdf";
 
   return (
-    <div className="min-h-screen flex flex-col bg-background text-foreground w-full max-w-full overflow-x-hidden">
+    <div className="min-h-screen flex flex-col bg-background text-foreground overflow-x-hidden">
       <Navbar />
 
-      <main className="flex-1 mx-auto max-w-3xl w-full max-w-full min-w-0 px-4 pt-24 sm:pt-28 pb-16 sm:px-6">
+      <main className="flex-1 mx-auto max-w-3xl w-full min-w-0 px-4 pt-24 sm:pt-28 pb-16 sm:px-6">
         {/* Navigation & Action Header */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 pb-6 border-b border-border/60">
           <div className="space-y-1">
@@ -74,7 +74,7 @@ export default function ResumePage() {
         </div>
 
         {/* Inline PDF Viewer Frame */}
-        <div className="mt-6 rounded-2xl border border-border/80 bg-card overflow-hidden shadow-lg h-[600px] sm:h-[800px] w-full max-w-full">
+        <div className="mt-6 rounded-2xl border border-border/80 bg-card overflow-hidden shadow-lg h-[600px] sm:h-[800px] w-full">
           <iframe
             src={`${resumeUrl}#toolbar=0&navpanes=0`}
             title={`${content.profile.name} Resume PDF`}

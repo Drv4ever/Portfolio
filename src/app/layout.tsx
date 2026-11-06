@@ -71,7 +71,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${nunito.variable} font-sans antialiased min-h-screen w-full max-w-full overflow-x-hidden bg-background text-foreground`}>
+      <body className={`${nunito.variable} font-sans antialiased min-h-screen bg-background text-foreground`}>
         <Providers>{children}</Providers>
       </body>
     </html>
