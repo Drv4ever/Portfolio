@@ -5,7 +5,7 @@ import { ArrowLeft } from "lucide-react";
 export default function NotFound() {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 text-center bg-background text-foreground">
-      <span className="font-mono text-sm uppercase tracking-widest text-emerald-500 pb-2">
+      <span className="font-mono text-sm uppercase tracking-widest text-orange-500 pb-2">
         404 — Page Not Found
       </span>
       <h1 className="font-serif text-4xl sm:text-5xl font-medium tracking-tight">

@@ -21,7 +21,7 @@ function LearningProjectItem({
     <article
       onMouseEnter={() => onHover?.(project)}
       onMouseLeave={() => onHover?.(null)}
-      className="group rounded-xl border border-border/70 bg-card p-5 space-y-2.5 transition-all hover:border-emerald-500/40 shadow-sm"
+      className="group rounded-xl border border-border/70 bg-card p-5 space-y-2.5 transition-all hover:border-orange-500/50 hover:shadow-[0_8px_24px_rgba(249,115,22,0.1)] shadow-sm"
     >
       <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/40 pb-2.5">
         <h4 className="text-base sm:text-lg font-bold text-foreground">
@@ -33,7 +33,7 @@ function LearningProjectItem({
               href={project.github}
               target="_blank"
               rel="noreferrer"
-              className="text-muted-foreground hover:text-foreground text-xs flex items-center gap-1 font-mono font-bold transition-colors"
+              className="text-muted-foreground hover:text-orange-400 text-xs flex items-center gap-1 font-mono font-bold transition-colors"
             >
               <Github className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Code</span>
@@ -45,7 +45,7 @@ function LearningProjectItem({
               href={project.live}
               target="_blank"
               rel="noreferrer"
-              className="text-muted-foreground hover:text-foreground text-xs flex items-center gap-1 font-mono font-bold transition-colors"
+              className="text-muted-foreground hover:text-orange-400 text-xs flex items-center gap-1 font-mono font-bold transition-colors"
             >
               <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Demo</span>

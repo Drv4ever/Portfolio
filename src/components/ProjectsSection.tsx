@@ -42,7 +42,7 @@ export function ProjectsSection() {
           <h2 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-muted-foreground">
             PROJECTS ({content.projects.length})
           </h2>
-          <span className="font-mono text-[11px] text-emerald-500 font-semibold">
+          <span className="font-mono text-[11px] text-orange-500 font-semibold">
             live & open-source
           </span>
         </div>

@@ -76,7 +76,7 @@ export function StatStrip() {
               <div className="flex items-baseline gap-1 font-mono text-3xl font-bold tracking-tight text-foreground md:text-4xl">
                 <span>{formatted}</span>
                 {item.suffix && (
-                  <span className="text-emerald-500 font-sans text-2xl">
+                  <span className="text-orange-500 font-sans text-2xl">
                     {item.suffix}
                   </span>
                 )}

@@ -23,7 +23,7 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
     <article
       onMouseEnter={handleMouseEnter}
       onMouseLeave={handleMouseLeave}
-      className="group rounded-xl border border-border/70 bg-card p-5 sm:p-6 space-y-3 transition-all hover:border-emerald-500/40 shadow-sm"
+      className="group rounded-xl border border-border/70 bg-card p-5 sm:p-6 space-y-3 transition-all duration-300 hover:-translate-y-1 hover:border-orange-500/50 hover:shadow-[0_8px_24px_rgba(249,115,22,0.1)] shadow-sm"
     >
       {/* Header Row: Title, Links, and Category */}
       <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/40 pb-3">
@@ -33,7 +33,7 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
               href={project.live || project.github}
               target="_blank"
               rel="noreferrer"
-              className="hover:text-foreground transition-colors underline decoration-1 decoration-border underline-offset-4 hover:decoration-foreground"
+              className="hover:text-orange-400 transition-colors underline decoration-1 decoration-border underline-offset-4 hover:decoration-orange-400"
             >
               {project.title}
             </a>
@@ -46,7 +46,7 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`${project.title} Live Demo`}
-                className="text-emerald-500 font-bold border border-emerald-500/20 bg-emerald-500/10 rounded-full px-2 py-0.5 hover:bg-emerald-500/20 transition-colors flex items-center gap-1"
+                className="text-orange-500 font-bold border border-orange-500/20 bg-orange-500/10 rounded-full px-2 py-0.5 hover:bg-orange-500/20 transition-colors flex items-center gap-1"
               >
                 <span>Live</span>
                 <ExternalLink className="h-3 w-3" />
@@ -82,7 +82,7 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
         {project.techStack.map((tech) => (
           <span
             key={tech}
-            className="font-mono rounded-full border border-border/60 bg-secondary/70 px-2.5 py-0.5 text-[11px] font-medium text-foreground/80 transition-all hover:bg-secondary hover:border-border"
+            className="font-mono rounded-full border border-border/60 bg-secondary/70 px-2.5 py-0.5 text-[11px] font-medium text-foreground/80 transition-all hover:bg-secondary hover:border-orange-500/30"
           >
             {tech}
           </span>
@@ -91,8 +91,8 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
 
       {/* Architecture Spec & Preview Footer */}
       <div className="pt-2 border-t border-border/40 flex items-center justify-between font-mono text-xs">
-        <span className="text-[10px] text-muted-foreground hidden sm:inline flex items-center gap-1">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+        <span className="text-[10px] text-muted-foreground hidden sm:inline flex items-center gap-1.5">
+          <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
           <span>hover for live preview</span>
         </span>
 
@@ -100,7 +100,7 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
           type="button"
           onClick={() => onSelect(project)}
           aria-label={`Inspect Architecture & Spec for ${project.title}`}
-          className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-foreground transition-colors cursor-pointer"
+          className="inline-flex items-center gap-1.5 text-xs font-semibold text-muted-foreground hover:text-orange-400 transition-colors cursor-pointer"
         >
           <Workflow className="h-3.5 w-3.5" />
           <span>Inspect Architecture & Spec ↗</span>

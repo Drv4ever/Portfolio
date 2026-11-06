@@ -54,10 +54,10 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
 
   const getLevelClass = (count: number) => {
     if (count === 0) return "bg-border/40 dark:bg-zinc-800/60";
-    if (count < 3) return "bg-emerald-800/50 dark:bg-[#0e4429]";
-    if (count < 6) return "bg-emerald-600/70 dark:bg-[#006d32]";
-    if (count < 8) return "bg-emerald-500 dark:bg-[#26a641]";
-    return "bg-emerald-400 dark:bg-[#39d353]";
+    if (count < 3) return "bg-amber-900/50 dark:bg-[#451a03]";
+    if (count < 6) return "bg-amber-700/70 dark:bg-[#9a3412]";
+    if (count < 8) return "bg-orange-500 dark:bg-[#ea580c]";
+    return "bg-amber-400 dark:bg-[#f59e0b]";
   };
 
   return (
@@ -76,18 +76,18 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
 
         <div className="flex items-center gap-3 text-[11px] font-bold">
           {data.longestStreak ? (
-            <span className="text-amber-500 dark:text-amber-400 flex items-center gap-1">
-              <Flame className="h-3.5 w-3.5" />
+            <span className="text-amber-500 dark:text-amber-400 flex items-center gap-1 group">
+              <Flame className="h-3.5 w-3.5 animate-pulse text-orange-500" />
               <span>{data.longestStreak}d best streak</span>
             </span>
           ) : null}
-          <span className="text-emerald-500 font-bold">
+          <span className="text-orange-500 font-bold">
             {data.totalContributions} Contributions This Year
           </span>
         </div>
       </div>
 
-      {/* Heatmap Grid in Amaan's Style */}
+      {/* Heatmap Grid in Amaan's Style with Playful Amber-Orange Palette */}
       <div className="rounded-xl border border-border/60 bg-card/60 p-3 sm:p-4 space-y-2 overflow-x-auto">
         {/* Months Row */}
         <div className="flex pl-7 text-[10px] font-mono text-muted-foreground select-none">
@@ -116,7 +116,7 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
                   <div
                     key={day.date || dIdx}
                     title={`${day.date || "Unknown date"}: ${day.contributionCount} contributions`}
-                    className={`h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-[2px] transition-all duration-300 ${getLevelClass(
+                    className={`h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-[2px] transition-all duration-150 hover:scale-135 hover:z-20 hover:shadow-[0_0_8px_rgba(249,115,22,0.7)] cursor-pointer ${getLevelClass(
                       day.contributionCount
                     )}`}
                     style={{
@@ -144,10 +144,10 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
             <span>Less</span>
             <div className="flex items-center gap-1">
               <div className="h-2.5 w-2.5 rounded-[2px] bg-border/40 dark:bg-zinc-800/60" />
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-emerald-800/50 dark:bg-[#0e4429]" />
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-emerald-600/70 dark:bg-[#006d32]" />
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-emerald-500 dark:bg-[#26a641]" />
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-emerald-400 dark:bg-[#39d353]" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-amber-900/50 dark:bg-[#451a03]" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-amber-700/70 dark:bg-[#9a3412]" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-orange-500 dark:bg-[#ea580c]" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-amber-400 dark:bg-[#f59e0b]" />
             </div>
             <span>More</span>
           </div>

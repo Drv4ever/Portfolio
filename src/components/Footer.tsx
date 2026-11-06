@@ -66,7 +66,7 @@ export function Footer() {
               className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background px-3.5 py-1 font-mono text-xs font-bold text-muted-foreground hover:text-foreground hover:bg-secondary transition-colors"
             >
               {copied ? (
-                <Check className="h-3 w-3 text-emerald-500" />
+                <Check className="h-3 w-3 text-orange-500" />
               ) : (
                 <Copy className="h-3 w-3" />
               )}

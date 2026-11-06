@@ -34,7 +34,26 @@ describe("Hero Component", () => {
     expect(screen.getByText(/open to opportunities/i)).toBeInTheDocument();
   });
 
-  it("renders core domain theme pills", () => {
+  it("renders core domain theme pills and handles playful clicks", () => {
+    const mockOsc = {
+      type: "sine",
+      frequency: { setValueAtTime: vi.fn() },
+      connect: vi.fn(),
+      start: vi.fn(),
+      stop: vi.fn(),
+    };
+    const mockGain = {
+      gain: { setValueAtTime: vi.fn(), exponentialRampToValueAtTime: vi.fn() },
+      connect: vi.fn(),
+    };
+    const mockAudioContext = vi.fn().mockImplementation(() => ({
+      currentTime: 0,
+      destination: {},
+      createOscillator: () => mockOsc,
+      createGain: () => mockGain,
+    }));
+    window.AudioContext = mockAudioContext as unknown as typeof AudioContext;
+
     render(<Hero />);
     expect(screen.getByText("backends")).toBeInTheDocument();
     expect(screen.getByText("typescript")).toBeInTheDocument();
@@ -44,6 +63,21 @@ describe("Hero Component", () => {
     expect(screen.getByText("aws")).toBeInTheDocument();
     expect(screen.getByText("mcp")).toBeInTheDocument();
     expect(screen.getByText("python")).toBeInTheDocument();
+
+    // Click theme pill
+    const backendsBtn = screen.getByRole("button", { name: "backends" });
+    fireEvent.click(backendsBtn);
+    expect(mockOsc.frequency.setValueAtTime).toHaveBeenCalled();
+
+    // Click avatar easter egg
+    const avatar = screen.getByTitle("Click for a friendly greeting!");
+    fireEvent.click(avatar);
+
+    // Audio fallback branch when AudioContext throws
+    window.AudioContext = vi.fn().mockImplementation(() => {
+      throw new Error("AudioContext blocked");
+    }) as unknown as typeof AudioContext;
+    fireEvent.click(avatar);
   });
 
   it("handles copy email action with clipboard interaction", async () => {

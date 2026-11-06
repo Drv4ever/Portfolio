@@ -79,7 +79,7 @@ export function HeroCanvas() {
     const render = () => {
       ctx.clearRect(0, 0, width, height);
 
-      // Draw subtle connections
+      // Draw subtle warm amber/orange connections
       for (let i = 0; i < points.length; i++) {
         const p1 = points[i];
 
@@ -104,7 +104,7 @@ export function HeroCanvas() {
         // Draw point
         ctx.beginPath();
         ctx.arc(p1.x, p1.y, p1.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(16, 185, 129, ${p1.baseAlpha})`;
+        ctx.fillStyle = `rgba(249, 115, 22, ${p1.baseAlpha})`;
         ctx.fill();
 
         for (let j = i + 1; j < points.length; j++) {
@@ -117,7 +117,7 @@ export function HeroCanvas() {
             ctx.beginPath();
             ctx.moveTo(p1.x, p1.y);
             ctx.lineTo(p2.x, p2.y);
-            ctx.strokeStyle = `rgba(16, 185, 129, ${0.12 * (1 - cdist / 90)})`;
+            ctx.strokeStyle = `rgba(245, 158, 11, ${0.12 * (1 - cdist / 90)})`;
             ctx.lineWidth = 0.6;
             ctx.stroke();
           }
@@ -143,7 +143,7 @@ export function HeroCanvas() {
       aria-hidden="true"
     >
       {/* Ambient static backdrop */}
-      <div className="absolute inset-0 bg-gradient-to-b from-emerald-500/[0.04] via-transparent to-transparent dark:from-emerald-500/[0.03]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-orange-500/[0.05] via-amber-500/[0.02] to-transparent dark:from-orange-500/[0.04]" />
 
       {/* Reactive canvas */}
       <canvas

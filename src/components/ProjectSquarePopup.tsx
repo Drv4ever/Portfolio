@@ -67,10 +67,10 @@ export function ProjectSquarePopup({ project, mousePos }: ProjectSquarePopupProp
     <AnimatePresence>
       <motion.div
         key={project.id}
-        initial={{ opacity: 0, scale: 0.9, y: 10 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        exit={{ opacity: 0, scale: 0.9, y: 10 }}
-        transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
+        initial={{ opacity: 0, scale: 0.82, y: 14, rotate: -1.5 }}
+        animate={{ opacity: 1, scale: 1, y: 0, rotate: 0 }}
+        exit={{ opacity: 0, scale: 0.85, y: 10, rotate: 1 }}
+        transition={{ type: "spring", stiffness: 380, damping: 24 }}
         style={{
           position: "fixed",
           left: `${coords.x}px`,
@@ -78,7 +78,7 @@ export function ProjectSquarePopup({ project, mousePos }: ProjectSquarePopupProp
           pointerEvents: "none",
           zIndex: 9999,
         }}
-        className="w-[310px] sm:w-[340px] rounded-2xl border border-emerald-500/30 bg-background/95 backdrop-blur-2xl shadow-2xl shadow-black/80 overflow-hidden flex flex-col"
+        className="w-[310px] sm:w-[340px] rounded-2xl border border-orange-500/40 bg-background/95 backdrop-blur-2xl shadow-2xl shadow-orange-500/10 overflow-hidden flex flex-col"
         aria-hidden="true"
       >
         {/* Subtle Domain Header Badge for Accessibility & Verification */}

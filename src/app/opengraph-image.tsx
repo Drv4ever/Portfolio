@@ -34,7 +34,7 @@ export default async function Image() {
               width: "16px",
               height: "16px",
               borderRadius: "50%",
-              backgroundColor: "#10b981",
+              backgroundColor: "#f97316",
             }}
           />
           <span
@@ -64,7 +64,7 @@ export default async function Image() {
           <p
             style={{
               fontSize: "32px",
-              color: "#38bdf8",
+              color: "#f97316",
               margin: 0,
               fontWeight: 500,
             }}

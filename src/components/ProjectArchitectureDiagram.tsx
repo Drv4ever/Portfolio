@@ -12,13 +12,13 @@ export function ProjectArchitectureDiagram({ project }: DiagramProps) {
   if (project.id === "mongo-mcp") {
     return (
       <div className="rounded-xl border border-border/70 bg-card/90 p-4 sm:p-6" aria-label="MongoDB MCP Server Architecture">
-        <div className="text-xs font-mono font-semibold text-emerald-500 uppercase tracking-wider pb-4">
+        <div className="text-xs font-mono font-semibold text-orange-500 uppercase tracking-wider pb-4">
           Verified Architecture: AI Client → MCP Server → MongoDB
         </div>
         <svg viewBox="0 0 680 180" className="w-full h-auto text-foreground font-mono text-[11px]">
           <defs>
-            <marker id="arrow-emerald" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
-              <path d="M 0 1 L 8 5 L 0 9 z" fill="#10b981" />
+            <marker id="arrow-orange" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+              <path d="M 0 1 L 8 5 L 0 9 z" fill="#f97316" />
             </marker>
           </defs>
 
@@ -28,18 +28,18 @@ export function ProjectArchitectureDiagram({ project }: DiagramProps) {
           <text x="90" y="98" textAnchor="middle" className="fill-muted-foreground text-[9px]">LLM / Cursor / Claude</text>
 
           {/* Arrow 1 */}
-          <path d="M 160 85 L 245 85" stroke="#10b981" strokeWidth="2" strokeDasharray="4 2" markerEnd="url(#arrow-emerald)" />
+          <path d="M 160 85 L 245 85" stroke="#f97316" strokeWidth="2" strokeDasharray="4 2" markerEnd="url(#arrow-orange)" />
           <text x="202" y="75" textAnchor="middle" className="fill-muted-foreground text-[8px]">MCP Protocol</text>
 
           {/* Node 2: MCP Server (Zod Validated, Read-Only Guard) */}
-          <rect x="250" y="35" width="190" height="100" rx="8" className="fill-secondary stroke-emerald-500 stroke-2" />
-          <text x="345" y="62" textAnchor="middle" className="fill-emerald-500 font-bold">TypeScript MCP Server</text>
+          <rect x="250" y="35" width="190" height="100" rx="8" className="fill-secondary stroke-orange-500 stroke-2" />
+          <text x="345" y="62" textAnchor="middle" className="fill-orange-500 font-bold">TypeScript MCP Server</text>
           <text x="345" y="82" textAnchor="middle" className="fill-foreground text-[10px]">Zod Request Validation</text>
           <text x="345" y="100" textAnchor="middle" className="fill-muted-foreground text-[9px]">Read-Only Security Guard</text>
-          <text x="345" y="118" textAnchor="middle" className="fill-emerald-400 text-[9px]">Controlled Queries Only</text>
+          <text x="345" y="118" textAnchor="middle" className="fill-amber-400 text-[9px]">Controlled Queries Only</text>
 
           {/* Arrow 2 */}
-          <path d="M 440 85 L 505 85" stroke="#10b981" strokeWidth="2" strokeDasharray="4 2" markerEnd="url(#arrow-emerald)" />
+          <path d="M 440 85 L 505 85" stroke="#f97316" strokeWidth="2" strokeDasharray="4 2" markerEnd="url(#arrow-orange)" />
           <text x="472" y="75" textAnchor="middle" className="fill-muted-foreground text-[8px]">Read Query</text>
 
           {/* Node 3: MongoDB */}
@@ -55,7 +55,7 @@ export function ProjectArchitectureDiagram({ project }: DiagramProps) {
   if (project.id === "parcel-locker") {
     return (
       <div className="rounded-xl border border-border/70 bg-card/90 p-4 sm:p-6" aria-label="Digital Parcel Locker Architecture">
-        <div className="text-xs font-mono font-semibold text-emerald-500 uppercase tracking-wider pb-4">
+        <div className="text-xs font-mono font-semibold text-orange-500 uppercase tracking-wider pb-4">
           Verified Architecture: EC2 Dashboard → S3 & Core Lambda → DynamoDB + AWS Bus
         </div>
         <svg viewBox="0 0 680 230" className="w-full h-auto text-foreground font-mono text-[11px]">
@@ -85,7 +85,7 @@ export function ProjectArchitectureDiagram({ project }: DiagramProps) {
           {/* DynamoDB */}
           <rect x="420" y="35" width="130" height="65" rx="8" className="fill-secondary stroke-border stroke-[1.5]" />
           <text x="485" y="62" textAnchor="middle" className="fill-foreground font-semibold">DynamoDB</text>
-          <text x="485" y="80" textAnchor="middle" className="fill-emerald-400 text-[9px]">Live Parcel Status</text>
+          <text x="485" y="80" textAnchor="middle" className="fill-amber-400 text-[9px]">Live Parcel Status</text>
 
           {/* Event Bus & Alarms */}
           <rect x="420" y="125" width="240" height="85" rx="8" className="fill-secondary stroke-border stroke-[1.5]" />
@@ -106,7 +106,7 @@ export function ProjectArchitectureDiagram({ project }: DiagramProps) {
   if (project.id === "tcras") {
     return (
       <div className="rounded-xl border border-border/70 bg-card/90 p-4 sm:p-6" aria-label="TCRAS Risk Architecture">
-        <div className="text-xs font-mono font-semibold text-emerald-500 uppercase tracking-wider pb-4">
+        <div className="text-xs font-mono font-semibold text-orange-500 uppercase tracking-wider pb-4">
           Verified Architecture: React → Node APIs → FastAPI → Isolation Forest → SQLite
         </div>
         <svg viewBox="0 0 680 180" className="w-full h-auto text-foreground font-mono text-[11px]">
@@ -134,7 +134,7 @@ export function ProjectArchitectureDiagram({ project }: DiagramProps) {
           {/* Isolation Forest */}
           <rect x="435" y="50" width="125" height="70" rx="8" className="fill-secondary stroke-border stroke-[1.5]" />
           <text x="497" y="78" textAnchor="middle" className="fill-foreground font-semibold">Isolation Forest</text>
-          <text x="497" y="96" textAnchor="middle" className="fill-emerald-400 text-[9px]">Anomaly Scoring</text>
+          <text x="497" y="96" textAnchor="middle" className="fill-amber-400 text-[9px]">Anomaly Scoring</text>
           <text x="497" y="108" textAnchor="middle" className="fill-muted-foreground text-[8px]">pandas & NumPy</text>
 
           {/* SQLite */}

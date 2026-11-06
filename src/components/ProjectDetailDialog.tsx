@@ -32,7 +32,7 @@ export function ProjectDetailDialog({
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto sm:rounded-2xl">
         <DialogHeader className="space-y-2 text-left">
           <div className="flex flex-wrap items-center justify-between gap-2 pr-6">
-            <span className="font-mono text-xs uppercase text-emerald-500 font-bold tracking-wider">
+            <span className="font-mono text-xs uppercase text-orange-500 font-bold tracking-wider">
               {project.category} Project
             </span>
 
@@ -46,7 +46,7 @@ export function ProjectDetailDialog({
                 </Button>
               )}
               {project.live && (
-                <Button asChild size="sm" className="h-7 gap-1 text-xs rounded-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold">
+                <Button asChild size="sm" className="h-7 gap-1 text-xs rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold">
                   <a href={project.live} target="_blank" rel="noreferrer">
                     <ExternalLink className="h-3.5 w-3.5" />
                     <span>Live</span>
@@ -77,7 +77,7 @@ export function ProjectDetailDialog({
           <ul className="space-y-2 text-xs text-muted-foreground leading-relaxed">
             {project.bullets.map((bullet, idx) => (
               <li key={idx} className="flex items-start gap-2">
-                <CheckCircle2 className="h-3.5 w-3.5 text-emerald-500 mt-0.5 shrink-0" />
+                <CheckCircle2 className="h-3.5 w-3.5 text-orange-500 mt-0.5 shrink-0" />
                 <span>{bullet}</span>
               </li>
             ))}

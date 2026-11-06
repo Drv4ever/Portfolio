@@ -41,7 +41,7 @@ export default function ResumePage() {
           </div>
 
           <div className="flex items-center gap-3">
-            <Button asChild size="lg" className="rounded-full gap-2 shadow-sm bg-emerald-700 hover:bg-emerald-600 text-white font-bold">
+            <Button asChild size="lg" className="rounded-full gap-2 shadow-sm bg-orange-600 hover:bg-orange-500 text-white font-bold">
               <a href={resumeUrl} download="Dhruv-Jain-Resume.pdf">
                 <Download className="h-4 w-4" />
                 <span>Download PDF</span>
@@ -59,7 +59,7 @@ export default function ResumePage() {
         {/* Fallback notification for mobile/unsupported viewers */}
         <div className="mt-4 rounded-xl border border-border/50 bg-secondary/30 p-4 text-xs text-muted-foreground flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
           <div className="flex items-center gap-2">
-            <FileText className="h-4 w-4 text-emerald-500 shrink-0" />
+            <FileText className="h-4 w-4 text-orange-500 shrink-0" />
             <span>
               If the inline PDF viewer does not load on your mobile device, you can view or download it directly.
             </span>
@@ -67,7 +67,7 @@ export default function ResumePage() {
           <a
             href={resumeUrl}
             download="Dhruv-Jain-Resume.pdf"
-            className="font-bold text-emerald-600 dark:text-emerald-400 hover:underline shrink-0"
+            className="font-bold text-orange-600 dark:text-orange-400 hover:underline shrink-0"
           >
             Direct Download →
           </a>

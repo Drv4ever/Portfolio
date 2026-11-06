@@ -4,7 +4,8 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { toast } from "sonner";
-import { Github, Linkedin, Mail, FileText } from "lucide-react";
+import { motion } from "motion/react";
+import { Github, Linkedin, Mail, FileText, Sparkles } from "lucide-react";
 import { content } from "@/content";
 
 function XIcon({ className = "h-4 w-4" }: { className?: string }) {
@@ -32,6 +33,34 @@ export function Hero() {
     setTimeout(() => setCopied(false), 2000);
   };
 
+  const playChime = (freq = 523.25) => {
+    try {
+      if (typeof window !== "undefined" && window.AudioContext) {
+        const ctx = new window.AudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = "sine";
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        gain.gain.setValueAtTime(0.03, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.12);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.12);
+      }
+    } catch {
+      // Audio optional
+    }
+  };
+
+  const handleAvatarClick = () => {
+    playChime(659.25);
+    toast("👋 Hey there! Welcome to Dhruv's portfolio.", {
+      description: "Feel free to explore the interactive demos and live systems below!",
+      icon: <Sparkles className="h-4 w-4 text-orange-500" />,
+    });
+  };
+
   const domainThemes = [
     "backends",
     "typescript",
@@ -43,6 +72,14 @@ export function Hero() {
     "python",
   ];
 
+  const handleThemeClick = (theme: string, idx: number) => {
+    const scale = [392, 440, 493.88, 523.25, 587.33, 659.25, 698.46, 783.99];
+    playChime(scale[idx % scale.length]);
+    toast.info(`Specialization: ${theme}`, {
+      description: `Highlighting core systems and engineering stack around ${theme}.`,
+    });
+  };
+
   return (
     <section
       id="hero"
@@ -52,8 +89,15 @@ export function Hero() {
       {/* Top Header Row: Profile Avatar, Name & Social Icons in Amaan/Aysh style */}
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3.5 sm:gap-4">
-          <div className="relative group shrink-0">
-            <div className="relative h-14 w-14 sm:h-16 sm:w-16 overflow-hidden rounded-full border-2 border-border/80 bg-muted shadow-md transition-all duration-300 group-hover:scale-105 group-hover:border-emerald-500/50">
+          <motion.div
+            className="relative group shrink-0 cursor-pointer"
+            onClick={handleAvatarClick}
+            whileHover={{ scale: 1.08, rotate: [0, -3, 3, -1, 1, 0] }}
+            whileTap={{ scale: 0.94, rotate: -4 }}
+            transition={{ type: "spring", stiffness: 400, damping: 15 }}
+            title="Click for a friendly greeting!"
+          >
+            <div className="relative h-14 w-14 sm:h-16 sm:w-16 overflow-hidden rounded-full border-2 border-border/80 bg-muted shadow-md transition-all duration-300 group-hover:scale-105 group-hover:border-orange-500/60 group-hover:shadow-[0_0_16px_rgba(249,115,22,0.3)]">
               <Image
                 src="/avatar.png"
                 alt="Dhruv Jain"
@@ -63,14 +107,14 @@ export function Hero() {
                 className="h-full w-full object-cover transition-all duration-300 group-hover:contrast-105"
               />
             </div>
-            {/* Live active dot indicator pinned to avatar */}
+            {/* Live active dot indicator pinned to avatar with warm yellowish-red flame pulse */}
             <span
-              className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full bg-emerald-500 ring-2 ring-background flex items-center justify-center"
+              className="absolute bottom-0 right-0 h-3.5 w-3.5 rounded-full bg-gradient-to-r from-amber-500 to-orange-500 ring-2 ring-background flex items-center justify-center shadow-xs"
               title="Open to opportunities"
             >
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75" />
             </span>
-          </div>
+          </motion.div>
 
           <div>
             <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground lowercase flex items-center gap-1.5">
@@ -129,11 +173,11 @@ export function Hero() {
             </Link>
           </div>
 
-          {/* Green Status Indicator */}
-          <div className="flex items-center gap-1.5 text-[11px] font-mono text-emerald-500">
+          {/* Warm Yellowish-Red Status Indicator */}
+          <div className="flex items-center gap-1.5 text-[11px] font-mono text-amber-500 dark:text-amber-400">
             <span className="relative flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-orange-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-gradient-to-r from-amber-500 to-orange-500" />
             </span>
             <span className="font-semibold text-muted-foreground text-[10px]">
               {copied ? "copied email!" : "open to opportunities"}
@@ -142,18 +186,23 @@ export function Hero() {
         </div>
       </div>
 
-      {/* Theme Pills (Amaan style) */}
+      {/* Playful Interactive Theme Pills (Amaan style with bouncy micro-interactions) */}
       <div
         className="flex flex-wrap items-center gap-2 pt-0.5"
         aria-label="Core Themes & Stack"
       >
-        {domainThemes.map((theme) => (
-          <span
+        {domainThemes.map((theme, idx) => (
+          <motion.button
             key={theme}
-            className="rounded-full border border-border/70 bg-secondary/80 px-3.5 py-1 text-xs font-semibold text-foreground/90 transition-all hover:bg-secondary hover:border-border cursor-default hover:scale-[1.02] active:scale-[0.98]"
+            type="button"
+            onClick={() => handleThemeClick(theme, idx)}
+            whileHover={{ y: -3, scale: 1.06, rotate: idx % 2 === 0 ? 1.5 : -1.5 }}
+            whileTap={{ scale: 0.92 }}
+            transition={{ type: "spring", stiffness: 450, damping: 18 }}
+            className="rounded-full border border-orange-500/20 bg-secondary/80 px-3.5 py-1 text-xs font-semibold text-foreground/90 transition-colors hover:border-orange-500/60 hover:bg-orange-500/10 hover:text-orange-400 cursor-pointer shadow-xs"
           >
             {theme}
-          </span>
+          </motion.button>
         ))}
       </div>
 
@@ -163,7 +212,7 @@ export function Hero() {
           i work on whatever is fun to{" "}
           <a
             href="#projects"
-            className="font-bold text-foreground underline decoration-1 decoration-border underline-offset-4 hover:decoration-foreground transition-colors"
+            className="font-bold text-foreground underline decoration-1 decoration-border underline-offset-4 hover:text-orange-400 hover:decoration-orange-400 transition-colors"
           >
             build
           </a>{" "}
@@ -173,7 +222,7 @@ export function Hero() {
           currently exploring mcp protocols, distributed architectures, and aws cloud infrastructure. i obsess over clean architecture, latency, and documenting the systems underneath on my{" "}
           <Link
             href="/resume"
-            className="font-bold text-foreground underline decoration-1 decoration-emerald-500/50 underline-offset-4 hover:text-emerald-400 hover:decoration-emerald-400 transition-colors"
+            className="font-bold text-foreground underline decoration-1 decoration-orange-500/60 underline-offset-4 hover:text-orange-400 hover:decoration-orange-400 transition-colors"
           >
             resume
           </Link>

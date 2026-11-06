@@ -96,7 +96,8 @@ export function Navbar() {
             const ctx = new window.AudioContext();
             const osc = ctx.createOscillator();
             const gain = ctx.createGain();
-            osc.frequency.setValueAtTime(587.33, ctx.currentTime);
+            osc.type = "sine";
+            osc.frequency.setValueAtTime(659.25, ctx.currentTime);
             gain.gain.setValueAtTime(0.04, ctx.currentTime);
             gain.gain.exponentialRampToValueAtTime(0.0001, ctx.currentTime + 0.15);
             osc.connect(gain);
@@ -120,7 +121,7 @@ export function Navbar() {
       <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
         {/* Scroll progress indicator */}
         <div
-          className="h-[2px] bg-emerald-500/80 transition-all duration-150 ease-out"
+          className="h-[2px] bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 transition-all duration-150 ease-out"
           style={{ width: `${scrollProgress}%` }}
           aria-hidden="true"
         />
@@ -142,19 +143,19 @@ export function Navbar() {
                 {soundMuted ? (
                   <VolumeX className="h-3.5 w-3.5" />
                 ) : (
-                  <Volume2 className="h-3.5 w-3.5 text-emerald-500" />
+                  <Volume2 className="h-3.5 w-3.5 text-orange-500" />
                 )}
               </Button>
 
               <Link
                 href="/"
-                className="group flex items-center gap-2 text-sm font-medium tracking-tight transition-colors hover:text-emerald-500"
+                className="group flex items-center gap-2 text-sm font-medium tracking-tight transition-colors hover:text-orange-500"
               >
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-background font-mono text-[11px] font-extrabold transition-transform group-hover:scale-105">
+                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-foreground text-background font-mono text-[11px] font-extrabold transition-transform group-hover:scale-110 group-hover:rotate-6">
                   DJ
                 </span>
                 <span className="font-mono text-sm font-bold tracking-tight text-foreground">
-                  dhruv<span className="text-emerald-500">.</span>
+                  dhruv<span className="text-orange-500">.</span>
                 </span>
               </Link>
             </div>
@@ -178,7 +179,7 @@ export function Navbar() {
                   >
                     <span>{link.label.toLowerCase()}</span>
                     {isActive && (
-                      <span className="absolute bottom-0 left-2 right-2 h-[2px] rounded-full bg-emerald-500" />
+                      <span className="absolute bottom-0 left-2 right-2 h-[2px] rounded-full bg-gradient-to-r from-amber-400 to-orange-500" />
                     )}
                   </Link>
                 );
@@ -259,7 +260,7 @@ export function Navbar() {
                         <Link
                           href="/resume"
                           onClick={() => setMobileMenuOpen(false)}
-                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-mono font-bold text-emerald-500 hover:bg-emerald-500/10 transition-colors"
+                          className="flex items-center gap-2 rounded-lg px-3 py-2 text-sm font-mono font-bold text-orange-500 hover:bg-orange-500/10 transition-colors"
                         >
                           <FileText className="h-4 w-4" />
                           <span>view resume</span>

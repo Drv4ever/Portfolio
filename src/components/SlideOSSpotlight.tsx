@@ -23,7 +23,7 @@ export function SlideOSSpotlight({
       aria-label="SlideOS Spotlight Project"
       onMouseEnter={() => onHover?.(project)}
       onMouseLeave={() => onHover?.(null)}
-      className="group rounded-2xl border border-border/80 bg-card/70 p-5 sm:p-6 space-y-4 transition-all duration-300 hover:border-emerald-500/40 shadow-sm"
+      className="group rounded-2xl border border-border/80 bg-card/70 p-5 sm:p-6 space-y-4 transition-all duration-300 hover:border-orange-500/50 hover:shadow-[0_8px_30px_rgba(249,115,22,0.12)] shadow-sm"
     >
       {/* Header Row: Title, Badges, Links */}
       <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border/40 pb-3">
@@ -38,7 +38,7 @@ export function SlideOSSpotlight({
               {project.title}
             </a>
           </h2>
-          <span className="font-mono text-xs font-bold text-emerald-500 border border-emerald-500/20 bg-emerald-500/10 rounded-full px-2.5 py-0.5">
+          <span className="font-mono text-xs font-bold text-orange-500 border border-orange-500/30 bg-orange-500/10 rounded-full px-2.5 py-0.5">
             Active Project
           </span>
         </div>
@@ -62,7 +62,7 @@ export function SlideOSSpotlight({
               target="_blank"
               rel="noreferrer"
               aria-label="SlideOS Live Demo Application"
-              className="text-emerald-500 hover:underline flex items-center gap-1 font-bold"
+              className="text-orange-500 hover:text-orange-400 hover:underline flex items-center gap-1 font-bold transition-colors"
             >
               <ExternalLink className="h-3.5 w-3.5" />
               <span>Live Demo ↗</span>
@@ -86,7 +86,7 @@ export function SlideOSSpotlight({
         {project.techStack.map((tech) => (
           <span
             key={tech}
-            className="font-mono rounded-full border border-border/60 bg-secondary/70 px-2.5 py-0.5 text-[11px] font-medium text-foreground/80 transition-all hover:bg-secondary hover:border-border"
+            className="font-mono rounded-full border border-border/60 bg-secondary/70 px-2.5 py-0.5 text-[11px] font-medium text-foreground/80 transition-all hover:bg-secondary hover:border-orange-500/30"
           >
             {tech}
           </span>

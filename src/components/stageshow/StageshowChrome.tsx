@@ -35,15 +35,15 @@ export function StageshowChrome({
 
         {/* Center URL Pill */}
         <div className="flex items-center gap-1.5 rounded-full border border-border/50 bg-background/80 px-2.5 py-0.5 text-[11px] text-muted-foreground shadow-2xs font-mono">
-          <span className="text-emerald-500 text-[10px]">🔒</span>
+          <span className="text-orange-500 text-[10px]">🔒</span>
           <span className="truncate max-w-[160px] sm:max-w-[220px] font-semibold text-foreground">
             {url}
           </span>
         </div>
 
-        {/* Status Pill */}
-        <div className="flex items-center gap-1 text-[10px] font-mono text-emerald-500 font-bold">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
+        {/* Status Pill in Warm Yellowish-Red */}
+        <div className="flex items-center gap-1 text-[10px] font-mono text-orange-500 font-bold">
+          <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
           <span className="hidden sm:inline uppercase tracking-wider">{statusBadge}</span>
         </div>
       </div>
