@@ -1,10 +1,10 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import { Project } from "@/content/schema";
 import { motion, AnimatePresence } from "motion/react";
-import { SlideOSStage } from "./stageshow/SlideOSStage";
-import { CloudConsoleStage } from "./stageshow/CloudConsoleStage";
+import { StageshowChrome } from "./stageshow/StageshowChrome";
 import { AgentStreamStage } from "./stageshow/AgentStreamStage";
 
 interface ProjectSquarePopupProps {
@@ -78,7 +78,7 @@ export function ProjectSquarePopup({ project, mousePos }: ProjectSquarePopupProp
           pointerEvents: "none",
           zIndex: 9999,
         }}
-        className="w-[310px] sm:w-[340px] rounded-2xl border border-orange-500/40 bg-background/95 backdrop-blur-2xl shadow-2xl shadow-orange-500/10 overflow-hidden flex flex-col"
+        className="w-[310px] sm:w-[350px] rounded-2xl border border-orange-500/40 bg-background/95 backdrop-blur-2xl shadow-2xl shadow-orange-500/10 overflow-hidden flex flex-col"
         aria-hidden="true"
       >
         {/* Subtle Domain Header Badge for Accessibility & Verification */}
@@ -86,16 +86,71 @@ export function ProjectSquarePopup({ project, mousePos }: ProjectSquarePopupProp
           {domain}
         </div>
 
-        {project.id === "slide-os" && <SlideOSStage />}
-        {project.id === "parcel-locker" && <CloudConsoleStage />}
+        {/* Real Live Landing Page for SlideOS */}
+        {project.id === "slide-os" && (
+          <StageshowChrome url="slide-os.vercel.app" statusBadge="LIVE APP">
+            <div className="relative w-full h-[200px] overflow-hidden bg-muted">
+              <Image
+                src="/preview-slide-os.png"
+                alt="SlideOS Live Landing Page"
+                fill
+                className="object-cover object-top"
+                sizes="350px"
+                priority
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent px-3 py-1.5 flex items-center justify-between text-[10px] font-mono text-zinc-300">
+                <span className="flex items-center gap-1.5 text-white font-bold">
+                  <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
+                  <span>Real Landing Page</span>
+                </span>
+                <span className="text-orange-400 font-semibold">slide-os.vercel.app ↗</span>
+              </div>
+            </div>
+          </StageshowChrome>
+        )}
+
+        {/* Real Live Warden Dashboard for Parcel Locker */}
+        {project.id === "parcel-locker" && (
+          <StageshowChrome url="15.207.54.197" statusBadge="AWS EC2">
+            <div className="relative w-full h-[200px] overflow-hidden bg-muted">
+              <Image
+                src="/preview-parcel-locker.png"
+                alt="Parcel Locker Live Warden Dashboard"
+                fill
+                className="object-cover object-top"
+                sizes="350px"
+                priority
+              />
+              <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/90 via-black/45 to-transparent px-3 py-1.5 flex items-center justify-between text-[10px] font-mono text-zinc-300">
+                <span className="flex items-center gap-1.5 text-white font-bold">
+                  <span className="h-1.5 w-1.5 rounded-full bg-orange-500 animate-pulse" />
+                  <span>Real Warden Portal</span>
+                </span>
+                <span className="text-orange-400 font-semibold">15.207.54.197 ↗</span>
+              </div>
+            </div>
+          </StageshowChrome>
+        )}
+
+        {/* Interactive Protocol Terminals for Backend / Machine Learning Systems */}
         {project.id === "mongo-mcp" && <AgentStreamStage type="mcp" />}
         {project.id === "tcras" && <AgentStreamStage type="tcras" />}
         {project.id === "vaultify" && <AgentStreamStage type="vaultify" />}
+
+        {/* Fallback for other projects */}
         {project.id !== "slide-os" &&
           project.id !== "parcel-locker" &&
           project.id !== "mongo-mcp" &&
           project.id !== "tcras" &&
-          project.id !== "vaultify" && <SlideOSStage />}
+          project.id !== "vaultify" && (
+            <StageshowChrome url={domain} statusBadge="ACTIVE">
+              <div className="p-4 space-y-2 text-xs font-mono text-muted-foreground bg-card/60 min-h-[160px] flex flex-col justify-center items-center text-center">
+                <span className="text-foreground font-bold">{project.title}</span>
+                <span className="text-[10px] text-orange-500 font-semibold">{project.shortTitle}</span>
+                <p className="text-[10px] line-clamp-2 max-w-[260px]">{project.description}</p>
+              </div>
+            </StageshowChrome>
+          )}
       </motion.div>
     </AnimatePresence>
   );

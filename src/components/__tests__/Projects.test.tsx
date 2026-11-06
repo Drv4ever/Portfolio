@@ -199,42 +199,50 @@ describe("ProjectSquarePopup Component", () => {
     expect(container.firstChild).toBeNull();
   });
 
-  it("renders preview mockups for all project types correctly", () => {
+  it("renders real landing page previews for deployed projects and protocol terminals for backend tools", () => {
     const slideOs = content.projects.find((p) => p.id === "slide-os")!;
     const parcel = content.projects.find((p) => p.id === "parcel-locker")!;
     const mongo = content.projects.find((p) => p.id === "mongo-mcp")!;
     const tcras = content.projects.find((p) => p.id === "tcras")!;
     const vaultify = content.projects.find((p) => p.id === "vaultify")!;
 
+    // Deployed SlideOS real landing page preview
     const { rerender } = render(<ProjectSquarePopup project={slideOs} mousePos={{ x: 50, y: 50 }} />);
-    expect(screen.getAllByText("slide-os.vercel.app/editor").length).toBeGreaterThanOrEqual(1);
-    expect(screen.getAllByText("Autonomous Agent Orchestration").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByAltText("SlideOS Live Landing Page")).toBeInTheDocument();
+    expect(screen.getAllByText("slide-os.vercel.app").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText("Real Landing Page")).toBeInTheDocument();
 
+    // Deployed Cloud Locker real warden dashboard preview
     rerender(<ProjectSquarePopup project={parcel} mousePos={{ x: 50, y: 50 }} />);
-    expect(screen.getByText("15.207.54.197:443/health")).toBeInTheDocument();
-    expect(screen.getByText("EC2 ap-south-1a")).toBeInTheDocument();
+    expect(screen.getByAltText("Parcel Locker Live Warden Dashboard")).toBeInTheDocument();
+    expect(screen.getAllByText("15.207.54.197").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText("Real Warden Portal")).toBeInTheDocument();
 
+    // Backend MCP agent stream terminal
     rerender(<ProjectSquarePopup project={mongo} mousePos={{ x: 50, y: 50 }} />);
     expect(screen.getByText("Autonomous Agent Stream")).toBeInTheDocument();
     expect(screen.getByText(/tools\/call: infer_schema/)).toBeInTheDocument();
 
+    // TCRAS ML anomaly engine terminal
     rerender(<ProjectSquarePopup project={tcras} mousePos={{ x: 50, y: 50 }} />);
     expect(screen.getByText("Risk Amplification Engine")).toBeInTheDocument();
     expect(screen.getByText(/Isolation Forest Evaluation/)).toBeInTheDocument();
 
+    // Vaultify zero-knowledge encryption terminal
     rerender(<ProjectSquarePopup project={vaultify} mousePos={{ x: 50, y: 50 }} />);
     expect(screen.getByText("AES-256 Secure Vault")).toBeInTheDocument();
     expect(screen.getByText(/Zero-Knowledge Encryption Pipeline/)).toBeInTheDocument();
   });
 
-  it("handles an unknown project id gracefully", () => {
+  it("handles an unknown project id gracefully with fallback card", () => {
     const unknownProject = {
       ...content.projects[0],
       id: "unknown-app",
       title: "Unknown Project",
     };
     render(<ProjectSquarePopup project={unknownProject} mousePos={{ x: 50, y: 50 }} />);
-    expect(screen.getAllByText("slide-os.vercel.app/editor").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByText("Unknown Project")).toBeInTheDocument();
+    expect(screen.getByText("ACTIVE")).toBeInTheDocument();
   });
 
   it("handles domain fallbacks when url parsing fails or when url is missing", () => {
@@ -277,11 +285,11 @@ describe("ProjectSquarePopup Component", () => {
     // Near right edge: targetX + 340 > 1024 - 16 (e.g. x = 900)
     // Near bottom edge: targetY + 280 > 768 - 16 (e.g. y = 600)
     const { rerender } = render(<ProjectSquarePopup project={slideOs} mousePos={{ x: 900, y: 600 }} />);
-    expect(screen.getAllByText("slide-os.vercel.app/editor").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByAltText("SlideOS Live Landing Page")).toBeInTheDocument();
 
     // Clamping to padding when negative
     rerender(<ProjectSquarePopup project={slideOs} mousePos={{ x: -100, y: -100 }} />);
-    expect(screen.getAllByText("slide-os.vercel.app/editor").length).toBeGreaterThanOrEqual(1);
+    expect(screen.getByAltText("SlideOS Live Landing Page")).toBeInTheDocument();
 
     Object.defineProperty(window, "innerWidth", { writable: true, configurable: true, value: originalInnerWidth });
     Object.defineProperty(window, "innerHeight", { writable: true, configurable: true, value: originalInnerHeight });
