@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Nunito } from "next/font/google";
 import type { ReactNode } from "react";
 import "./globals.css";
@@ -11,6 +11,17 @@ const nunito = Nunito({
   subsets: ["latin"],
   display: "swap",
 });
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  userScalable: true,
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#111111" },
+    { media: "(prefers-color-scheme: light)", color: "#fcfcfc" },
+  ],
+};
 
 export const metadata: Metadata = {
   title: `${profile.name} | ${profile.role}`,
@@ -60,7 +71,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${nunito.variable} font-sans antialiased min-h-screen bg-background text-foreground`}>
+      <body className={`${nunito.variable} font-sans antialiased min-h-screen w-full max-w-full overflow-x-hidden bg-background text-foreground`}>
         <Providers>{children}</Providers>
       </body>
     </html>

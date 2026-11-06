@@ -87,7 +87,7 @@ export function Hero() {
       className="pt-20 pb-2 sm:pt-24 space-y-5"
     >
       {/* Top Header Row: Profile Avatar, Name & Social Icons in Amaan/Aysh style */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
+      <div className="flex flex-wrap items-center justify-between gap-3 sm:gap-4">
         <div className="flex items-center gap-3.5 sm:gap-4">
           <motion.div
             className="relative group shrink-0 cursor-pointer"
@@ -127,7 +127,7 @@ export function Hero() {
         </div>
 
         {/* Social Icons row & Active status badge */}
-        <div className="flex flex-col items-end gap-1.5">
+        <div className="flex flex-col sm:items-end gap-1.5">
           <div className="flex items-center gap-2.5 text-muted-foreground">
             <a
               href="https://x.com/Drv4ever632"

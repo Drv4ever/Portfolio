@@ -118,7 +118,7 @@ export function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+      <header className="fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full max-w-full">
         {/* Scroll progress indicator */}
         <div
           className="h-[2px] bg-gradient-to-r from-amber-400 via-orange-500 to-rose-500 transition-all duration-150 ease-out"
@@ -126,10 +126,10 @@ export function Navbar() {
           aria-hidden="true"
         />
 
-        <div className="mx-auto max-w-2xl px-4 pt-3 pb-2 sm:px-6">
+        <div className="mx-auto max-w-2xl px-3 sm:px-6 pt-3 pb-2 w-full">
           <nav
             aria-label="Main Navigation"
-            className="flex items-center justify-between rounded-full border border-border/80 bg-background/85 px-4 py-1.5 backdrop-blur-md shadow-sm"
+            className="flex items-center justify-between rounded-full border border-border/80 bg-background/85 px-3 sm:px-4 py-1.5 backdrop-blur-md shadow-sm w-full"
           >
             {/* Left Controls: Audio Icon & Logo */}
             <div className="flex items-center gap-1.5 sm:gap-2">

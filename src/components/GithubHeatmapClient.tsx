@@ -53,11 +53,11 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
   };
 
   const getLevelClass = (count: number) => {
-    if (count === 0) return "bg-zinc-200/90 dark:bg-zinc-800/60";
-    if (count < 3) return "bg-orange-200 dark:bg-[#451a03]";
-    if (count < 6) return "bg-orange-300 dark:bg-[#9a3412]";
-    if (count < 8) return "bg-orange-500 dark:bg-[#ea580c]";
-    return "bg-amber-500 dark:bg-[#f59e0b]";
+    if (count === 0) return "bg-heatmap-0";
+    if (count < 3) return "bg-heatmap-1";
+    if (count < 6) return "bg-heatmap-2";
+    if (count < 8) return "bg-heatmap-3";
+    return "bg-heatmap-4";
   };
 
   return (
@@ -65,19 +65,19 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
       ref={containerRef}
       id="github-activity"
       aria-label="GitHub Activity Heatmap"
-      className="space-y-3 pt-2"
+      className="space-y-3 pt-2 w-full max-w-full min-w-0"
     >
       <div className="flex flex-wrap items-center justify-between text-xs font-mono pb-1 border-b border-border/40 gap-2">
         <div className="flex items-center gap-2">
-          <Github className="h-4 w-4 text-foreground" />
+          <Github className="h-4 w-4 text-foreground shrink-0" />
           <h2 className="font-bold text-foreground">GitHub Activity Stream</h2>
           <span className="text-muted-foreground text-[11px]">• @Drv4ever</span>
         </div>
 
-        <div className="flex items-center gap-3 text-[11px] font-bold">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3 text-[11px] font-bold">
           {data.longestStreak ? (
             <span className="text-amber-500 dark:text-amber-400 flex items-center gap-1 group">
-              <Flame className="h-3.5 w-3.5 animate-pulse text-orange-500" />
+              <Flame className="h-3.5 w-3.5 animate-pulse text-orange-500 shrink-0" />
               <span>{data.longestStreak}d best streak</span>
             </span>
           ) : null}
@@ -88,49 +88,59 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
       </div>
 
       {/* Heatmap Grid in Amaan's Style with Lightish Gray Zero Squares in Light Theme */}
-      <div className="rounded-xl border border-border/60 bg-card/60 p-3 sm:p-4 space-y-2 overflow-x-auto">
-        {/* Months Row */}
-        <div className="flex pl-7 text-[10px] font-mono text-muted-foreground select-none">
-          {recentWeeks.map((week, idx) => {
-            const label = getMonthLabel(week, idx);
-            return (
-              <div key={idx} className="w-3 shrink-0 text-left">
-                {label && <span className="absolute -translate-y-0.5">{label}</span>}
+      <div className="rounded-xl border border-border/60 bg-card/60 p-3 sm:p-4 space-y-2 w-full max-w-full min-w-0 overflow-hidden">
+        {/* Unified Horizontal Scroll Area so Months and Days Scroll Together Smoothly */}
+        <div
+          tabIndex={0}
+          role="region"
+          aria-label="GitHub Contributions Calendar"
+          className="overflow-x-auto pb-1 max-w-full touch-pan-x focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring rounded-lg"
+        >
+          <div className="min-w-max space-y-2">
+            {/* Months Row */}
+            <div className="flex pl-7 text-[10px] font-mono text-muted-foreground select-none">
+              {recentWeeks.map((week, idx) => {
+                const label = getMonthLabel(week, idx);
+                return (
+                  <div key={idx} className="relative w-3 shrink-0 text-left">
+                    {label && <span className="absolute -translate-y-0.5 whitespace-nowrap">{label}</span>}
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Days Column + Matrix */}
+            <div className="flex gap-1.5 items-center">
+              <div className="flex flex-col justify-between h-[84px] text-[9px] font-mono text-muted-foreground w-6 pr-1 select-none shrink-0">
+                <span>Mon</span>
+                <span>Wed</span>
+                <span>Fri</span>
               </div>
-            );
-          })}
-        </div>
 
-        {/* Days Column + Matrix */}
-        <div className="flex gap-1.5 items-center">
-          <div className="flex flex-col justify-between h-[84px] text-[9px] font-mono text-muted-foreground w-6 pr-1 select-none">
-            <span>Mon</span>
-            <span>Wed</span>
-            <span>Fri</span>
-          </div>
-
-          <div className="flex gap-1 overflow-x-auto pb-1 flex-1">
-            {recentWeeks.map((week, wIdx) => (
-              <div key={wIdx} className="flex flex-col gap-1 shrink-0">
-                {week.contributionDays.map((day, dIdx) => (
-                  <div
-                    key={day.date || dIdx}
-                    title={`${day.date || "Unknown date"}: ${day.contributionCount} contributions`}
-                    className={`h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-[2px] transition-all duration-150 hover:scale-135 hover:z-20 hover:shadow-[0_0_8px_rgba(249,115,22,0.7)] cursor-pointer ${getLevelClass(
-                      day.contributionCount
-                    )}`}
-                    style={{
-                      opacity: isVisible ? 1 : 0.4,
-                    }}
-                  />
+              <div className="flex gap-1 shrink-0">
+                {recentWeeks.map((week, wIdx) => (
+                  <div key={wIdx} className="flex flex-col gap-1 shrink-0">
+                    {week.contributionDays.map((day, dIdx) => (
+                      <div
+                        key={day.date || dIdx}
+                        title={`${day.date || "Unknown date"}: ${day.contributionCount} contributions`}
+                        className={`h-2.5 w-2.5 sm:h-3 sm:w-3 rounded-[2px] transition-all duration-150 hover:scale-135 hover:z-20 hover:shadow-[0_0_8px_rgba(249,115,22,0.7)] cursor-pointer ${getLevelClass(
+                          day.contributionCount
+                        )}`}
+                        style={{
+                          opacity: isVisible ? 1 : 0.4,
+                        }}
+                      />
+                    ))}
+                  </div>
                 ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
 
         {/* Bottom Legend Bar */}
-        <div className="flex items-center justify-between text-[11px] font-mono text-muted-foreground pt-1 border-t border-border/40">
+        <div className="flex flex-wrap items-center justify-between text-[11px] font-mono text-muted-foreground pt-1 border-t border-border/40 gap-2">
           <a
             href="https://github.com/Drv4ever"
             target="_blank"
@@ -143,11 +153,11 @@ export function GithubHeatmapClient({ calendar }: GithubHeatmapClientProps) {
           <div className="flex items-center gap-1.5 text-[10px]">
             <span>Less</span>
             <div className="flex items-center gap-1">
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-zinc-200/90 dark:bg-zinc-800/60" />
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-orange-200 dark:bg-[#451a03]" />
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-orange-300 dark:bg-[#9a3412]" />
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-orange-500 dark:bg-[#ea580c]" />
-              <div className="h-2.5 w-2.5 rounded-[2px] bg-amber-500 dark:bg-[#f59e0b]" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-heatmap-0" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-heatmap-1" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-heatmap-2" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-heatmap-3" />
+              <div className="h-2.5 w-2.5 rounded-[2px] bg-heatmap-4" />
             </div>
             <span>More</span>
           </div>

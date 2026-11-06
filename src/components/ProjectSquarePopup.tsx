@@ -78,7 +78,7 @@ export function ProjectSquarePopup({ project, mousePos }: ProjectSquarePopupProp
           pointerEvents: "none",
           zIndex: 9999,
         }}
-        className="w-[310px] sm:w-[350px] rounded-2xl border border-orange-500/40 bg-background/95 backdrop-blur-2xl shadow-2xl shadow-orange-500/10 overflow-hidden flex flex-col"
+        className="hidden sm:flex w-[310px] sm:w-[350px] rounded-2xl border border-orange-500/40 bg-background/95 backdrop-blur-2xl shadow-2xl shadow-orange-500/10 overflow-hidden flex-col"
         aria-hidden="true"
       >
         {/* Subtle Domain Header Badge for Accessibility & Verification */}
