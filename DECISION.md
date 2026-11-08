@@ -85,7 +85,7 @@ flowchart TD
 | Component | Heading Level | Font Utility | Visual Style |
 |:---|:---|:---|:---|
 | `Hero.tsx` | `h1` | `.retro-heading` | Emerald Bold, lowercase greeting, retro drop shadow |
-| `SlideOSSpotlight.tsx` | `h2` | `.retro-heading` | Emerald Bold, orange active indicator, interactive stageshow |
+| `SlideOSSpotlight.tsx` | `h2` | `.retro-heading` | Emerald Bold, orange active indicator, streamlined text layout |
 | `SlideOSSpotlight.tsx` | Badge | `.retro-pixel` | Press Start 2P, uppercase, 10px |
 | `ProjectsSection.tsx` | `h2` | `.retro-pixel` | Press Start 2P, uppercase tracking |
 | `ProjectsSection.tsx` | Subhead | `.retro-heading` | Emerald Bold, 20px |
