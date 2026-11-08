@@ -2,9 +2,21 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+@font-face {
+  font-family: "Emerald Bold";
+  src: url("/fonts/emerald-bold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 @layer base {
   :root,
   .dark {
+    --font-heading: "Emerald Bold", system-ui, sans-serif;
+    --font-display: "Handjet", system-ui, sans-serif;
+    --font-pixel: "Press Start 2P", ui-monospace, monospace;
+
     --bg: #111111;
     --bg-raised: #18181a;
     --border: #262628;
@@ -183,7 +195,61 @@
   --color-heatmap-3: var(--heatmap-3);
   --color-heatmap-4: var(--heatmap-4);
 
+  --font-heading: "Emerald Bold", system-ui, sans-serif;
+  --font-display: "Handjet", system-ui, sans-serif;
+  --font-pixel: "Press Start 2P", ui-monospace, monospace;
   --font-sans: var(--font-nunito), "Nunito", system-ui, -apple-system, sans-serif;
   --font-serif: var(--font-nunito), "Nunito", system-ui, -apple-system, sans-serif;
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+}
+
+/* sadok.mx-style Retro Typography */
+.font-heading {
+  font-family: var(--font-heading);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-pixel {
+  font-family: var(--font-pixel);
+}
+
+/* Primary retro heading font (Image 1 - Emerald Bold with crisp rendering and drop shadow) */
+.retro-heading {
+  font-family: var(--font-heading);
+  letter-spacing: 0;
+  font-kerning: none;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: auto;
+  font-smooth: never;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.1;
+  text-shadow: 0.0625em 0.0625em 0 rgba(0, 0, 0, 0.7);
+}
+
+.light .retro-heading,
+html:not(.dark) .retro-heading {
+  text-shadow: 0.0625em 0.0625em 0 #d9d6ca;
+}
+
+/* Secondary retro project title font (Image 2 - Handjet matrix-display font) */
+.retro-project-title {
+  font-family: var(--font-display);
+  font-variation-settings: "ELGR" 1.3, "ELSH" 1.9;
+  letter-spacing: 0.02em;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: auto;
+  font-smooth: never;
+}
+
+/* Pixel kicker & badge font (Image 2 cite / tag - Press Start 2P) */
+.retro-pixel {
+  font-family: var(--font-pixel);
+  letter-spacing: 0.04em;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: auto;
+  font-smooth: never;
 }

@@ -18,7 +18,7 @@ export function SkillsSection() {
   return (
     <section id="skills" aria-label="Technical Skills Matrix" className="space-y-4">
       <div className="space-y-0.5">
-        <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground">
+        <h2 className="retro-heading text-2xl sm:text-3xl font-bold tracking-tight text-foreground">
           Technical Skills & Tooling
         </h2>
         <p className="text-xs text-muted-foreground font-mono font-medium">
@@ -49,7 +49,7 @@ export function SkillsSection() {
         })}
       </div>
 
-      {/* Grouped Skills Display in Amaan Card Grid */}
+      {/* Grouped Skills Display in Card Grid */}
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         {displayedSkills.map((cat) => (
           <article
@@ -57,7 +57,7 @@ export function SkillsSection() {
             className="rounded-lg border border-border bg-card p-4 space-y-2.5 transition-colors hover:border-border/80"
           >
             <div className="flex items-center justify-between border-b border-border/40 pb-2">
-              <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-foreground/90">
+              <h3 className="retro-pixel text-[11px] font-bold uppercase tracking-wider text-foreground/90">
                 {cat.category}
               </h3>
               <span className="font-mono text-[10px] font-semibold text-muted-foreground">

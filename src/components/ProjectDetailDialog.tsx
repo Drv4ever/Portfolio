@@ -32,7 +32,7 @@ export function ProjectDetailDialog({
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto sm:rounded-2xl">
         <DialogHeader className="space-y-2 text-left">
           <div className="flex flex-wrap items-center justify-between gap-2 pr-6">
-            <span className="font-mono text-xs uppercase text-orange-500 font-bold tracking-wider">
+            <span className="retro-pixel text-[10px] uppercase text-orange-500 font-bold tracking-wider">
               {project.category} Project
             </span>
 
@@ -56,7 +56,7 @@ export function ProjectDetailDialog({
             </div>
           </div>
 
-          <DialogTitle className="text-2xl font-extrabold sm:text-3xl">
+          <DialogTitle className="retro-heading text-2xl font-bold sm:text-3xl">
             {project.title}
           </DialogTitle>
           <DialogDescription className="text-sm text-muted-foreground leading-relaxed">
@@ -71,7 +71,7 @@ export function ProjectDetailDialog({
 
         {/* Resume Key Contributions */}
         <div className="space-y-3 pt-2">
-          <h4 className="font-mono text-xs uppercase tracking-wider text-foreground/90 font-bold">
+          <h4 className="retro-pixel text-[11px] uppercase tracking-wider text-foreground/90 font-bold">
             Key Engineering Highlights
           </h4>
           <ul className="space-y-2 text-xs text-muted-foreground leading-relaxed">
@@ -86,7 +86,7 @@ export function ProjectDetailDialog({
 
         {/* Tech Stack Chips */}
         <div className="pt-3 border-t border-border/40">
-          <h4 className="font-mono text-xs uppercase tracking-wider text-foreground/90 font-bold pb-2">
+          <h4 className="retro-pixel text-[11px] uppercase tracking-wider text-foreground/90 font-bold pb-2">
             Technologies Used
           </h4>
           <div className="flex flex-wrap gap-1.5">

@@ -145,8 +145,8 @@ export function ProjectSquarePopup({ project, mousePos }: ProjectSquarePopupProp
           project.id !== "vaultify" && (
             <StageshowChrome url={domain} statusBadge="ACTIVE">
               <div className="p-4 space-y-2 text-xs font-mono text-muted-foreground bg-card/60 min-h-[160px] flex flex-col justify-center items-center text-center">
-                <span className="text-foreground font-bold">{project.title}</span>
-                <span className="text-[10px] text-orange-500 font-semibold">{project.shortTitle}</span>
+                <span className="retro-project-title text-base text-foreground font-bold">{project.title}</span>
+                <span className="retro-pixel text-[9px] text-orange-500 font-semibold">{project.shortTitle}</span>
                 <p className="text-[10px] line-clamp-2 max-w-[260px]">{project.description}</p>
               </div>
             </StageshowChrome>

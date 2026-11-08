@@ -117,7 +117,7 @@ export function Hero() {
           </motion.div>
 
           <div>
-            <h1 className="text-2xl sm:text-3xl font-extrabold tracking-tight text-foreground lowercase flex items-center gap-1.5">
+            <h1 className="retro-heading text-2xl sm:text-3xl font-bold tracking-tight text-foreground lowercase flex items-center gap-1.5">
               hi, im dhruv <span className="sr-only">Dhruv Jain</span>
             </h1>
             <p className="text-xs text-muted-foreground font-mono">

@@ -24,7 +24,7 @@ function LearningProjectItem({
       className="group rounded-xl border border-border/70 bg-card p-5 space-y-2.5 transition-all hover:border-orange-500/50 hover:shadow-[0_8px_24px_rgba(249,115,22,0.1)] shadow-sm"
     >
       <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/40 pb-2.5">
-        <h4 className="text-base sm:text-lg font-bold text-foreground">
+        <h4 className="retro-project-title text-lg sm:text-xl font-bold text-foreground">
           {project.title}
         </h4>
         <div className="flex items-center gap-2 font-mono text-xs">
@@ -55,7 +55,7 @@ function LearningProjectItem({
         </div>
       </div>
 
-      <p className="font-mono text-[10px] font-bold text-muted-foreground uppercase">
+      <p className="retro-pixel text-[9px] font-bold text-muted-foreground uppercase">
         Backend Cryptography Practice
       </p>
 
@@ -89,7 +89,7 @@ export function LearningProjects({
     <div className="space-y-3 pt-2">
       <div className="flex items-center gap-2">
         <BookOpen className="h-3.5 w-3.5 text-muted-foreground" />
-        <h3 className="font-mono text-xs font-bold uppercase tracking-wider text-muted-foreground">
+        <h3 className="retro-pixel text-[11px] font-bold uppercase tracking-wider text-muted-foreground">
           Foundational & Learning Projects
         </h3>
       </div>

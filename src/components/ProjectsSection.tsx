@@ -36,17 +36,17 @@ export function ProjectsSection() {
       onMouseMove={handleMouseMove}
       className="space-y-6"
     >
-      {/* Amaan-style Section Header */}
+      {/* Section Header */}
       <div className="space-y-1 border-b border-border/40 pb-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-xs sm:text-sm font-mono font-bold uppercase tracking-wider text-muted-foreground">
+          <h2 className="retro-pixel text-xs sm:text-sm font-bold uppercase tracking-wider text-muted-foreground">
             PROJECTS ({content.projects.length})
           </h2>
-          <span className="font-mono text-[11px] text-orange-500 font-semibold">
+          <span className="retro-pixel text-[10px] text-orange-500 font-semibold">
             live & open-source
           </span>
         </div>
-        <p className="text-sm sm:text-base font-bold text-foreground">
+        <p className="retro-heading text-lg sm:text-xl font-bold text-foreground">
           coolest stuff i&apos;ve built (yet)
         </p>
       </div>

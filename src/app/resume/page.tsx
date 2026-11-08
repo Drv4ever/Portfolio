@@ -32,7 +32,7 @@ export default function ResumePage() {
               <ArrowLeft className="h-3.5 w-3.5" />
               <span>Back to Portfolio</span>
             </Link>
-            <h1 className="text-2xl sm:text-4xl font-extrabold tracking-tight">
+            <h1 className="retro-heading text-2xl sm:text-4xl font-bold tracking-tight">
               Curriculum Vitae
             </h1>
             <p className="text-xs sm:text-sm text-muted-foreground font-mono font-semibold">

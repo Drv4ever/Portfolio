@@ -28,7 +28,7 @@ export function SlideOSSpotlight({
       {/* Header Row: Title, Badges, Links */}
       <div className="flex flex-wrap items-baseline justify-between gap-3 border-b border-border/40 pb-3">
         <div className="flex flex-wrap items-center gap-2.5">
-          <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
+          <h2 className="retro-heading text-xl sm:text-2xl font-bold tracking-tight text-foreground">
             <a
               href="https://slide-os.vercel.app/"
               target="_blank"
@@ -38,7 +38,7 @@ export function SlideOSSpotlight({
               {project.title}
             </a>
           </h2>
-          <span className="font-mono text-xs font-bold text-orange-500 border border-orange-500/30 bg-orange-500/10 rounded-full px-2.5 py-0.5">
+          <span className="retro-pixel text-[10px] font-bold text-orange-500 border border-orange-500/30 bg-orange-500/10 rounded-full px-2.5 py-0.5">
             Active Project
           </span>
         </div>

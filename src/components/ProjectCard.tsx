@@ -28,7 +28,7 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
       {/* Header Row: Title, Links, and Category */}
       <div className="flex flex-wrap items-baseline justify-between gap-2 border-b border-border/40 pb-3">
         <div className="flex flex-wrap items-center gap-2.5">
-          <h3 className="text-base sm:text-lg font-bold text-foreground">
+          <h3 className="retro-project-title text-xl sm:text-2xl font-bold text-foreground">
             <a
               href={project.live || project.github}
               target="_blank"
@@ -46,7 +46,7 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
                 target="_blank"
                 rel="noreferrer"
                 aria-label={`${project.title} Live Demo`}
-                className="text-orange-500 font-bold border border-orange-500/20 bg-orange-500/10 rounded-full px-2 py-0.5 hover:bg-orange-500/20 transition-colors flex items-center gap-1"
+                className="retro-pixel text-[9px] text-orange-500 font-bold border border-orange-500/20 bg-orange-500/10 rounded-full px-2 py-0.5 hover:bg-orange-500/20 transition-colors flex items-center gap-1"
               >
                 <span>Live</span>
                 <ExternalLink className="h-3 w-3" />
@@ -67,7 +67,7 @@ export function ProjectCard({ project, onSelect, onHover }: ProjectCardProps) {
           </div>
         </div>
 
-        <span className="font-mono text-xs font-semibold text-muted-foreground">
+        <span className="retro-pixel text-[10px] font-semibold text-muted-foreground">
           {project.shortTitle}
         </span>
       </div>
