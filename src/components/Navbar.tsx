@@ -45,7 +45,6 @@ export function Navbar() {
 
   React.useEffect(() => {
     setMounted(true);
-
     const handleScroll = () => {
       const totalScroll = document.documentElement.scrollHeight - window.innerHeight;
       if (totalScroll > 0) {
@@ -155,7 +154,7 @@ export function Navbar() {
                   DJ
                 </span>
                 <span className="font-mono text-sm font-bold tracking-tight text-foreground">
-                  dhruv<span className="text-orange-500">.</span>
+                  Dhruv<span className="text-orange-500">.</span>
                 </span>
               </Link>
             </div>
